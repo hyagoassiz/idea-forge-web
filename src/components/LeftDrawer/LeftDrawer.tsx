@@ -1,3 +1,4 @@
+import { DrawerGroup } from "@/components/LeftDrawer/types";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Box from "@mui/material/Box";
@@ -13,22 +14,9 @@ import ListSubheader from "@mui/material/ListSubheader";
 import { styled, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import React, { ReactNode } from "react";
+import React from "react";
 
-export type DrawerOption = {
-  label: string;
-  href?: string;
-  onClick?: () => void;
-  disabled?: boolean;
-  icon?: ReactNode;
-};
-
-export type DrawerGroup = {
-  title: string; // master option (not clickable)
-  options: DrawerOption[];
-};
-
-type Props = {
+type LeftDrawerProps = {
   open: boolean;
   onClose: () => void;
   siteName: string;
@@ -43,7 +31,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "space-between",
 }));
 
-const LeftDrawer: React.FC<Props> = ({ open, onClose, siteName, groups }) => {
+const LeftDrawer: React.FC<LeftDrawerProps> = ({
+  open,
+  onClose,
+  siteName,
+  groups,
+}) => {
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
