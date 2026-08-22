@@ -14,7 +14,6 @@ import ListSubheader from "@mui/material/ListSubheader";
 import { styled, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import React from "react";
 
 type LeftDrawerProps = {
   open: boolean;
@@ -31,13 +30,14 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "space-between",
 }));
 
-const LeftDrawer: React.FC<LeftDrawerProps> = ({
+export function LeftDrawer({
   open,
   onClose,
   siteName,
   groups,
-}) => {
+}: LeftDrawerProps) {
   const theme = useTheme();
+
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
   const drawerWidth = isMdUp ? 280 : "80vw";
@@ -109,6 +109,4 @@ const LeftDrawer: React.FC<LeftDrawerProps> = ({
       ))}
     </Drawer>
   );
-};
-
-export default LeftDrawer;
+}

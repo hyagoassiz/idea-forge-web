@@ -24,7 +24,7 @@ export function ControlledEmailField<T extends FieldValues>({
   control,
   rules,
   ...textFieldProps
-}: ControlledEmailFieldProps<T>): React.JSX.Element {
+}: ControlledEmailFieldProps<T>) {
   return (
     <Controller
       name={name}

@@ -162,7 +162,8 @@ modules
 
 - Declare funções utilizando `function`.
 - Utilize arrow functions apenas quando forem exigidas pela API utilizada ou quando houver ganho claro de legibilidade.
-- Declare explicitamente o tipo de retorno.
+- Declare explicitamente o tipo de retorno de todas as funções, exceto componentes React que retornem `ReactElement` ou `ReactNode`, cujo retorno pode ser inferido pelo TypeScript.
+- Não utilize `any` como tipo de retorno.
 
 Exemplo correto:
 
@@ -179,6 +180,43 @@ const calculateTotal = (items: Item[]) => {
   return items.reduce((total, item) => total + item.value, 0);
 };
 ```
+
+---
+
+### Exportações
+
+- Utilize `export default function` apenas quando exigido pelo framework ou quando o arquivo possuir uma única exportação principal e esse padrão fizer sentido.
+- Utilize `export function` para componentes, hooks e funções reutilizáveis.
+- Arquivos especiais do Next.js, como `page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx` e `not-found.tsx`, devem utilizar `export default`, conforme as convenções do Next.js.
+
+Exemplos:
+
+// Componente reutilizável
+export function AuthCard() {
+return <div />;
+}
+
+// Hook reutilizável
+export function useCreateUser() {
+// ...
+}
+
+// Função utilitária
+export function calculateTotal() {
+// ...
+}
+
+// Arquivo especial do Next.js
+export default function RootLayout({
+children,
+}: Readonly<{ children: React.ReactNode }>) {
+return (
+
+<html>
+<body>{children}</body>
+</html>
+);
+}
 
 ---
 

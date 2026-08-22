@@ -1,6 +1,5 @@
 import { LoadingButton } from "@mui/lab";
 import { Box, ButtonProps, Stack } from "@mui/material";
-import React from "react";
 
 interface ActionButton {
   id: string;
@@ -18,7 +17,7 @@ interface FormActionsProps {
   buttons: ActionButton[];
 }
 
-export const FormActions: React.FC<FormActionsProps> = ({ buttons }) => {
+export function FormActions({ buttons }: FormActionsProps) {
   return (
     <Box mt={4}>
       <Stack
@@ -43,4 +42,4 @@ export const FormActions: React.FC<FormActionsProps> = ({ buttons }) => {
       </Stack>
     </Box>
   );
-};
+}

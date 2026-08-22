@@ -39,7 +39,7 @@ export function ControlledSelect<T extends FieldValues>({
   options,
   rules,
   ...selectProps
-}: ControlledSelectProps<T>): React.JSX.Element {
+}: ControlledSelectProps<T>) {
   return (
     <Controller
       name={name}

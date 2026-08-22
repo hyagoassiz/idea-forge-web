@@ -1,1 +1,1 @@
-export { default } from "./LeftDrawer";
+export * from "./LeftDrawer";

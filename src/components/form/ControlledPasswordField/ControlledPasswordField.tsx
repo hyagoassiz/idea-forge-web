@@ -31,7 +31,7 @@ export function ControlledPasswordField<T extends FieldValues>({
   control,
   rules,
   ...textFieldProps
-}: ControlledPasswordFieldProps<T>): React.JSX.Element {
+}: ControlledPasswordFieldProps<T>) {
   const [mostrarSenha, setMostrarSenha] = useState<boolean>(false);
 
   return (

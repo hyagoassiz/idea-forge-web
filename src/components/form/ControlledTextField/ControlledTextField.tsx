@@ -23,7 +23,7 @@ export function ControlledTextField<T extends FieldValues>({
   control,
   rules,
   ...textFieldProps
-}: ControlledTextFieldProps<T>): React.JSX.Element {
+}: ControlledTextFieldProps<T>) {
   return (
     <Controller
       name={name}
