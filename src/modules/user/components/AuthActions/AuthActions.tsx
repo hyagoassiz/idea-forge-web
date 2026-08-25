@@ -1,5 +1,5 @@
 import { LoadingButton } from "@mui/lab";
-import { Box, Divider, Link, Typography } from "@mui/material";
+import { Divider, Link, Typography } from "@mui/material";
 
 interface AuthActionsProps {
   linkHref: string;
@@ -19,7 +19,7 @@ export function AuthActions({
   onClick,
 }: AuthActionsProps) {
   return (
-    <Box>
+    <>
       <LoadingButton
         type="submit"
         variant="contained"
@@ -38,7 +38,7 @@ export function AuthActions({
         sx={{
           width: "100%",
           height: "1px",
-          marginTop: "20px",
+          marginTop: 1,
         }}
       />
 
@@ -46,7 +46,7 @@ export function AuthActions({
         variant="body2"
         color="text.secondary"
         sx={{
-          mt: 2,
+          mt: 1,
           textAlign: "center",
         }}
       >
@@ -60,6 +60,6 @@ export function AuthActions({
           {linkLabel}
         </Link>
       </Typography>
-    </Box>
+    </>
   );
 }
