@@ -1,4 +1,6 @@
 "use client";
+
+import ideaForge from "@/modules/user/assets/idea-forge.jpeg";
 import { Grid, useMediaQuery, useTheme } from "@mui/material";
 
 export default function PublicLayout({
@@ -17,7 +19,7 @@ export default function PublicLayout({
           item
           md={6}
           sx={{
-            // backgroundImage: `url(${gestorImage})`,
+            backgroundImage: `url(${ideaForge.src})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

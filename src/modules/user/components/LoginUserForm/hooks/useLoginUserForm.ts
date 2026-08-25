@@ -4,10 +4,7 @@ import {
   loginUserSchema,
 } from "@/modules/user/components/LoginUserForm/schema/loginUserSchema";
 import { loginUser } from "@/modules/user/services/userService";
-import {
-  UserLoginRequestDTO,
-  UserLoginResponseDTO,
-} from "@/modules/user/types";
+import { UserLoginRequest, UserLoginResponse } from "@/modules/user/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -16,7 +13,7 @@ import { useForm, UseFormReturn } from "react-hook-form";
 interface UseLoginUserFormReturn {
   isLoading: boolean;
   loginUserForm: UseFormReturn<LoginUserForm>;
-  handleLogin(): Promise<void>;
+  handleLogin(): void;
 }
 
 export function useLoginUserForm(): UseLoginUserFormReturn {
@@ -29,14 +26,13 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     defaultValues: {
       email: "",
       password: "",
-      rememberEmail: false,
     },
   });
 
   const { mutate, isPending } = useMutation<
-    UserLoginResponseDTO,
+    UserLoginResponse,
     ApiErrorResponse,
-    UserLoginRequestDTO
+    UserLoginRequest
   >({
     mutationFn: loginUser,
     onSuccess: () => {
@@ -53,11 +49,9 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     },
   });
 
-  const handleLogin = loginUserForm.handleSubmit(
-    async (data): Promise<void> => {
-      mutate(data);
-    },
-  );
+  const handleLogin = loginUserForm.handleSubmit((data) => {
+    mutate(data);
+  });
 
   return { isLoading: isPending, loginUserForm, handleLogin };
 }

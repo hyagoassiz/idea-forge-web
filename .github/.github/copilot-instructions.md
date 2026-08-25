@@ -124,7 +124,8 @@ modules/
 # Funções
 
 - Prefira declarações `function` para funções nomeadas, componentes e hooks.
-- Utilize arrow functions quando forem exigidas pela API utilizada ou quando proporcionarem ganho claro de legibilidade.
+- Utilize arrow functions para callbacks e para funções exigidas ou retornadas por APIs de bibliotecas.
+- Exemplos comuns: `handleSubmit`, `map`, `filter`, `reduce`, `useMemo`, `useCallback` e callbacks de eventos.
 - Declare explicitamente o retorno de funções exportadas e de funções cujo tipo não seja óbvio.
 - Nunca utilize `any` como tipo de retorno.
 
