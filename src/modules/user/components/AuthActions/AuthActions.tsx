@@ -3,16 +3,16 @@ import { Divider, Link, Typography } from "@mui/material";
 
 interface AuthActionsProps {
   linkHref: string;
-  isLoading: boolean;
+  isLoading?: boolean;
   buttonLabel: string;
   linkLabel: string;
-  linkDescription: string;
+  linkDescription?: string;
   onClick(): void;
 }
 
 export function AuthActions({
   linkHref,
-  isLoading,
+  isLoading = false,
   buttonLabel,
   linkLabel,
   linkDescription,
