@@ -1,28 +1,11 @@
 "use client";
 
 import { AuthActions } from "@/modules/user/components/AuthActions";
+import { useVerifyEmailSent } from "@/modules/user/components/VerifyEmailSent/hooks/useVerifyEmailSent";
 import { Typography } from "@mui/material";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 export function VerifyEmailSent() {
-  const router = useRouter();
-
-  const searchParams = useSearchParams();
-
-  const email = searchParams.get("email");
-
-  const token = searchParams.get("token");
-
-  useEffect(() => {
-    if (!email || !token) {
-      router.replace("/login");
-    }
-  }, [email, token, router]);
-
-  if (!email || !token) {
-    return null;
-  }
+  const { email, token, router } = useVerifyEmailSent();
 
   return (
     <>
