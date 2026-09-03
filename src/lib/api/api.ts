@@ -2,7 +2,7 @@
 
 import { ApiErrorResponse } from "@/lib/api/types/ApiErrorResponse";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
 export async function api<T>(
   endpoint: string,
