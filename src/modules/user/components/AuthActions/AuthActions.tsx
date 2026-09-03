@@ -4,10 +4,10 @@ import { Divider, Link, Typography } from "@mui/material";
 interface AuthActionsProps {
   linkHref: string;
   isLoading?: boolean;
-  buttonLabel: string;
+  buttonLabel?: string;
   linkLabel: string;
   linkDescription?: string;
-  onClick(): void;
+  onClick?(): void;
 }
 
 export function AuthActions({
@@ -20,20 +20,21 @@ export function AuthActions({
 }: AuthActionsProps) {
   return (
     <>
-      <LoadingButton
-        type="submit"
-        variant="contained"
-        fullWidth
-        sx={{ mt: 1, py: 1.5, textTransform: "none", fontWeight: 700 }}
-        size="large"
-        disabled={isLoading}
-        loading={isLoading}
-        loadingPosition="center"
-        onClick={onClick}
-      >
-        {buttonLabel}
-      </LoadingButton>
-
+      {buttonLabel && onClick && (
+        <LoadingButton
+          type="submit"
+          variant="contained"
+          fullWidth
+          sx={{ mt: 1, py: 1.5, textTransform: "none", fontWeight: 700 }}
+          size="large"
+          disabled={isLoading}
+          loading={isLoading}
+          loadingPosition="center"
+          onClick={onClick}
+        >
+          {buttonLabel}
+        </LoadingButton>
+      )}
       <Divider
         sx={{
           width: "100%",

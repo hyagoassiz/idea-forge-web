@@ -4,6 +4,8 @@ import {
   CreateUserUserResponse,
   UserLoginRequest,
   UserLoginResponse,
+  VerifyEmailRequest,
+  VerifyEmailResponse,
 } from "@/modules/user/types/user";
 
 export async function createUser(
@@ -19,6 +21,15 @@ export async function loginUser(
   payload: UserLoginRequest,
 ): Promise<UserLoginResponse> {
   return api("/users/login", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function verifyEmail(
+  payload: VerifyEmailRequest,
+): Promise<VerifyEmailResponse> {
+  return api("/auth/verify-email", {
     method: "POST",
     body: JSON.stringify(payload),
   });
