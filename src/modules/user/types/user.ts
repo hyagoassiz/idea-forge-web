@@ -25,3 +25,12 @@ export type VerifyEmailRequest = {
 export type VerifyEmailResponse = {
   message: string;
 };
+
+export type ResendEmailVerificationRequest = {
+  email: string;
+};
+
+export type ResendEmailVerificationResponse = {
+  message: string;
+  token: string;
+};

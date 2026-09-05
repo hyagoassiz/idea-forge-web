@@ -2,6 +2,8 @@ import { api } from "@/lib/api/api";
 import {
   CreateUserRequest,
   CreateUserUserResponse,
+  ResendEmailVerificationRequest,
+  ResendEmailVerificationResponse,
   UserLoginRequest,
   UserLoginResponse,
   VerifyEmailRequest,
@@ -30,6 +32,15 @@ export async function verifyEmail(
   payload: VerifyEmailRequest,
 ): Promise<VerifyEmailResponse> {
   return api("/auth/verify-email", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function resendVerificationEmail(
+  payload: ResendEmailVerificationRequest,
+): Promise<ResendEmailVerificationResponse> {
+  return api("/auth/resend-verification-email", {
     method: "POST",
     body: JSON.stringify(payload),
   });
