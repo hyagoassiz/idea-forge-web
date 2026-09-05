@@ -1,18 +1,18 @@
 "use client";
 
+import { Alert } from "@/modules/user/components/Alert";
 import { AuthActions } from "@/modules/user/components/AuthActions";
 import { useVerifyEmailSent } from "@/modules/user/components/VerifyEmailSent/hooks/useVerifyEmailSent";
-import { Typography } from "@mui/material";
 
 export function VerifyEmailSent() {
   const { email, token, router } = useVerifyEmailSent();
 
   return (
     <>
-      <Typography textAlign="center">
+      <Alert severity="info" icon={false}>
         Enviamos um e-mail de verificação para <strong>{email}</strong>.
         Verifique sua caixa de entrada para validar seu endereço de e-mail.
-      </Typography>
+      </Alert>
 
       <AuthActions
         linkHref="/login"

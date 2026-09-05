@@ -80,7 +80,7 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
       const email = loginUserForm.getValues("email");
 
       setTimeout(() => {
-        router.push(`/verify-email/send?email=${email}&token=${token}`);
+        router.push(`/verify-email/sent?email=${email}&token=${token}`);
       }, 1000);
     },
 

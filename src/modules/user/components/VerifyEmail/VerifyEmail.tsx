@@ -1,11 +1,12 @@
 "use client";
 
+import { Alert } from "@/modules/user/components/Alert";
 import { AuthActions } from "@/modules/user/components/AuthActions";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { useVerifyEmail } from "./hooks/useVerifyEmail";
 
 export function VerifyEmail() {
-  const { apiMessage, isLoading, typographyColor } = useVerifyEmail();
+  const { apiMessage, isLoading, alertSeverity } = useVerifyEmail();
 
   return (
     <>
@@ -25,9 +26,7 @@ export function VerifyEmail() {
 
       {!isLoading && apiMessage && (
         <>
-          <Typography variant="body1" color={typographyColor}>
-            {apiMessage}
-          </Typography>
+          <Alert severity={alertSeverity}>{apiMessage}</Alert>
 
           <AuthActions linkHref="/login" linkLabel="Fazer login" />
         </>
