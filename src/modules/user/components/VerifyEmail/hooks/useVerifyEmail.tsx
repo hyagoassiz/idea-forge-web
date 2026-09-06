@@ -3,7 +3,6 @@
 import { ApiErrorResponse } from "@/lib/api/types";
 import { verifyEmail } from "@/modules/user/services/userService";
 import { VerifyEmailRequest, VerifyEmailResponse } from "@/modules/user/types";
-import { TypographyProps } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
@@ -11,7 +10,7 @@ import { useEffect } from "react";
 interface IUseVerifyEmailReturn {
   apiMessage: string | null;
   isLoading: boolean;
-  typographyColor: TypographyProps["color"] | undefined;
+  alertSeverity: "error" | "success" | undefined;
 }
 
 export function useVerifyEmail(): IUseVerifyEmailReturn {
@@ -32,10 +31,6 @@ export function useVerifyEmail(): IUseVerifyEmailReturn {
   const apiMessage =
     (error as ApiErrorResponse | null)?.message ?? data?.message ?? null;
 
-  const typographyColor: TypographyProps["color"] = isError
-    ? "error"
-    : undefined;
-
   useEffect(() => {
     if (!token) {
       router.replace("/login");
@@ -49,6 +44,6 @@ export function useVerifyEmail(): IUseVerifyEmailReturn {
   return {
     apiMessage,
     isLoading: isPending,
-    typographyColor,
+    alertSeverity: isError ? "error" : "success",
   };
 }
