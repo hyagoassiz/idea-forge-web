@@ -40,10 +40,14 @@ export function useRegisterUserForm(): UseRegisterUserFormReturn {
     CreateUserRequest
   >({
     mutationFn: createUser,
-    onSuccess: () => {
-      registerUserForm.reset();
-
-      window.setTimeout(() => router.push("/login"), 1000);
+    onSuccess: (response) => {
+      window.setTimeout(
+        () =>
+          router.push(
+            `/verify-email/sent?email=${response.email}&token=${response.token}`,
+          ),
+        1000,
+      );
     },
     onError: (error) => {
       error?.errors?.forEach((item) => {
