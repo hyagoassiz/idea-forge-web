@@ -1,17 +1,6 @@
+import { ActionButton } from "@/types";
 import { LoadingButton } from "@mui/lab";
-import { Box, ButtonProps, Stack } from "@mui/material";
-
-interface ActionButton {
-  id: string;
-  label: string;
-  onClick?: () => void;
-  type?: "button" | "submit" | "reset";
-  loading?: boolean;
-  size?: ButtonProps["size"];
-  disabled?: boolean;
-  variant?: ButtonProps["variant"];
-  color?: ButtonProps["color"];
-}
+import { Box, Stack } from "@mui/material";
 
 interface FormActionsProps {
   buttons: ActionButton[];

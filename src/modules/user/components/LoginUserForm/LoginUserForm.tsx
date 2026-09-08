@@ -4,16 +4,19 @@ import { ControlledEmailField } from "@/components/form/ControlledEmailField";
 import { ControlledPasswordField } from "@/components/form/ControlledPasswordField";
 import { Alert } from "@/modules/user/components/Alert";
 import { AuthActions } from "@/modules/user/components/AuthActions";
+import { ForgotPasswordDialog } from "@/modules/user/components/LoginUserForm/components/ForgotPassword";
 import { useLoginUserForm } from "@/modules/user/components/LoginUserForm/hooks/useLoginUserForm";
-import { Link } from "@mui/material";
+import { Box, Link } from "@mui/material";
 
 export function LoginUserForm() {
   const {
+    isForgotPasswordDialogOpen,
     isLoading,
     loginUserForm,
     showResendVerificationEmailLink,
     handleLogin,
     handleResendVerificationEmail,
+    toggleForgotPasswordDialog,
   } = useLoginUserForm();
 
   return (
@@ -58,7 +61,20 @@ export function LoginUserForm() {
         linkLabel="Criar conta"
         linkDescription="Ainda não possui uma conta?"
         onClick={handleLogin}
-      />
+      >
+        <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
+          <Link
+            onClick={toggleForgotPasswordDialog}
+            sx={{ color: "text.secondary", cursor: "pointer" }}
+          >
+            Esqueceu a senha?
+          </Link>
+        </Box>
+      </AuthActions>
+
+      {isForgotPasswordDialogOpen && (
+        <ForgotPasswordDialog onClose={toggleForgotPasswordDialog} />
+      )}
     </>
   );
 }

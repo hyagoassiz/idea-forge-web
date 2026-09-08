@@ -1,14 +1,7 @@
 import { z } from "zod";
 
-export const registerUserSchema = z
+export const resetPasswordSchema = z
   .object({
-    name: z.string().trim().min(1, "Nome é obrigatório"),
-    email: z
-      .string()
-      .trim()
-      .min(1, "E-mail é obrigatório")
-      .email("Informe um e-mail válido")
-      .toLowerCase(),
     password: z.string().min(1, "Senha é obrigatória"),
     confirmPassword: z.string().min(1, "Confirmar senha é obrigatória"),
   })
@@ -17,4 +10,4 @@ export const registerUserSchema = z
     path: ["confirmPassword"],
   });
 
-export type RegisterUserForm = z.infer<typeof registerUserSchema>;
+export type ResetPasswordForm = z.infer<typeof resetPasswordSchema>;

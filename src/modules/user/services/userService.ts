@@ -19,6 +19,12 @@ export async function createUser(
   });
 }
 
+export async function getMe(): Promise<UserLoginResponse> {
+  return api("/users/me", {
+    method: "GET",
+  });
+}
+
 export async function loginUser(
   payload: UserLoginRequest,
 ): Promise<UserLoginResponse> {

@@ -1,3 +1,4 @@
+import { GlobalLoading } from "@/components/GlobalLoading";
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import type { Metadata } from "next";
@@ -31,7 +32,11 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
         <AppRouterCacheProvider>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <ReactQueryProvider>
+            {children}
+
+            <GlobalLoading />
+          </ReactQueryProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

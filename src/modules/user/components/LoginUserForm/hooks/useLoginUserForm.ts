@@ -13,19 +13,25 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 import { LoginUserForm, loginUserSchema } from "../schema/loginUserSchema";
 
 interface UseLoginUserFormReturn {
+  isForgotPasswordDialogOpen: boolean;
   isLoading: boolean;
   loginUserForm: UseFormReturn<LoginUserForm>;
   showResendVerificationEmailLink: boolean;
   handleLogin(): void;
   handleResendVerificationEmail(): void;
+  toggleForgotPasswordDialog(): void;
 }
 
 export function useLoginUserForm(): UseLoginUserFormReturn {
   const router = useRouter();
+
+  const [isForgotPasswordDialogOpen, setIsForgotPasswordDialogOpen] =
+    useState(false);
 
   const loginUserForm = useForm<LoginUserForm>({
     resolver: zodResolver(loginUserSchema),
@@ -45,7 +51,7 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     mutationFn: loginUser,
 
     onSuccess: () => {
-      setTimeout(() => router.push("/dashboard"), 1000);
+      router.push("/dashboard");
     },
 
     onError: (error) => {
@@ -79,9 +85,7 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     onSuccess: ({ token }) => {
       const email = loginUserForm.getValues("email");
 
-      setTimeout(() => {
-        router.push(`/verify-email/sent?email=${email}&token=${token}`);
-      }, 1000);
+      router.push(`/verify-email/sent?email=${email}&token=${token}`);
     },
 
     onError: (error) => {
@@ -99,7 +103,12 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     });
   }
 
+  function toggleForgotPasswordDialog(): void {
+    setIsForgotPasswordDialogOpen((prevState) => !prevState);
+  }
+
   return {
+    isForgotPasswordDialogOpen,
     isLoading: loginMutation.isPending || resendMutation.isPending,
     loginUserForm,
     showResendVerificationEmailLink:
@@ -108,5 +117,6 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
       !loginUserForm.formState.isValid,
     handleLogin,
     handleResendVerificationEmail,
+    toggleForgotPasswordDialog,
   };
 }

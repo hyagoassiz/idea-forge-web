@@ -1,8 +1,8 @@
 import { ApiErrorResponse } from "@/lib/api/types";
 import {
-  RegisterUserForm,
-  registerUserSchema,
-} from "@/modules/user/components/RegisterUserForm/schema/registerUserSchema";
+  ResetPasswordForm,
+  resetPasswordSchema,
+} from "@/modules/user/components/ResetPasswordForm/schema/resetPasswordSchema";
 import { createUser } from "@/modules/user/services/userService";
 import {
   CreateUserRequest,
@@ -10,25 +10,28 @@ import {
 } from "@/modules/user/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
-interface UseRegisterUserFormReturn {
+interface UseResetPasswordFormReturn {
   isLoading: boolean;
-  registerUserForm: UseFormReturn<RegisterUserForm>;
+  resetPasswordForm: UseFormReturn<ResetPasswordForm>;
   handleRegister(): void;
 }
 
-export function useRegisterUserForm(): UseRegisterUserFormReturn {
+export function useResetPasswordForm(): UseResetPasswordFormReturn {
   const router = useRouter();
 
-  const registerUserForm = useForm<RegisterUserForm>({
-    resolver: zodResolver(registerUserSchema),
+  const searchParams = useSearchParams();
+
+  const token = searchParams.get("token");
+
+  const resetPasswordForm = useForm<ResetPasswordForm>({
+    resolver: zodResolver(resetPasswordSchema),
     mode: "onSubmit",
     reValidateMode: "onChange",
     defaultValues: {
-      name: "",
-      email: "",
       password: "",
       confirmPassword: "",
     },
@@ -47,20 +50,28 @@ export function useRegisterUserForm(): UseRegisterUserFormReturn {
     },
     onError: (error) => {
       error?.errors?.forEach((item) => {
-        registerUserForm.setError(item.field as keyof RegisterUserForm, {
+        resetPasswordForm.setError(item.field as keyof ResetPasswordForm, {
           message: item.message,
         });
       });
     },
   });
 
-  const handleRegister = registerUserForm.handleSubmit((data) => {
-    mutate({
-      name: data.name,
-      email: data.email,
-      password: data.password,
-    });
+  const handleRegister = resetPasswordForm.handleSubmit((data) => {
+    // mutate({
+    //   password: data.password,
+    // });
   });
 
-  return { isLoading: isPending, registerUserForm, handleRegister };
+  useEffect(() => {
+    if (!token) {
+      router.replace("/login");
+
+      return;
+    }
+
+    // mutate({ token });
+  }, [token, mutate, router]);
+
+  return { isLoading: isPending, resetPasswordForm, handleRegister };
 }

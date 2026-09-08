@@ -2,6 +2,7 @@ import { LoadingButton } from "@mui/lab";
 import { Divider, Link, Typography } from "@mui/material";
 
 interface AuthActionsProps {
+  children?: React.ReactNode;
   linkHref: string;
   isLoading?: boolean;
   buttonLabel?: string;
@@ -11,6 +12,7 @@ interface AuthActionsProps {
 }
 
 export function AuthActions({
+  children,
   linkHref,
   isLoading = false,
   buttonLabel,
@@ -35,6 +37,7 @@ export function AuthActions({
           {buttonLabel}
         </LoadingButton>
       )}
+      {children}
       <Divider
         sx={{
           width: "100%",
@@ -48,6 +51,7 @@ export function AuthActions({
         color="text.secondary"
         sx={{
           mt: 1,
+          width: "100%",
           textAlign: "center",
         }}
       >
