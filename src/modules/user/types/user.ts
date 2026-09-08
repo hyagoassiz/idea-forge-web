@@ -24,6 +24,30 @@ export type VerifyEmailRequest = {
   token: string;
 };
 
+export type ForgotPasswordRequest = {
+  email: string;
+};
+
+export type ForgotPasswordResponse = {
+  message: string;
+  token: string;
+};
+
+export type ValidateResetTokenRequest = {
+  token: string;
+};
+
+export type ValidateResetTokenResponse = { message: string; valid: boolean };
+
+export type ResetPasswordRequest = {
+  token: string;
+  password: string;
+};
+
+export type ResetPasswordResponse = {
+  message: string;
+};
+
 export type VerifyEmailResponse = {
   message: string;
 };

@@ -2,7 +2,7 @@
 
 import { ControlledEmailField } from "@/components/form/ControlledEmailField";
 import { ControlledPasswordField } from "@/components/form/ControlledPasswordField";
-import { Alert } from "@/modules/user/components/Alert";
+import { Alert } from "@/components/Alert";
 import { AuthActions } from "@/modules/user/components/AuthActions";
 import { ForgotPasswordDialog } from "@/modules/user/components/LoginUserForm/components/ForgotPassword";
 import { useLoginUserForm } from "@/modules/user/components/LoginUserForm/hooks/useLoginUserForm";

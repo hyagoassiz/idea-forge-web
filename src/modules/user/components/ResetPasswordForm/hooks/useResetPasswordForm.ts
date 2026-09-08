@@ -1,23 +1,29 @@
 import { ApiErrorResponse } from "@/lib/api/types";
+import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import {
   ResetPasswordForm,
   resetPasswordSchema,
 } from "@/modules/user/components/ResetPasswordForm/schema/resetPasswordSchema";
-import { createUser } from "@/modules/user/services/userService";
 import {
-  CreateUserRequest,
-  CreateUserUserResponse,
+  resetPassword,
+  resetPasswordValidate,
+} from "@/modules/user/services/userService";
+import {
+  ResetPasswordRequest,
+  ResetPasswordResponse,
 } from "@/modules/user/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 interface UseResetPasswordFormReturn {
+  apiMessage: string | null;
+  alertSeverity: "error" | "success" | undefined;
   isLoading: boolean;
   resetPasswordForm: UseFormReturn<ResetPasswordForm>;
-  handleRegister(): void;
+  handleConfirm(): void;
 }
 
 export function useResetPasswordForm(): UseResetPasswordFormReturn {
@@ -37,41 +43,52 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
     },
   });
 
-  const { mutate, isPending } = useMutation<
-    CreateUserUserResponse,
+  const resetPasswordValidateQuery = useQuery({
+    queryKey: ["reset-password-validate", token],
+    queryFn: () => resetPasswordValidate({ token: token! }),
+    enabled: !!token,
+    retry: false,
+  });
+
+  const resetPasswordMutation = useMutation<
+    ResetPasswordResponse,
     ApiErrorResponse,
-    CreateUserRequest
+    ResetPasswordRequest
   >({
-    mutationFn: createUser,
-    onSuccess: (response) => {
-      router.push(
-        `/verify-email/sent?email=${response.email}&token=${response.token}`,
-      );
+    mutationFn: resetPassword,
+
+    onSuccess: () => {
+      router.push("login");
     },
+
     onError: (error) => {
-      error?.errors?.forEach((item) => {
-        resetPasswordForm.setError(item.field as keyof ResetPasswordForm, {
-          message: item.message,
-        });
-      });
+      applyFieldErrors(resetPasswordForm, error);
     },
   });
 
-  const handleRegister = resetPasswordForm.handleSubmit((data) => {
-    // mutate({
-    //   password: data.password,
-    // });
+  const apiMessage =
+    (resetPasswordValidateQuery.error as ApiErrorResponse | null)?.message ??
+    resetPasswordValidateQuery.data?.message ??
+    null;
+
+  const handleConfirm = resetPasswordForm.handleSubmit(({ password }) => {
+    resetPasswordMutation.mutate({
+      password,
+      token: token ?? "",
+    });
   });
 
   useEffect(() => {
     if (!token) {
       router.replace("/login");
-
-      return;
     }
+  }, [token, router]);
 
-    // mutate({ token });
-  }, [token, mutate, router]);
-
-  return { isLoading: isPending, resetPasswordForm, handleRegister };
+  return {
+    apiMessage,
+    alertSeverity: resetPasswordValidateQuery.isError ? "error" : "success",
+    isLoading: false,
+    resetPasswordForm,
+    handleConfirm,
+  };
 }

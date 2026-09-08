@@ -1,13 +1,23 @@
+import { ApiErrorResponse } from "@/lib/api/types";
 import {
   ForgotPasswordForm,
   forgotPasswordSchema,
 } from "@/modules/user/components/LoginUserForm/components/ForgotPassword/schema/forgotPasswordSchema";
+import { forgotPassword } from "@/modules/user/services/userService";
+import {
+  ForgotPasswordRequest,
+  ForgotPasswordResponse,
+} from "@/modules/user/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 interface UseForgotPasswordDialogReturn {
+  apiMessage: string | null;
+  alertSeverity: "error" | "success" | undefined;
   forgotPasswordForm: UseFormReturn<ForgotPasswordForm>;
+  isLoading: boolean;
   handleConfirm(): void;
 }
 
@@ -23,10 +33,31 @@ export function useForgotPasswordDialog(): UseForgotPasswordDialogReturn {
     },
   });
 
-  const handleConfirm = forgotPasswordForm.handleSubmit((data) => {
-    console.log(data);
-    router.push(`/reset-password?email=${data.email}&token=123456`);
+  const { mutate, error, data, isPending, isError } = useMutation<
+    ForgotPasswordResponse,
+    ApiErrorResponse,
+    ForgotPasswordRequest
+  >({
+    mutationFn: forgotPassword,
+    onSuccess: (response) => {
+      setTimeout(() => {
+        router.push(`/reset-password?token=${response.token}`);
+      }, 1500);
+    },
   });
 
-  return { forgotPasswordForm, handleConfirm };
+  const apiMessage =
+    (error as ApiErrorResponse | null)?.message ?? data?.message ?? null;
+
+  const handleConfirm = forgotPasswordForm.handleSubmit(({ email }) => {
+    mutate({ email });
+  });
+
+  return {
+    apiMessage,
+    alertSeverity: isError ? "error" : "success",
+    forgotPasswordForm,
+    isLoading: isPending,
+    handleConfirm,
+  };
 }
