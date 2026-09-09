@@ -1,4 +1,4 @@
-import { AuthCard } from "@/modules/user/components/AuthCard";
+import { AuthCard } from "@/components/AuthCard";
 import { RegisterUserForm } from "@/modules/user/components/RegisterUserForm";
 
 export const metadata = {

@@ -3,13 +3,13 @@ import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import {
   loginUser,
   resendVerificationEmail,
-} from "@/modules/user/services/userService";
+} from "@/modules/auth/services/authService";
 import {
+  LoginRequest,
+  LoginResponse,
   ResendEmailVerificationRequest,
   ResendEmailVerificationResponse,
-  UserLoginRequest,
-  UserLoginResponse,
-} from "@/modules/user/types";
+} from "@/modules/auth/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -44,9 +44,9 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
   });
 
   const loginMutation = useMutation<
-    UserLoginResponse,
+    LoginResponse,
     ApiErrorResponse,
-    UserLoginRequest
+    LoginRequest
   >({
     mutationFn: loginUser,
 
@@ -85,7 +85,7 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     onSuccess: ({ token }) => {
       const email = loginUserForm.getValues("email");
 
-      router.push(`/verify-email/sent?email=${email}&token=${token}`);
+      router.push(`/auth/verify-email/sent?email=${email}&token=${token}`);
     },
 
     onError: (error) => {

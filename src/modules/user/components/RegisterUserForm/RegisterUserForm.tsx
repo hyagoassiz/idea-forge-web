@@ -1,9 +1,9 @@
 "use client";
 
+import { AuthActions } from "@/components/AuthActions";
 import { ControlledEmailField } from "@/components/form/ControlledEmailField";
 import { ControlledPasswordField } from "@/components/form/ControlledPasswordField";
 import { ControlledTextField } from "@/components/form/ControlledTextField";
-import { AuthActions } from "@/modules/user/components/AuthActions";
 import { useRegisterUserForm } from "@/modules/user/components/RegisterUserForm/hooks/useRegisterUserForm";
 
 export function RegisterUserForm() {
@@ -52,7 +52,7 @@ export function RegisterUserForm() {
       />
 
       <AuthActions
-        linkHref="/login"
+        linkHref="/auth/login"
         isLoading={isLoading}
         buttonLabel="Criar conta"
         linkLabel="Entrar"

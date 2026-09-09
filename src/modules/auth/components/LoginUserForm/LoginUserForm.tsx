@@ -1,11 +1,11 @@
 "use client";
 
+import { Alert } from "@/components/Alert";
+import { AuthActions } from "@/components/AuthActions";
 import { ControlledEmailField } from "@/components/form/ControlledEmailField";
 import { ControlledPasswordField } from "@/components/form/ControlledPasswordField";
-import { Alert } from "@/components/Alert";
-import { AuthActions } from "@/modules/user/components/AuthActions";
-import { ForgotPasswordDialog } from "@/modules/user/components/LoginUserForm/components/ForgotPassword";
-import { useLoginUserForm } from "@/modules/user/components/LoginUserForm/hooks/useLoginUserForm";
+import { ForgotPasswordDialog } from "@/modules/auth/components/LoginUserForm/components/ForgotPassword";
+import { useLoginUserForm } from "@/modules/auth/components/LoginUserForm/hooks/useLoginUserForm";
 import { Box, Link } from "@mui/material";
 
 export function LoginUserForm() {
@@ -55,7 +55,7 @@ export function LoginUserForm() {
       )}
 
       <AuthActions
-        linkHref="/register"
+        linkHref="/auth/register"
         isLoading={isLoading}
         buttonLabel="Entrar"
         linkLabel="Criar conta"

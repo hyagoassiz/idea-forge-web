@@ -1,7 +1,7 @@
 "use client";
 
 import { Alert } from "@/components/Alert";
-import { AuthActions } from "@/modules/user/components/AuthActions";
+import { AuthActions } from "@/components/AuthActions";
 import { Box, CircularProgress } from "@mui/material";
 import { useVerifyEmail } from "./hooks/useVerifyEmail";
 
@@ -28,7 +28,7 @@ export function VerifyEmail() {
         <>
           <Alert severity={alertSeverity}>{apiMessage}</Alert>
 
-          <AuthActions linkHref="/login" linkLabel="Fazer login" />
+          <AuthActions linkHref="/auth/login" linkLabel="Fazer login" />
         </>
       )}
     </>

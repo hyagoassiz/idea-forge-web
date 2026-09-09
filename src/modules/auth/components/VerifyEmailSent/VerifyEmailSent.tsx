@@ -1,8 +1,8 @@
 "use client";
 
 import { Alert } from "@/components/Alert";
-import { AuthActions } from "@/modules/user/components/AuthActions";
-import { useVerifyEmailSent } from "@/modules/user/components/VerifyEmailSent/hooks/useVerifyEmailSent";
+import { AuthActions } from "@/components/AuthActions";
+import { useVerifyEmailSent } from "@/modules/auth/components/VerifyEmailSent/hooks/useVerifyEmailSent";
 
 export function VerifyEmailSent() {
   const { email, token, router } = useVerifyEmailSent();
@@ -15,10 +15,10 @@ export function VerifyEmailSent() {
       </Alert>
 
       <AuthActions
-        linkHref="/login"
+        linkHref="/auth/login"
         buttonLabel="Validar e-mail"
         linkLabel="Fazer login"
-        onClick={() => router.push(`/verify-email?token=${token}`)}
+        onClick={() => router.push(`/auth/verify-email?token=${token}`)}
       />
     </>
   );

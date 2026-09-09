@@ -1,8 +1,8 @@
 "use client";
 
 import { ApiErrorResponse } from "@/lib/api/types";
-import { verifyEmail } from "@/modules/user/services/userService";
-import { VerifyEmailRequest, VerifyEmailResponse } from "@/modules/user/types";
+import { verifyEmail } from "@/modules/auth/services/authService";
+import { VerifyEmailRequest, VerifyEmailResponse } from "@/modules/auth/types";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
@@ -33,7 +33,7 @@ export function useVerifyEmail(): IUseVerifyEmailReturn {
 
   useEffect(() => {
     if (!token) {
-      router.replace("/login");
+      router.replace("/auth/login");
 
       return;
     }

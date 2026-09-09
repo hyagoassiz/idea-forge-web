@@ -1,5 +1,5 @@
-import { AuthCard } from "@/modules/user/components/AuthCard";
-import { ResetPasswordForm } from "@/modules/user/components/ResetPasswordForm";
+import { AuthCard } from "@/components/AuthCard";
+import { ResetPasswordForm } from "@/modules/auth/components/ResetPasswordForm";
 
 export const metadata = {
   title: "Redefinir senha | Idea Forge",

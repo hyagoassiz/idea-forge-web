@@ -1,9 +1,9 @@
 "use client";
 
+import { Alert } from "@/components/Alert";
 import Dialog from "@/components/Dialog";
 import { ControlledEmailField } from "@/components/form/ControlledEmailField";
-import { Alert } from "@/components/Alert";
-import { useForgotPasswordDialog } from "@/modules/user/components/LoginUserForm/components/ForgotPassword/hooks/useForgotPasswordDialog";
+import { useForgotPasswordDialog } from "@/modules/auth/components/LoginUserForm/components/ForgotPassword/hooks/useForgotPasswordDialog";
 import { Box } from "@mui/material";
 
 interface ForgotPasswordDialogProps {

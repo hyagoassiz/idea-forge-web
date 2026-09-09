@@ -3,15 +3,15 @@ import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import {
   ResetPasswordForm,
   resetPasswordSchema,
-} from "@/modules/user/components/ResetPasswordForm/schema/resetPasswordSchema";
+} from "@/modules/auth/components/ResetPasswordForm/schema/resetPasswordSchema";
 import {
   resetPassword,
   resetPasswordValidate,
-} from "@/modules/user/services/userService";
+} from "@/modules/auth/services/authService";
 import {
   ResetPasswordRequest,
   ResetPasswordResponse,
-} from "@/modules/user/types";
+} from "@/modules/auth/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -58,7 +58,7 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
     mutationFn: resetPassword,
 
     onSuccess: () => {
-      router.push("login");
+      router.push("auth/login");
     },
 
     onError: (error) => {
@@ -80,7 +80,7 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
 
   useEffect(() => {
     if (!token) {
-      router.replace("/login");
+      router.replace("/auth/login");
     }
   }, [token, router]);
 

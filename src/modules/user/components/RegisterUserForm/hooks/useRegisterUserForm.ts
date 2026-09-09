@@ -42,7 +42,7 @@ export function useRegisterUserForm(): UseRegisterUserFormReturn {
     mutationFn: createUser,
     onSuccess: (response) => {
       router.push(
-        `/verify-email/sent?email=${response.email}&token=${response.token}`,
+        `/auth/verify-email/sent?email=${response.email}&token=${response.token}`,
       );
     },
     onError: (error) => {

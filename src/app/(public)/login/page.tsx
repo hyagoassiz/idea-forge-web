@@ -1,5 +1,5 @@
-import { AuthCard } from "@/modules/user/components/AuthCard";
-import { LoginUserForm } from "@/modules/user/components/LoginUserForm";
+import { AuthCard } from "@/components/AuthCard";
+import { LoginUserForm } from "@/modules/auth/components/LoginUserForm";
 
 export const metadata = {
   title: "Login| Idea Forge",

@@ -2,12 +2,12 @@ import { ApiErrorResponse } from "@/lib/api/types";
 import {
   ForgotPasswordForm,
   forgotPasswordSchema,
-} from "@/modules/user/components/LoginUserForm/components/ForgotPassword/schema/forgotPasswordSchema";
-import { forgotPassword } from "@/modules/user/services/userService";
+} from "@/modules/auth/components/LoginUserForm/components/ForgotPassword/schema/forgotPasswordSchema";
+import { forgotPassword } from "@/modules/auth/services/authService";
 import {
   ForgotPasswordRequest,
   ForgotPasswordResponse,
-} from "@/modules/user/types";
+} from "@/modules/auth/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";

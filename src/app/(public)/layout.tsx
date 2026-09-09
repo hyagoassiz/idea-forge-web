@@ -1,6 +1,6 @@
 "use client";
 
-import ideaForge from "@/modules/user/assets/idea-forge.jpeg";
+import ideaForge from "@/assets/idea-forge.jpeg";
 import { Grid, useMediaQuery, useTheme } from "@mui/material";
 
 export default function PublicLayout({
