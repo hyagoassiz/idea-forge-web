@@ -33,7 +33,7 @@ export function useVerifyEmail(): IUseVerifyEmailReturn {
 
   useEffect(() => {
     if (!token) {
-      router.replace("/auth/login");
+      router.replace("/login");
 
       return;
     }

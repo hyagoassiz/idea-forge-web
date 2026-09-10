@@ -15,10 +15,10 @@ export function VerifyEmailSent() {
       </Alert>
 
       <AuthActions
-        linkHref="/auth/login"
+        linkHref="/login"
         buttonLabel="Validar e-mail"
         linkLabel="Fazer login"
-        onClick={() => router.push(`/auth/verify-email?token=${token}`)}
+        onClick={() => router.push(`/verify-email?token=${token}`)}
       />
     </>
   );

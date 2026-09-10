@@ -58,7 +58,7 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
     mutationFn: resetPassword,
 
     onSuccess: () => {
-      router.push("auth/login");
+      router.push("login");
     },
 
     onError: (error) => {
@@ -80,7 +80,7 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
 
   useEffect(() => {
     if (!token) {
-      router.replace("/auth/login");
+      router.replace("/login");
     }
   }, [token, router]);
 

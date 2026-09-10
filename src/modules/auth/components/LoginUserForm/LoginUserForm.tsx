@@ -55,7 +55,7 @@ export function LoginUserForm() {
       )}
 
       <AuthActions
-        linkHref="/auth/register"
+        linkHref="/register"
         isLoading={isLoading}
         buttonLabel="Entrar"
         linkLabel="Criar conta"

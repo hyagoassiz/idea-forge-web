@@ -18,7 +18,7 @@ export function useVerifyEmailSent(): UseVerifyEmailSent {
 
   useEffect(() => {
     if (!email || !token) {
-      router.replace("/auth/login");
+      router.replace("/login");
     }
   }, [email, token, router]);
 

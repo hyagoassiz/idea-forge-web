@@ -28,7 +28,7 @@ export function VerifyEmail() {
         <>
           <Alert severity={alertSeverity}>{apiMessage}</Alert>
 
-          <AuthActions linkHref="/auth/login" linkLabel="Fazer login" />
+          <AuthActions linkHref="/login" linkLabel="Fazer login" />
         </>
       )}
     </>

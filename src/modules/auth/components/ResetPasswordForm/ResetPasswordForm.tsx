@@ -43,7 +43,7 @@ export function ResetPasswordForm() {
       )}
 
       <AuthActions
-        linkHref="/auth/login"
+        linkHref="/login"
         isLoading={isLoading}
         buttonLabel={apiMessage ? undefined : `Redefinir senha`}
         linkLabel="Fazer login"

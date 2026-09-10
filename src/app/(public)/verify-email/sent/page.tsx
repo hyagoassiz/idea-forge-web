@@ -1,5 +1,5 @@
-import { AuthCard } from "@/modules/user/components/AuthCard";
-import { VerifyEmailSent } from "@/modules/user/components/VerifyEmailSent";
+import { AuthCard } from "@/components/AuthCard";
+import { VerifyEmailSent } from "@/modules/auth/components/VerifyEmailSent";
 
 export const metadata = {
   title: "E-mail enviado | Idea Forge",

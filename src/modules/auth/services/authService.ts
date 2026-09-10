@@ -14,8 +14,8 @@ import {
   VerifyEmailResponse,
 } from "@/modules/auth/types";
 
-export async function loginUser(payload: LoginRequest): Promise<LoginResponse> {
-  return api("/auth/login", {
+export async function login(payload: LoginRequest): Promise<LoginResponse> {
+  return api("/users/login", {
     method: "POST",
     body: JSON.stringify(payload),
   });

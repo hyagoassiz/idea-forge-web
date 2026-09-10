@@ -1,7 +1,7 @@
 import { ApiErrorResponse } from "@/lib/api/types";
 import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import {
-  loginUser,
+  login,
   resendVerificationEmail,
 } from "@/modules/auth/services/authService";
 import {
@@ -48,7 +48,7 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     ApiErrorResponse,
     LoginRequest
   >({
-    mutationFn: loginUser,
+    mutationFn: login,
 
     onSuccess: () => {
       router.push("/dashboard");
@@ -85,7 +85,7 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     onSuccess: ({ token }) => {
       const email = loginUserForm.getValues("email");
 
-      router.push(`/auth/verify-email/sent?email=${email}&token=${token}`);
+      router.push(`/verify-email/sent?email=${email}&token=${token}`);
     },
 
     onError: (error) => {

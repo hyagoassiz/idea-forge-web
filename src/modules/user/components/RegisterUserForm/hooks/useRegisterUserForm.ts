@@ -1,4 +1,5 @@
 import { ApiErrorResponse } from "@/lib/api/types";
+import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import {
   RegisterUserForm,
   registerUserSchema,
@@ -42,15 +43,11 @@ export function useRegisterUserForm(): UseRegisterUserFormReturn {
     mutationFn: createUser,
     onSuccess: (response) => {
       router.push(
-        `/auth/verify-email/sent?email=${response.email}&token=${response.token}`,
+        `/verify-email/sent?email=${response.email}&token=${response.token}`,
       );
     },
     onError: (error) => {
-      error?.errors?.forEach((item) => {
-        registerUserForm.setError(item.field as keyof RegisterUserForm, {
-          message: item.message,
-        });
-      });
+      applyFieldErrors(registerUserForm, error);
     },
   });
 
