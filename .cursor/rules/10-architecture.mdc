@@ -1,0 +1,28 @@
+---
+description: Arquitetura do frontend
+globs:
+  - "src/**/*"
+---
+
+# Estrutura
+
+- `modules`: funcionalidades organizadas por domínio.
+- `components`: componentes compartilhados entre domínios.
+- `services`: integrações HTTP compartilhadas.
+- `lib`: utilitários e infraestrutura compartilhada.
+
+Cada domínio dentro de `modules` pode organizar:
+
+- `components`
+- `hooks`
+- `services`
+- `types`
+
+Regras:
+
+- Organize funcionalidades específicas do domínio dentro de `modules`.
+- Componentes compartilhados entre domínios devem ficar em `components`.
+- Integrações HTTP compartilhadas devem ficar em `services`.
+- Não crie pastas vazias.
+- Não mova arquivos sem necessidade.
+- Antes de criar uma nova estrutura, verifique se a existente pode ser utilizada ou evoluída.
