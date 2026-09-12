@@ -31,6 +31,12 @@ export const authService = {
     });
   },
 
+  logout: async (): Promise<void> => {
+    return api("/auth/logout", {
+      method: "POST",
+    });
+  },
+
   resendVerificationEmail: async (
     payload: ResendEmailVerificationRequest,
   ): Promise<ResendEmailVerificationResponse> => {
