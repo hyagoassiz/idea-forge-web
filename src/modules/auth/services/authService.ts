@@ -1,5 +1,6 @@
 import { api } from "@/lib/api/api";
 import {
+  EmailVerificationResponse,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
   LoginRequest,
@@ -11,11 +12,10 @@ import {
   ValidateResetTokenRequest,
   ValidateResetTokenResponse,
   VerifyEmailRequest,
-  VerifyEmailResponse,
 } from "@/modules/auth/types";
 
 export async function login(payload: LoginRequest): Promise<LoginResponse> {
-  return api("/users/login", {
+  return api("/auth/login", {
     method: "POST",
     body: JSON.stringify(payload),
   });
@@ -23,7 +23,7 @@ export async function login(payload: LoginRequest): Promise<LoginResponse> {
 
 export async function verifyEmail(
   payload: VerifyEmailRequest,
-): Promise<VerifyEmailResponse> {
+): Promise<EmailVerificationResponse> {
   return api("/auth/verify-email", {
     method: "POST",
     body: JSON.stringify(payload),

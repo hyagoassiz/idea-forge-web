@@ -1,0 +1,21 @@
+---
+description: Services e React Query
+globs:
+  - "src/**/*.ts"
+  - "src/**/*.tsx"
+---
+
+# Services
+
+- Toda chamada HTTP deve ficar em `services`.
+- Services são responsáveis somente pela comunicação com a API.
+- Services não devem conter regras de negócio.
+- Services não devem manipular estado da aplicação.
+- Services não devem utilizar `localStorage` ou `sessionStorage`.
+
+# React Query
+
+- Utilize React Query para operações de leitura e escrita na API.
+- Encapsule `useQuery` e `useMutation` em hooks.
+- Não utilize `useQuery` ou `useMutation` diretamente em páginas ou componentes.
+- Reutilize hooks existentes antes de criar novos.

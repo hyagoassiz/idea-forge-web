@@ -1,0 +1,36 @@
+---
+description: Regras gerais obrigatórias do projeto
+alwaysApply: true
+---
+
+# Princípios
+
+- Priorize simplicidade, legibilidade e consistência.
+- Implemente apenas o necessário para o requisito atual.
+- Não antecipe funcionalidades futuras.
+- Não altere código fora do escopo da tarefa.
+- Antes de criar algo novo, verifique se existe uma implementação semelhante que possa ser reutilizada ou evoluída.
+- Se existir dúvida de regra de negócio, peça esclarecimentos.
+
+# TypeScript
+
+- Nunca utilize `any`.
+- Utilize `interface` ou `type` de acordo com o propósito do tipo.
+- Evite type assertions desnecessárias.
+- Não duplique tipos existentes.
+
+# Nomenclatura
+
+- Todo código deve utilizar inglês.
+- Textos exibidos na interface devem utilizar o idioma da aplicação.
+
+# Decisão
+
+Antes de criar qualquer abstração:
+
+1. Existe algo reutilizável?
+2. A implementação existente pode ser evoluída?
+3. A nova abstração é realmente necessária?
+4. Isso é necessário para o requisito atual?
+
+Escolha sempre a solução mais simples que mantenha os padrões existentes.

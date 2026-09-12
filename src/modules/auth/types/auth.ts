@@ -34,7 +34,7 @@ export type ResetPasswordResponse = {
   message: string;
 };
 
-export type VerifyEmailResponse = {
+export type EmailVerificationResponse = {
   message: string;
 };
 

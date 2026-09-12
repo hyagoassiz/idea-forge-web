@@ -1,0 +1,23 @@
+---
+description: Padrões React e Next.js
+globs:
+  - "**/*.tsx"
+---
+
+# React e Next.js
+
+- Utilize Next.js App Router.
+- Utilize Server Components por padrão.
+- Utilize `"use client"` somente quando houver necessidade de estado, eventos, hooks ou APIs do navegador.
+- Utilize `function` para declarar componentes.
+- Mantenha componentes focados em apresentação e interação com o usuário.
+- Não coloque regras de negócio diretamente nos componentes.
+- Reutilize componentes existentes antes de criar novos.
+
+# Formulários
+
+- Utilize React Hook Form para formulários.
+- Utilize Zod para validação.
+- Utilize `zodResolver` para integrar Zod ao React Hook Form.
+- Prefira os componentes existentes em `components/form`.
+- Não utilize `Controller` diretamente quando existir um componente de formulário adequado.

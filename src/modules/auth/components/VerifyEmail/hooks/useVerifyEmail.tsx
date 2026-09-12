@@ -2,7 +2,10 @@
 
 import { ApiErrorResponse } from "@/lib/api/types";
 import { verifyEmail } from "@/modules/auth/services/authService";
-import { VerifyEmailRequest, VerifyEmailResponse } from "@/modules/auth/types";
+import {
+  EmailVerificationResponse,
+  VerifyEmailRequest,
+} from "@/modules/auth/types";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
@@ -21,7 +24,7 @@ export function useVerifyEmail(): IUseVerifyEmailReturn {
   const token = searchParams.get("token");
 
   const { mutate, isPending, isError, data, error } = useMutation<
-    VerifyEmailResponse,
+    EmailVerificationResponse,
     ApiErrorResponse,
     VerifyEmailRequest
   >({
