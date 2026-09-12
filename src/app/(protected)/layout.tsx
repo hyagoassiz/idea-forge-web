@@ -3,7 +3,9 @@ import { AppBar } from "@/components/AppBar";
 import { LeftDrawer } from "@/components/LeftDrawer";
 import { DrawerGroup } from "@/components/LeftDrawer/types";
 import { ProtectedLayoutSkeleton } from "@/components/ProtectedLayoutSkeleton";
+import { APP_NAME } from "@/constants/app";
 import { getMe } from "@/modules/user/services/userService";
+import { routes } from "@/routes";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import { Box, Toolbar } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
@@ -40,17 +42,17 @@ export default function PublicLayout({
   }
 
   if (isError) {
-    redirect("/login");
+    redirect(routes.public.login);
   }
 
   return (
     <Box>
-      <AppBar title="Idea Forge" setIsLeftDrawerOpen={setIsLeftDrawerOpen} />
+      <AppBar title={APP_NAME} setIsLeftDrawerOpen={setIsLeftDrawerOpen} />
 
       <LeftDrawer
         open={isLeftDrawerOpen}
         onClose={() => setIsLeftDrawerOpen(false)}
-        siteName="Idea Forge"
+        siteName={APP_NAME}
         groups={groups}
       />
 

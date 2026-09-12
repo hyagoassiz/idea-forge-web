@@ -4,6 +4,7 @@ import { Alert } from "@/components/Alert";
 import { AuthActions } from "@/components/AuthActions";
 import { ControlledPasswordField } from "@/components/form/ControlledPasswordField";
 import { useResetPasswordForm } from "@/modules/auth/components/ResetPasswordForm/hooks/useResetPasswordForm";
+import { routes } from "@/routes";
 
 export function ResetPasswordForm() {
   const {
@@ -43,7 +44,7 @@ export function ResetPasswordForm() {
       )}
 
       <AuthActions
-        linkHref="/login"
+        linkHref={routes.public.login}
         isLoading={isLoading}
         buttonLabel={apiMessage ? undefined : `Redefinir senha`}
         linkLabel="Fazer login"

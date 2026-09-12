@@ -1,3 +1,4 @@
+import { routes } from "@/routes";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -18,7 +19,7 @@ export function useVerifyEmailSent(): UseVerifyEmailSent {
 
   useEffect(() => {
     if (!email || !token) {
-      router.replace("/login");
+      router.replace(routes.public.login);
     }
   }, [email, token, router]);
 

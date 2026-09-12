@@ -5,6 +5,7 @@ import { ControlledEmailField } from "@/components/form/ControlledEmailField";
 import { ControlledPasswordField } from "@/components/form/ControlledPasswordField";
 import { ControlledTextField } from "@/components/form/ControlledTextField";
 import { useRegisterUserForm } from "@/modules/user/components/RegisterUserForm/hooks/useRegisterUserForm";
+import { routes } from "@/routes";
 
 export function RegisterUserForm() {
   const { isLoading, registerUserForm, handleRegister } = useRegisterUserForm();
@@ -52,7 +53,7 @@ export function RegisterUserForm() {
       />
 
       <AuthActions
-        linkHref="/login"
+        linkHref={routes.public.login}
         isLoading={isLoading}
         buttonLabel="Criar conta"
         linkLabel="Entrar"

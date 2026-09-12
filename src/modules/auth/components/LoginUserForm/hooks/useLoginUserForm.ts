@@ -10,6 +10,7 @@ import {
   ResendEmailVerificationRequest,
   ResendEmailVerificationResponse,
 } from "@/modules/auth/types";
+import { routes } from "@/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -51,7 +52,7 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     mutationFn: login,
 
     onSuccess: () => {
-      router.push("/dashboard");
+      router.push(routes.protected.dashboard);
     },
 
     onError: (error) => {
@@ -85,7 +86,7 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     onSuccess: ({ token }) => {
       const email = loginUserForm.getValues("email");
 
-      router.push(`/verify-email/sent?email=${email}&token=${token}`);
+      router.push(routes.public.verifyEmail.sent(email, token));
     },
 
     onError: (error) => {

@@ -6,6 +6,7 @@ import { ControlledEmailField } from "@/components/form/ControlledEmailField";
 import { ControlledPasswordField } from "@/components/form/ControlledPasswordField";
 import { ForgotPasswordDialog } from "@/modules/auth/components/LoginUserForm/components/ForgotPassword";
 import { useLoginUserForm } from "@/modules/auth/components/LoginUserForm/hooks/useLoginUserForm";
+import { routes } from "@/routes";
 import { Box, Link } from "@mui/material";
 
 export function LoginUserForm() {
@@ -55,7 +56,7 @@ export function LoginUserForm() {
       )}
 
       <AuthActions
-        linkHref="/register"
+        linkHref={routes.public.register}
         isLoading={isLoading}
         buttonLabel="Entrar"
         linkLabel="Criar conta"

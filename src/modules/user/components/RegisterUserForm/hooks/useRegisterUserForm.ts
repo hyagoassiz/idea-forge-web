@@ -9,6 +9,7 @@ import {
   CreateUserRequest,
   CreateUserUserResponse,
 } from "@/modules/user/types";
+import { routes } from "@/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -43,7 +44,7 @@ export function useRegisterUserForm(): UseRegisterUserFormReturn {
     mutationFn: createUser,
     onSuccess: (response) => {
       router.push(
-        `/verify-email/sent?email=${response.email}&token=${response.token}`,
+        routes.public.verifyEmail.sent(response.email, response.token),
       );
     },
     onError: (error) => {

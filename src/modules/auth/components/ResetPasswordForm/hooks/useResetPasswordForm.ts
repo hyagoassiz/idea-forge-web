@@ -12,6 +12,7 @@ import {
   ResetPasswordRequest,
   ResetPasswordResponse,
 } from "@/modules/auth/types";
+import { routes } from "@/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -58,7 +59,7 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
     mutationFn: resetPassword,
 
     onSuccess: () => {
-      router.push("login");
+      router.push(routes.public.login);
     },
 
     onError: (error) => {
@@ -80,7 +81,7 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
 
   useEffect(() => {
     if (!token) {
-      router.replace("/login");
+      router.replace(routes.public.login);
     }
   }, [token, router]);
 

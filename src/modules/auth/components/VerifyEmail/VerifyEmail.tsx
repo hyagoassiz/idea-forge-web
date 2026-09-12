@@ -2,6 +2,7 @@
 
 import { Alert } from "@/components/Alert";
 import { AuthActions } from "@/components/AuthActions";
+import { routes } from "@/routes";
 import { Box, CircularProgress } from "@mui/material";
 import { useVerifyEmail } from "./hooks/useVerifyEmail";
 
@@ -28,7 +29,7 @@ export function VerifyEmail() {
         <>
           <Alert severity={alertSeverity}>{apiMessage}</Alert>
 
-          <AuthActions linkHref="/login" linkLabel="Fazer login" />
+          <AuthActions linkHref={routes.public.login} linkLabel="Fazer login" />
         </>
       )}
     </>

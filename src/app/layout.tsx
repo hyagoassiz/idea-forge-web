@@ -1,4 +1,5 @@
 import { GlobalLoading } from "@/components/GlobalLoading";
+import { APP_NAME } from "@/constants/app";
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import type { Metadata } from "next";
@@ -16,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Idea Forge",
+  title: APP_NAME,
   description: "Transforme ideias em oportunidades",
 };
 

@@ -6,6 +6,7 @@ import {
   EmailVerificationResponse,
   VerifyEmailRequest,
 } from "@/modules/auth/types";
+import { routes } from "@/routes";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
@@ -36,7 +37,7 @@ export function useVerifyEmail(): IUseVerifyEmailReturn {
 
   useEffect(() => {
     if (!token) {
-      router.replace("/login");
+      router.replace(routes.public.login);
 
       return;
     }
