@@ -1,18 +1,10 @@
-import { ApiErrorResponse } from "@/lib/api/types";
 import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import {
-  login,
-  resendVerificationEmail,
-} from "@/modules/auth/services/authService";
-import {
-  LoginRequest,
-  LoginResponse,
-  ResendEmailVerificationRequest,
-  ResendEmailVerificationResponse,
-} from "@/modules/auth/types";
+  useLoginMutation,
+  useResendVerificationEmailMutation,
+} from "@/modules/auth/services/hooks";
 import { routes } from "@/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
@@ -44,13 +36,7 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     },
   });
 
-  const loginMutation = useMutation<
-    LoginResponse,
-    ApiErrorResponse,
-    LoginRequest
-  >({
-    mutationFn: login,
-
+  const loginMutation = useLoginMutation({
     onSuccess: () => {
       router.push(routes.protected.dashboard);
     },
@@ -76,13 +62,7 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
     },
   });
 
-  const resendMutation = useMutation<
-    ResendEmailVerificationResponse,
-    ApiErrorResponse,
-    ResendEmailVerificationRequest
-  >({
-    mutationFn: resendVerificationEmail,
-
+  const resendMutation = useResendVerificationEmailMutation({
     onSuccess: ({ token }) => {
       const email = loginUserForm.getValues("email");
 

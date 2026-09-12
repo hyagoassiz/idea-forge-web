@@ -1,17 +1,11 @@
-import { ApiErrorResponse } from "@/lib/api/types";
 import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import {
   RegisterUserForm,
   registerUserSchema,
 } from "@/modules/user/components/RegisterUserForm/schema/registerUserSchema";
-import { createUser } from "@/modules/user/services/userService";
-import {
-  CreateUserRequest,
-  CreateUserUserResponse,
-} from "@/modules/user/types";
+import { useCreateUserMutation } from "@/modules/user/services/hooks";
 import { routes } from "@/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm, UseFormReturn } from "react-hook-form";
 
@@ -36,12 +30,7 @@ export function useRegisterUserForm(): UseRegisterUserFormReturn {
     },
   });
 
-  const { mutate, isPending } = useMutation<
-    CreateUserUserResponse,
-    ApiErrorResponse,
-    CreateUserRequest
-  >({
-    mutationFn: createUser,
+  const { mutate, isPending } = useCreateUserMutation({
     onSuccess: (response) => {
       router.push(
         routes.public.verifyEmail.sent(response.email, response.token),

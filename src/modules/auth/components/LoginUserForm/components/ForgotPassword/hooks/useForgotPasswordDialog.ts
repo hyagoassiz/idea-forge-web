@@ -3,13 +3,8 @@ import {
   ForgotPasswordForm,
   forgotPasswordSchema,
 } from "@/modules/auth/components/LoginUserForm/components/ForgotPassword/schema/forgotPasswordSchema";
-import { forgotPassword } from "@/modules/auth/services/authService";
-import {
-  ForgotPasswordRequest,
-  ForgotPasswordResponse,
-} from "@/modules/auth/types";
+import { useForgotPasswordMutation } from "@/modules/auth/services/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm, UseFormReturn } from "react-hook-form";
 
@@ -33,18 +28,17 @@ export function useForgotPasswordDialog(): UseForgotPasswordDialogReturn {
     },
   });
 
-  const { mutate, error, data, isPending, isError } = useMutation<
-    ForgotPasswordResponse,
-    ApiErrorResponse,
-    ForgotPasswordRequest
-  >({
-    mutationFn: forgotPassword,
-    onSuccess: (response) => {
-      setTimeout(() => {
-        router.push(`/reset-password?token=${response.token}`);
-      }, 1500);
+  const { mutate, error, data, isPending, isError } = useForgotPasswordMutation(
+    {
+      onSuccess: (response) => {
+        if (!response.token) return;
+
+        setTimeout(() => {
+          router.push(`/reset-password?token=${response.token}`);
+        }, 1500);
+      },
     },
-  });
+  );
 
   const apiMessage =
     (error as ApiErrorResponse | null)?.message ?? data?.message ?? null;

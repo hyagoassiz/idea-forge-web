@@ -1,4 +1,4 @@
-export interface ApiFieldError {
+interface ApiFieldError {
   field: string;
   code: string;
   message: string;

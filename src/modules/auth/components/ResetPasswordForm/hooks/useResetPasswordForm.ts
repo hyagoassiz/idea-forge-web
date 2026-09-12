@@ -5,16 +5,11 @@ import {
   resetPasswordSchema,
 } from "@/modules/auth/components/ResetPasswordForm/schema/resetPasswordSchema";
 import {
-  resetPassword,
-  resetPasswordValidate,
-} from "@/modules/auth/services/authService";
-import {
-  ResetPasswordRequest,
-  ResetPasswordResponse,
-} from "@/modules/auth/types";
+  useResetPasswordMutation,
+  useResetPasswordValidateQuery,
+} from "@/modules/auth/services/hooks";
 import { routes } from "@/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
@@ -44,20 +39,14 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
     },
   });
 
-  const resetPasswordValidateQuery = useQuery({
-    queryKey: ["reset-password-validate", token],
-    queryFn: () => resetPasswordValidate({ token: token! }),
-    enabled: !!token,
-    retry: false,
-  });
+  const resetPasswordValidateQuery = useResetPasswordValidateQuery(
+    { token: token! },
+    {
+      retry: false,
+    },
+  );
 
-  const resetPasswordMutation = useMutation<
-    ResetPasswordResponse,
-    ApiErrorResponse,
-    ResetPasswordRequest
-  >({
-    mutationFn: resetPassword,
-
+  const resetPasswordMutation = useResetPasswordMutation({
     onSuccess: () => {
       router.push(routes.public.login);
     },

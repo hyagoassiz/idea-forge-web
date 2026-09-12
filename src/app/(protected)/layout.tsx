@@ -4,11 +4,10 @@ import { LeftDrawer } from "@/components/LeftDrawer";
 import { DrawerGroup } from "@/components/LeftDrawer/types";
 import { ProtectedLayoutSkeleton } from "@/components/ProtectedLayoutSkeleton";
 import { APP_NAME } from "@/constants/app";
-import { getMe } from "@/modules/user/services/userService";
+import { useGetMeQuery } from "@/modules/user/services/hooks";
 import { routes } from "@/routes";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import { Box, Toolbar } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 
@@ -19,10 +18,7 @@ export default function PublicLayout({
 }>) {
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useState<boolean>(false);
 
-  const { isPending, isError } = useQuery({
-    queryKey: ["me"],
-    queryFn: getMe,
-  });
+  const { isPending, isError } = useGetMeQuery();
 
   const groups: DrawerGroup[] = [
     {
