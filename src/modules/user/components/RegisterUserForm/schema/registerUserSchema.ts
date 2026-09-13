@@ -7,9 +7,8 @@ export const registerUserSchema = z
       .string()
       .trim()
       .min(1, "E-mail é obrigatório")
-      .email("Formato de e-mail inválido")
+      .email("Informe um e-mail válido")
       .toLowerCase(),
-
     password: z.string().min(1, "Senha é obrigatória"),
     confirmPassword: z.string().min(1, "Confirmar senha é obrigatória"),
   })

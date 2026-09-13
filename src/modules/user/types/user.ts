@@ -14,25 +14,6 @@ export type CreateUserUserResponse = Pick<
   token: string;
 };
 
-export type UserLoginRequest = Pick<User, "email" | "password">;
-
-export type UserLoginResponse = Pick<User, "email" | "emailVerified"> & {
+export type UserResponse = Pick<User, "email" | "emailVerified"> & {
   message: string;
-};
-
-export type VerifyEmailRequest = {
-  token: string;
-};
-
-export type VerifyEmailResponse = {
-  message: string;
-};
-
-export type ResendEmailVerificationRequest = {
-  email: string;
-};
-
-export type ResendEmailVerificationResponse = {
-  message: string;
-  token: string;
 };

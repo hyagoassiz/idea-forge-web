@@ -1,6 +1,6 @@
 // lib/api/api.ts
 
-import { ApiErrorResponse } from "@/lib/api/types/ApiErrorResponse";
+import { ApiErrorResponse } from "@/lib/api/types/apiErrorResponse";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 

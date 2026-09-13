@@ -1,4 +1,6 @@
-import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
+import { GlobalLoading } from "@/components/GlobalLoading";
+import { APP_NAME } from "@/constants/app";
+import { Providers } from "@/providers/providers";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -15,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Idea Forge",
+  title: APP_NAME,
   description: "Transforme ideias em oportunidades",
 };
 
@@ -31,7 +33,11 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
         <AppRouterCacheProvider>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <Providers>
+            {children}
+
+            <GlobalLoading />
+          </Providers>
         </AppRouterCacheProvider>
       </body>
     </html>
