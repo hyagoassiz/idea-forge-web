@@ -1,6 +1,6 @@
 import { GlobalLoading } from "@/components/GlobalLoading";
 import { APP_NAME } from "@/constants/app";
-import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
+import { Providers } from "@/providers/providers";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -33,11 +33,11 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
         <AppRouterCacheProvider>
-          <ReactQueryProvider>
+          <Providers>
             {children}
 
             <GlobalLoading />
-          </ReactQueryProvider>
+          </Providers>
         </AppRouterCacheProvider>
       </body>
     </html>

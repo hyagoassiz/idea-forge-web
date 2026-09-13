@@ -56,7 +56,7 @@ export function RegisterUserForm() {
         linkHref={routes.public.login}
         isLoading={isLoading}
         buttonLabel="Criar conta"
-        linkLabel="Entrar"
+        linkLabel="Login"
         linkDescription="Já possui uma conta?"
         onClick={handleRegister}
       />

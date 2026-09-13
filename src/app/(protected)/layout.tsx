@@ -59,7 +59,6 @@ export default function PublicLayout({
           sx={{
             minHeight: "calc(100vh - 64px)",
             p: 3,
-            bgcolor: "#f7f8fc",
           }}
         >
           {children}
