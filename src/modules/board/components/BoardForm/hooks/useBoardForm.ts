@@ -3,7 +3,7 @@ import {
   BoardForm,
   boardSchema,
 } from "@/modules/board/components/BoardForm/schema/boardSchema";
-import { useCreateBoardMutation } from "@/modules/board/service/hooks";
+import { useCreateBoardMutation } from "@/modules/board/services/hooks";
 import { routes } from "@/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";

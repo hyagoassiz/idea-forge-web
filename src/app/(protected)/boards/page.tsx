@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/PageHeader";
 import { APP_NAME } from "@/constants/app";
+import { Boards } from "@/modules/board/components/Boards";
 import { routes } from "@/routes";
 import { Add } from "@mui/icons-material";
 import { Button } from "@mui/material";
@@ -24,6 +25,8 @@ export default function BoardsPage() {
           </Button>
         }
       />
+
+      <Boards />
     </>
   );
 }

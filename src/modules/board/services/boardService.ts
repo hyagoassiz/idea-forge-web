@@ -8,4 +8,8 @@ export const boardService = {
       body: JSON.stringify(payload),
     });
   },
+
+  getBoards: async (): Promise<Board[]> => {
+    return api("/boards");
+  },
 };
