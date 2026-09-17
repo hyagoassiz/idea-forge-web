@@ -28,6 +28,12 @@ export async function loginUser(
   });
 }
 
+export async function logoutUser(): Promise<void> {
+  await api<void>("/users/logout", {
+    method: "POST",
+  });
+}
+
 export async function verifyEmail(
   payload: VerifyEmailRequest,
 ): Promise<VerifyEmailResponse> {

@@ -5,6 +5,8 @@ import { DrawerGroup } from "@/components/LeftDrawer/types";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import { Box, Toolbar } from "@mui/material";
 import { useState } from "react";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { logoutUser } from "@/modules/user/services/userService";
 
 export default function PublicLayout({
   children,
@@ -21,6 +23,14 @@ export default function PublicLayout({
           icon: <SpaceDashboardIcon />,
           label: "Dashboard",
           href: "/dashboard",
+        },
+        {
+          icon: <LogoutIcon />,
+          label: "Logout",
+          onClick: async () => {
+            await logoutUser();
+            window.location.href = "/login";
+          },
         },
       ],
     },
