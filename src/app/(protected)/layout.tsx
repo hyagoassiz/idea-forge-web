@@ -11,6 +11,8 @@ import GridViewIcon from "@mui/icons-material/GridView";
 import { Box, Toolbar } from "@mui/material";
 import { redirect } from "next/navigation";
 import { useState } from "react";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { logoutUser } from "@/modules/user/services/userService";
 
 export default function PublicLayout({
   children,
@@ -29,6 +31,14 @@ export default function PublicLayout({
           icon: <DashboardIcon />,
           label: "Dashboard",
           href: "/dashboard",
+        },
+        {
+          icon: <LogoutIcon />,
+          label: "Logout",
+          onClick: async () => {
+            await logoutUser();
+            window.location.href = "/login";
+          },
         },
       ],
     },

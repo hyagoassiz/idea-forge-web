@@ -17,7 +17,10 @@ export async function api<T>(
     },
   });
 
-  const data = (await response.json()) as T | ApiErrorResponse;
+  const responseText = await response.text();
+  const data = responseText
+    ? (JSON.parse(responseText) as T | ApiErrorResponse)
+    : undefined;
 
   if (!response.ok) {
     throw data;
