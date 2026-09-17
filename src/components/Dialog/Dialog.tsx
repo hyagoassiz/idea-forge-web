@@ -15,7 +15,7 @@ interface DialogProps {
   onClose(): void;
 }
 
-export default function Dialog({
+export function Dialog({
   open,
   title,
   children,

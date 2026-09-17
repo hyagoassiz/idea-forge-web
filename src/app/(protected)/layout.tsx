@@ -6,6 +6,7 @@ import { ProtectedLayoutSkeleton } from "@/components/ProtectedLayoutSkeleton";
 import { APP_NAME } from "@/constants/app";
 import { useGetMeQuery } from "@/modules/user/services/hooks";
 import { routes } from "@/routes";
+import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import { Box, Toolbar } from "@mui/material";
 import { redirect } from "next/navigation";
@@ -28,6 +29,16 @@ export default function PublicLayout({
           icon: <SpaceDashboardIcon />,
           label: "Dashboard",
           href: "/dashboard",
+        },
+      ],
+    },
+    {
+      title: "",
+      options: [
+        {
+          icon: <LightbulbIcon />,
+          label: "Quadros",
+          href: routes.protected.boards.list,
         },
       ],
     },
