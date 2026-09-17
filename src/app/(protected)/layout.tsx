@@ -2,11 +2,16 @@
 import { AppBar } from "@/components/AppBar";
 import { LeftDrawer } from "@/components/LeftDrawer";
 import { DrawerGroup } from "@/components/LeftDrawer/types";
+import { ProtectedLayoutSkeleton } from "@/components/ProtectedLayoutSkeleton";
+import { APP_NAME } from "@/constants/app";
+import { authService } from "@/modules/auth/services/authService";
+import { useGetMeQuery } from "@/modules/user/services/hooks";
+import { routes } from "@/routes";
+import LogoutIcon from "@mui/icons-material/Logout";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import { Box, Toolbar } from "@mui/material";
+import { redirect } from "next/navigation";
 import { useState } from "react";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { logoutUser } from "@/modules/user/services/userService";
 
 export default function PublicLayout({
   children,
@@ -14,6 +19,8 @@ export default function PublicLayout({
   children: React.ReactNode;
 }>) {
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useState<boolean>(false);
+
+  const { isPending, isError } = useGetMeQuery();
 
   const groups: DrawerGroup[] = [
     {
@@ -28,7 +35,7 @@ export default function PublicLayout({
           icon: <LogoutIcon />,
           label: "Logout",
           onClick: async () => {
-            await logoutUser();
+            await authService.logout();
             window.location.href = "/login";
           },
         },
@@ -36,14 +43,22 @@ export default function PublicLayout({
     },
   ];
 
+  if (isPending) {
+    return <ProtectedLayoutSkeleton />;
+  }
+
+  if (isError) {
+    redirect(routes.public.login);
+  }
+
   return (
     <Box>
-      <AppBar title="Idea Forge" setIsLeftDrawerOpen={setIsLeftDrawerOpen} />
+      <AppBar title={APP_NAME} setIsLeftDrawerOpen={setIsLeftDrawerOpen} />
 
       <LeftDrawer
         open={isLeftDrawerOpen}
         onClose={() => setIsLeftDrawerOpen(false)}
-        siteName="Idea Forge"
+        siteName={APP_NAME}
         groups={groups}
       />
 
@@ -54,7 +69,6 @@ export default function PublicLayout({
           sx={{
             minHeight: "calc(100vh - 64px)",
             p: 3,
-            bgcolor: "#f7f8fc",
           }}
         >
           {children}
