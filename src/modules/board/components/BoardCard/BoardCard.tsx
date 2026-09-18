@@ -8,6 +8,7 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
+
 interface BoardCardProps {
   name: string;
   onOpen: () => void;

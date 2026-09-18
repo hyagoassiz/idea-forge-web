@@ -6,8 +6,8 @@ import { ProtectedLayoutSkeleton } from "@/components/ProtectedLayoutSkeleton";
 import { APP_NAME } from "@/constants/app";
 import { useGetMeQuery } from "@/modules/user/services/hooks";
 import { routes } from "@/routes";
-import LightbulbIcon from "@mui/icons-material/Lightbulb";
-import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import GridViewIcon from "@mui/icons-material/GridView";
 import { Box, Toolbar } from "@mui/material";
 import { redirect } from "next/navigation";
 import { useState } from "react";
@@ -26,7 +26,7 @@ export default function PublicLayout({
       title: "",
       options: [
         {
-          icon: <SpaceDashboardIcon />,
+          icon: <DashboardIcon />,
           label: "Dashboard",
           href: "/dashboard",
         },
@@ -36,7 +36,7 @@ export default function PublicLayout({
       title: "",
       options: [
         {
-          icon: <LightbulbIcon />,
+          icon: <GridViewIcon />,
           label: "Quadros",
           href: routes.protected.boards.list,
         },

@@ -1,19 +1,19 @@
 import { ApiErrorResponse } from "@/lib/api/types";
 import { boardService } from "@/modules/board/services/boardService";
-import { Board, CreateBoardRequest } from "@/modules/board/types";
+import { Board, UpdateBoardRequest } from "@/modules/board/types";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 
-type UseCreateBoardMutationOptions = UseMutationOptions<
+type UseUpdateBoardMutationOptions = UseMutationOptions<
   Board,
   ApiErrorResponse,
-  CreateBoardRequest
+  UpdateBoardRequest
 >;
 
-export function useCreateBoardMutation(
-  options?: UseCreateBoardMutationOptions,
+export function useUpdateBoardMutation(
+  options?: UseUpdateBoardMutationOptions,
 ) {
   return useMutation({
-    mutationFn: boardService.createBoard,
+    mutationFn: boardService.updateBoard,
     ...options,
   });
 }

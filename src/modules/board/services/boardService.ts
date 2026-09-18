@@ -1,5 +1,9 @@
 import { api } from "@/lib/api/api";
-import { Board, CreateBoardRequest } from "@/modules/board/types";
+import {
+  Board,
+  CreateBoardRequest,
+  UpdateBoardRequest,
+} from "@/modules/board/types";
 
 export const boardService = {
   createBoard: async (payload: CreateBoardRequest): Promise<Board> => {
@@ -11,5 +15,13 @@ export const boardService = {
 
   getBoards: async (): Promise<Board[]> => {
     return api("/boards");
+  },
+
+  updateBoard: async (payload: UpdateBoardRequest): Promise<Board> => {
+    const { id } = payload;
+    return api(`/boards/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+    });
   },
 };

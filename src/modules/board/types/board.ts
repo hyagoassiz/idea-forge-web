@@ -6,4 +6,4 @@ export interface Board {
 
 export type CreateBoardRequest = Pick<Board, "name" | "description">;
 
-export type EditBoardRequest = Pick<Board, "id" | "name" | "description">;
+export type UpdateBoardRequest = Pick<Board, "id" | "name" | "description">;
