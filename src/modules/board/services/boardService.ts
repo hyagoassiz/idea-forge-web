@@ -13,6 +13,10 @@ export const boardService = {
     });
   },
 
+  getBoard: async (id: number): Promise<Board> => {
+    return api(`board/${id}`);
+  },
+
   getBoards: async (): Promise<Board[]> => {
     return api("/boards");
   },

@@ -5,11 +5,14 @@ import {
 } from "@/modules/board/components/BoardForm/schema/boardSchema";
 import {
   useCreateBoardMutation,
+  useGetBoardQuery,
   useUpdateBoardMutation,
 } from "@/modules/board/services/hooks";
+import { Board } from "@/modules/board/types";
 import { routes } from "@/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
+import { useCallback, useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 interface UseBoardFormReturn {
@@ -34,9 +37,13 @@ export function useBoardForm(): UseBoardFormReturn {
     },
   });
 
+  const { data: board, isError } = useGetBoardQuery(boardId as number, {
+    enabled: Boolean(boardId),
+  });
+
   const createBoardMutation = useCreateBoardMutation({
     onSuccess: () => {
-      router.push(routes.protected.boards.list);
+      goToBoards();
     },
     onError: (error) => {
       applyFieldErrors(boardForm, error);
@@ -45,14 +52,14 @@ export function useBoardForm(): UseBoardFormReturn {
 
   const updateBoardMutation = useUpdateBoardMutation({
     onSuccess: () => {
-      router.push(routes.protected.boards.list);
+      goToBoards();
     },
     onError: (error) => {
       applyFieldErrors(boardForm, error);
     },
   });
 
-  const handleSave = boardForm.handleSubmit((data) => {
+  const handleSave = boardForm.handleSubmit((data): void => {
     if (boardId) {
       updateBoardMutation.mutate({
         id: boardId,
@@ -68,6 +75,32 @@ export function useBoardForm(): UseBoardFormReturn {
       description: data.description ?? "",
     });
   });
+
+  const fillForm = useCallback(
+    (board: Board): void => {
+      boardForm.reset({
+        name: board.name,
+        description: board.description ?? "",
+      });
+    },
+    [boardForm],
+  );
+
+  const goToBoards = useCallback((): void => {
+    router.push(routes.protected.boards.list);
+  }, [router]);
+
+  useEffect(() => {
+    if (!board) return;
+
+    fillForm(board);
+  }, [board, fillForm]);
+
+  useEffect(() => {
+    if (!isError) return;
+
+    goToBoards();
+  }, [isError, goToBoards]);
 
   return {
     isLoading: createBoardMutation.isPending || updateBoardMutation.isPending,
