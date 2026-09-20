@@ -14,7 +14,7 @@ export const boardService = {
   },
 
   getBoard: async (id: number): Promise<Board> => {
-    return api(`board/${id}`);
+    return api(`/boards/${id}`);
   },
 
   getBoards: async (): Promise<Board[]> => {

@@ -1,6 +1,7 @@
 "use client";
 
 import { MoreOptions } from "@/components/MoreOptions";
+
 import {
   Box,
   Card,
@@ -19,30 +20,35 @@ export function BoardCard({ name, onOpen, onEdit }: BoardCardProps) {
   return (
     <Card
       sx={{
-        height: "100%",
-        borderRadius: 3,
+        height: "auto",
+        position: "relative",
       }}
     >
       <CardActionArea
         onClick={onOpen}
-        sx={{ height: "100%", alignItems: "stretch" }}
+        sx={{
+          height: "100%",
+          alignItems: "stretch",
+        }}
       >
-        <CardContent
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-          }}
-        >
+        <CardContent>
           <Box>
             <Typography variant="h6" fontWeight={600}>
               {name}
             </Typography>
           </Box>
-
-          <MoreOptions options={[{ label: "Editar", onClick: onEdit }]} />
         </CardContent>
       </CardActionArea>
+
+      <Box
+        sx={{
+          position: "absolute",
+          top: 8,
+          right: 8,
+        }}
+      >
+        <MoreOptions options={[{ label: "Editar", onClick: onEdit }]} />
+      </Box>
     </Card>
   );
 }
