@@ -1,14 +1,15 @@
-import { SearchProps } from "@/types";
+import { SearchProps as Props } from "@/types";
 import { Close, Search as SearchIcon } from "@mui/icons-material";
 import { IconButton, InputAdornment, TextField, Tooltip } from "@mui/material";
 
+type SearchProps = {
+  search: Props;
+  width?: number;
+};
+
 export function Search({
-  onChange,
-  placeholder,
-  value,
-  open,
-  handleOpen,
-  handleClose,
+  search: { open, placeholder, value, handleClose, handleOpen, onChange },
+  width = 250,
 }: SearchProps) {
   if (!open) {
     return (
@@ -29,7 +30,7 @@ export function Search({
       size="small"
       autoFocus
       sx={{
-        width: 250,
+        width: width,
         transition: "width 0.3s ease",
       }}
       InputProps={{

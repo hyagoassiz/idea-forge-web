@@ -1,7 +1,7 @@
 "use client";
 
 import { ContentCard } from "@/components/ContentCard";
-import { Search } from "@/components/Search";
+import { Search } from "@/components/icon/Search";
 import { BoardCard } from "@/modules/board/components/BoardCard";
 import { useBoards } from "@/modules/board/components/Boards/hooks/useBoards";
 import { routes } from "@/routes";
@@ -15,7 +15,7 @@ export function Boards() {
   const router = useRouter();
 
   return (
-    <ContentCard toolbar={<Search {...search} />}>
+    <ContentCard toolbar={<Search search={search} />}>
       <Grid container spacing={1}>
         {boards?.map((board) => (
           <Grid item xs={12} sm={6} key={board.id}>
