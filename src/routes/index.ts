@@ -1,6 +1,11 @@
 export const routes = {
   protected: {
     dashboard: "/dashboard",
+    boards: {
+      list: "/boards",
+      new: "/boards/new",
+      edit: (idBoard: number) => `/boards/${idBoard}/edit`,
+    },
   },
 
   public: {

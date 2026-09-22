@@ -16,6 +16,7 @@ export function FormActions({ buttons }: FormActionsProps) {
       >
         {buttons.map((button) => (
           <LoadingButton
+            href={button.href}
             key={button.id}
             type={button.type ?? "button"}
             variant={button.variant ?? "contained"}
