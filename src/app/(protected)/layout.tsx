@@ -7,8 +7,8 @@ import { APP_NAME } from "@/constants/app";
 import { authService } from "@/modules/auth/services/authService";
 import { useGetMeQuery } from "@/modules/user/services/hooks";
 import { routes } from "@/routes";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import LogoutIcon from "@mui/icons-material/Logout";
-import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import { Box, Toolbar } from "@mui/material";
 import { redirect } from "next/navigation";
 import { useState } from "react";
@@ -27,7 +27,7 @@ export default function PublicLayout({
       title: "",
       options: [
         {
-          icon: <SpaceDashboardIcon />,
+          icon: <DashboardIcon />,
           label: "Dashboard",
           href: "/dashboard",
         },

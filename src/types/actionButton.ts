@@ -6,6 +6,7 @@ export interface ActionButton {
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   loading?: boolean;
+  href?: string;
   size?: ButtonProps["size"];
   disabled?: boolean;
   variant?: ButtonProps["variant"];
