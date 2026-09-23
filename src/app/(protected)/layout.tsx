@@ -4,15 +4,14 @@ import { LeftDrawer } from "@/components/LeftDrawer";
 import { DrawerGroup } from "@/components/LeftDrawer/types";
 import { ProtectedLayoutSkeleton } from "@/components/ProtectedLayoutSkeleton";
 import { APP_NAME } from "@/constants/app";
+import { authService } from "@/modules/auth/services/authService";
 import { useGetMeQuery } from "@/modules/user/services/hooks";
 import { routes } from "@/routes";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import GridViewIcon from "@mui/icons-material/GridView";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Box, Toolbar } from "@mui/material";
 import { redirect } from "next/navigation";
 import { useState } from "react";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { logoutUser } from "@/modules/user/services/userService";
 
 export default function PublicLayout({
   children,
@@ -36,19 +35,9 @@ export default function PublicLayout({
           icon: <LogoutIcon />,
           label: "Logout",
           onClick: async () => {
-            await logoutUser();
+            await authService.logout();
             window.location.href = "/login";
           },
-        },
-      ],
-    },
-    {
-      title: "",
-      options: [
-        {
-          icon: <GridViewIcon />,
-          label: "Quadros",
-          href: routes.protected.boards.list,
         },
       ],
     },
