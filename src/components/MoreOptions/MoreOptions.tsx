@@ -6,6 +6,7 @@ interface MoreOptionsProps {
   disabled?: boolean;
   options: {
     label: string;
+    disabled?: boolean;
     onClick: () => void;
   }[];
 }
@@ -48,6 +49,7 @@ export function MoreOptions({ disabled = false, options }: MoreOptionsProps) {
         {options?.map((option) => (
           <MenuItem
             key={option.label}
+            disabled={option.disabled}
             onClick={() => handleOptionClick(option.onClick)}
           >
             {option.label}

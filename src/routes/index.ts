@@ -5,6 +5,7 @@ export const routes = {
       list: "/boards",
       new: "/boards/new",
       edit: (idBoard: number) => `/boards/${idBoard}/edit`,
+      view: (idBoard: number) => `/boards/${idBoard}`,
     },
   },
 

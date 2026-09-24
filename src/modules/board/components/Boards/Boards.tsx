@@ -22,7 +22,7 @@ export function Boards() {
             <BoardCard
               name={board.name}
               onEdit={() => router.push(routes.protected.boards.edit(board.id))}
-              onOpen={() => {}}
+              onOpen={() => router.push(routes.protected.boards.view(board.id))}
             />
           </Grid>
         ))}

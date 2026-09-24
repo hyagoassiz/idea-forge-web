@@ -23,6 +23,7 @@ export function useResetPasswordValidateQuery(
     queryKey: [RESET_PASSWORD_VALIDATE_KEY, payload.token],
     queryFn: () => authService.resetPasswordValidate(payload),
     enabled: !!payload.token,
+    retry: false,
     ...options,
   });
 }

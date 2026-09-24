@@ -16,6 +16,7 @@ export function useGetBoardQuery(
   return useQuery({
     queryKey: [GET_BOARD_KEY],
     queryFn: () => boardService.getBoard(id),
+    retry: false,
     ...options,
   });
 }
