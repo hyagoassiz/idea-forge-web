@@ -17,6 +17,7 @@ export function BoardForm() {
           name="name"
           control={boardForm.control}
           fullWidth
+          InputProps={{ slotProps: { input: { maxLength: 60 } } }}
         />
 
         <ControlledTextField
@@ -24,6 +25,7 @@ export function BoardForm() {
           name="description"
           control={boardForm.control}
           fullWidth
+          InputProps={{ slotProps: { input: { maxLength: 255 } } }}
         />
       </Stack>
 

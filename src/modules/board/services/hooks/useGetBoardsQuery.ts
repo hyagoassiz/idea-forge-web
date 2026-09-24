@@ -13,6 +13,7 @@ export function useGetBoardsQuery(options?: UseGetBoardsQueryOptions) {
   return useQuery({
     queryKey: [GET_BOARDS_KEY],
     queryFn: () => boardService.getBoards(),
+    retry: false,
     ...options,
   });
 }
