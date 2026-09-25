@@ -3,7 +3,7 @@
 import { Alert } from "@/components/Alert";
 import { Dialog } from "@/components/Dialog";
 import { ControlledEmailField } from "@/components/form/ControlledEmailField";
-import { useForgotPasswordDialog } from "@/modules/auth/components/LoginUserForm/components/ForgotPassword/hooks/useForgotPasswordDialog";
+import { useForgotPasswordDialog } from "@/modules/auth/components/ForgotPasswordDialog/hooks/useForgotPasswordDialog";
 import { Box } from "@mui/material";
 
 interface ForgotPasswordDialogProps {

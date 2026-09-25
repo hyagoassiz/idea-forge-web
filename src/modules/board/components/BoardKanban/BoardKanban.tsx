@@ -2,7 +2,7 @@
 
 import { ContentCard } from "@/components/ContentCard";
 import { MoreOptions } from "@/components/MoreOptions";
-import { BoardColumn } from "@/modules/board/components/BoardKanban/components";
+import { BoardColumn } from "@/modules/board/components/BoardColumn";
 import { Box } from "@mui/material";
 
 export function BoardKanban() {

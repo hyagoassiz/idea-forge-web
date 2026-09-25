@@ -2,7 +2,7 @@ import { ApiErrorResponse } from "@/lib/api/types";
 import {
   ForgotPasswordForm,
   forgotPasswordSchema,
-} from "@/modules/auth/components/LoginUserForm/components/ForgotPassword/schema/forgotPasswordSchema";
+} from "@/modules/auth/components/ForgotPasswordDialog/schema/forgotPasswordSchema";
 import { useForgotPasswordMutation } from "@/modules/auth/services/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
