@@ -4,7 +4,7 @@ import { Alert } from "@/components/Alert";
 import { AuthActions } from "@/components/AuthActions";
 import { ControlledEmailField } from "@/components/form/ControlledEmailField";
 import { ControlledPasswordField } from "@/components/form/ControlledPasswordField";
-import { ForgotPasswordDialog } from "@/modules/auth/components/LoginUserForm/components/ForgotPassword";
+import { ForgotPasswordDialog } from "@/modules/auth/components/ForgotPasswordDialog";
 import { useLoginUserForm } from "@/modules/auth/components/LoginUserForm/hooks/useLoginUserForm";
 import { routes } from "@/routes";
 import { Box, Link } from "@mui/material";
