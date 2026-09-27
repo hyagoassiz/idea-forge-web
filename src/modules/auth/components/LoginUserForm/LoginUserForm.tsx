@@ -74,7 +74,10 @@ export function LoginUserForm() {
       </AuthActions>
 
       {isForgotPasswordDialogOpen && (
-        <ForgotPasswordDialog onClose={toggleForgotPasswordDialog} />
+        <ForgotPasswordDialog
+          open={isForgotPasswordDialogOpen}
+          onClose={toggleForgotPasswordDialog}
+        />
       )}
     </>
   );

@@ -1,11 +1,13 @@
 import { useGetBoardQuery } from "@/modules/board/services/hooks";
 import { routes } from "@/routes";
 import { useParams, useRouter } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface UseBoardViewReturn {
+  isCreateIdeaDialogOpen: boolean;
   isLoading: boolean;
   name?: string;
+  toggleCreateIdeiaDialog(): void;
 }
 
 export function useBoardView(): UseBoardViewReturn {
@@ -15,6 +17,9 @@ export function useBoardView(): UseBoardViewReturn {
 
   const boardId = params.id ? Number(params.id) : undefined;
 
+  const [isCreateIdeaDialogOpen, setIsCreateIdeaDialogOpen] =
+    useState<boolean>(false);
+
   const { isError, isFetching, data } = useGetBoardQuery(boardId as number, {
     enabled: Boolean(boardId),
   });
@@ -23,11 +28,20 @@ export function useBoardView(): UseBoardViewReturn {
     router.push(routes.protected.boards.list);
   }, [router]);
 
+  function toggleCreateIdeiaDialog(): void {
+    setIsCreateIdeaDialogOpen((prevState) => !prevState);
+  }
+
   useEffect(() => {
     if (!isError) return;
 
     goToBoards();
   }, [isError, goToBoards]);
 
-  return { isLoading: isFetching, name: data?.name };
+  return {
+    isCreateIdeaDialogOpen,
+    isLoading: isFetching,
+    name: data?.name,
+    toggleCreateIdeiaDialog,
+  };
 }
