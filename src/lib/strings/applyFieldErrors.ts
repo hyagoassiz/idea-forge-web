@@ -5,7 +5,7 @@ export function applyFieldErrors<T extends FieldValues>(
   form: UseFormReturn<T>,
   error: ApiErrorResponse,
 ) {
-  error.errors?.forEach(({ field, message }) => {
+  error?.errors?.forEach(({ field, message }) => {
     form.setError(field as Path<T>, {
       type: "manual",
       message,

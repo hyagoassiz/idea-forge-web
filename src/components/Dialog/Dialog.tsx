@@ -32,6 +32,9 @@ export function Dialog({
           flexDirection: "column",
           gap: 2,
           minWidth: 400,
+          "&.MuiDialogContent-root": {
+            paddingTop: 1,
+          },
         }}
       >
         {children}

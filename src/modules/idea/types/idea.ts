@@ -1,5 +1,5 @@
 export interface Idea {
-  id: string;
+  id: number;
   name: string;
   description: string;
 }
