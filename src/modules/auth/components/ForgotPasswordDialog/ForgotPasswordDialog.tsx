@@ -7,10 +7,14 @@ import { useForgotPasswordDialog } from "@/modules/auth/components/ForgotPasswor
 import { Box } from "@mui/material";
 
 interface ForgotPasswordDialogProps {
+  open: boolean;
   onClose: () => void;
 }
 
-export function ForgotPasswordDialog({ onClose }: ForgotPasswordDialogProps) {
+export function ForgotPasswordDialog({
+  open,
+  onClose,
+}: ForgotPasswordDialogProps) {
   const {
     apiMessage,
     alertSeverity,
@@ -22,7 +26,7 @@ export function ForgotPasswordDialog({ onClose }: ForgotPasswordDialogProps) {
   return (
     <Dialog
       title="Esqueceu a senha?"
-      open={true}
+      open={open}
       onClose={onClose}
       actions={[
         {
@@ -46,7 +50,7 @@ export function ForgotPasswordDialog({ onClose }: ForgotPasswordDialogProps) {
         <>
           Digite o endereço de e-mail da sua conta e enviaremos um link para
           redefinir sua senha.
-          <Box mt={1}>
+          <Box>
             <ControlledEmailField
               name="email"
               control={forgotPasswordForm.control}
