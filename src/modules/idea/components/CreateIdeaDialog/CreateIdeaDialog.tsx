@@ -6,12 +6,20 @@ import { useCreateIdeaDialog } from "@/modules/idea/components/CreateIdeaDialog/
 import { Stack } from "@mui/material";
 
 interface CreateIdeaDialogProps {
+  boardId: number;
   open: boolean;
   onClose(): void;
 }
 
-export function CreateIdeaDialog({ open, onClose }: CreateIdeaDialogProps) {
-  const { ideaForm, isLoading, handleSave } = useCreateIdeaDialog({ onClose });
+export function CreateIdeaDialog({
+  boardId,
+  open,
+  onClose,
+}: CreateIdeaDialogProps) {
+  const { ideaForm, isLoading, handleSave } = useCreateIdeaDialog({
+    boardId,
+    onClose,
+  });
 
   return (
     <Dialog

@@ -3,9 +3,16 @@
 import { ContentCard } from "@/components/ContentCard";
 import { MoreOptions } from "@/components/MoreOptions";
 import { BoardColumn } from "@/modules/board/components/BoardColumn";
+import { useBoardKanban } from "@/modules/board/components/BoardKanban/hooks/useBoardKanban";
 import { Box } from "@mui/material";
 
-export function BoardKanban() {
+interface BoardKanbanProps {
+  boardId?: number;
+}
+
+export function BoardKanban({ boardId }: BoardKanbanProps) {
+  const { ideas } = useBoardKanban({ boardId });
+
   const columns = [
     {
       id: "DRAFT",
@@ -50,9 +57,19 @@ export function BoardKanban() {
           overflowX: "auto",
         }}
       >
-        {columns.map((column) => (
-          <BoardColumn key={column.id} title={column.title} />
-        ))}
+        {columns.map((column) => {
+          const columnIdeas = ideas?.filter(
+            (idea) => idea.status === column.id,
+          );
+
+          return (
+            <BoardColumn
+              ideas={columnIdeas ?? []}
+              key={column.id}
+              title={column.title}
+            />
+          );
+        })}
       </Box>
     </ContentCard>
   );

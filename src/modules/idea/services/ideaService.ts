@@ -6,24 +6,30 @@ import {
 } from "@/modules/idea/types";
 
 export const ideaService = {
-  createIdea: async (payload: CreateIdeaRequest): Promise<Idea> => {
-    return api("/ideas", {
+  createIdea: async (
+    boardId: number,
+    payload: CreateIdeaRequest,
+  ): Promise<Idea> => {
+    return api(`/boards/${boardId}/ideas`, {
       method: "POST",
       body: JSON.stringify(payload),
     });
   },
 
-  getIdea: async (id: number): Promise<Idea> => {
-    return api(`/ideas/${id}`);
+  getIdea: async (boardId: number, ideaId: number): Promise<Idea> => {
+    return api(`boards/${boardId}/ideas/${ideaId}`);
   },
 
-  getIdeas: async (): Promise<Idea[]> => {
-    return api("/ideas");
+  getIdeas: async (boardId: number): Promise<Idea[]> => {
+    return api(`boards/${boardId}/ideas`);
   },
 
-  updateIdea: async (payload: UpdateIdeaRequest): Promise<Idea> => {
+  updateIdea: async (
+    boardId: number,
+    payload: UpdateIdeaRequest,
+  ): Promise<Idea> => {
     const { id } = payload;
-    return api(`/ideas/${id}`, {
+    return api(`boards/${boardId}/ideas/${id}`, {
       method: "PUT",
       body: JSON.stringify(payload),
     });

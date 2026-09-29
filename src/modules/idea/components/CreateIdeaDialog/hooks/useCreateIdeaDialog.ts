@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 interface UseCreateIdeaDialogProps {
+  boardId: number;
   onClose(): void;
 }
 
@@ -16,6 +17,7 @@ interface UseCreateIdeaDialogReturn {
 }
 
 export function useCreateIdeaDialog({
+  boardId,
   onClose,
 }: UseCreateIdeaDialogProps): UseCreateIdeaDialogReturn {
   const ideaForm = useForm<BoardForm>({
@@ -38,8 +40,11 @@ export function useCreateIdeaDialog({
 
   const handleSave = ideaForm.handleSubmit((data): void => {
     createIdeaMutation.mutate({
-      name: data.name,
-      description: data.description ?? "",
+      boardId: boardId,
+      payload: {
+        name: data.name,
+        description: data.description ?? "",
+      },
     });
   });
 

@@ -4,6 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 interface UseBoardViewReturn {
+  boardId?: number;
   isCreateIdeaDialogOpen: boolean;
   isLoading: boolean;
   name?: string;
@@ -39,6 +40,7 @@ export function useBoardView(): UseBoardViewReturn {
   }, [isError, goToBoards]);
 
   return {
+    boardId,
     isCreateIdeaDialogOpen,
     isLoading: isFetching,
     name: data?.name,
