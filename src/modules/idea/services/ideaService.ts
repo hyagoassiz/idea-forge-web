@@ -17,11 +17,11 @@ export const ideaService = {
   },
 
   getIdea: async (boardId: number, ideaId: number): Promise<Idea> => {
-    return api(`boards/${boardId}/ideas/${ideaId}`);
+    return api(`/boards/${boardId}/ideas/${ideaId}`);
   },
 
   getIdeas: async (boardId: number): Promise<Idea[]> => {
-    return api(`boards/${boardId}/ideas`);
+    return api(`/boards/${boardId}/ideas`);
   },
 
   updateIdea: async (
@@ -29,7 +29,7 @@ export const ideaService = {
     payload: UpdateIdeaRequest,
   ): Promise<Idea> => {
     const { id } = payload;
-    return api(`boards/${boardId}/ideas/${id}`, {
+    return api(`/boards/${boardId}/ideas/${id}`, {
       method: "PUT",
       body: JSON.stringify(payload),
     });
