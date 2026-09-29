@@ -1,6 +1,7 @@
 // lib/api/api.ts
 
 import { ApiErrorResponse } from "@/lib/api/types/apiErrorResponse";
+import { routes } from "@/routes";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
@@ -21,6 +22,12 @@ export async function api<T>(
   const data = responseText
     ? (JSON.parse(responseText) as T | ApiErrorResponse)
     : undefined;
+
+  if (response?.status === 403) {
+    window.location.href = routes.public.login;
+
+    throw data;
+  }
 
   if (!response.ok) {
     throw data;
