@@ -6,7 +6,7 @@ interface BoardColumnProps {
   title: string;
 }
 
-export function BoardColumn({ ideas, title }: BoardColumnProps) {
+export function BoardColumn({ title }: BoardColumnProps) {
   return (
     <Paper
       sx={{
@@ -26,19 +26,16 @@ export function BoardColumn({ ideas, title }: BoardColumnProps) {
           gap: 1,
         }}
       >
-        {ideas?.map((idea) => (
-          <Box
-            key={idea.id}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            bgcolor="black"
-            height={100}
-            width="100%"
-          >
-            {idea.name}
-          </Box>
-        ))}
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          bgcolor="black"
+          height={100}
+          width="100%"
+        >
+          Card
+        </Box>
       </Box>
     </Paper>
   );

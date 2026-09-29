@@ -1,8 +1,12 @@
 import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import { BoardForm } from "@/modules/board/components/BoardForm/schema/boardSchema";
 import { ideaSchema } from "@/modules/idea/components/CreateIdeaDialog/schema/ideaSchema";
-import { useCreateIdeaMutation } from "@/modules/idea/services/hooks";
+import {
+  GET_IDEAS_KEY,
+  useCreateIdeaMutation,
+} from "@/modules/idea/services/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 interface UseCreateIdeaDialogProps {
@@ -20,6 +24,8 @@ export function useCreateIdeaDialog({
   boardId,
   onClose,
 }: UseCreateIdeaDialogProps): UseCreateIdeaDialogReturn {
+  const queryClient = useQueryClient();
+
   const ideaForm = useForm<BoardForm>({
     resolver: zodResolver(ideaSchema),
     mode: "onSubmit",
@@ -31,6 +37,8 @@ export function useCreateIdeaDialog({
 
   const createIdeaMutation = useCreateIdeaMutation({
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [GET_IDEAS_KEY] });
+
       onClose();
     },
     onError: (error) => {
