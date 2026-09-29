@@ -9,10 +9,14 @@ export const GET_IDEA_KEY = "GET_IDEA_KEY";
 
 type UseGetIdeaQueryOptions = QueryOptions<Idea, ApiErrorResponse>;
 
-export function useGetIdeaQuery(id: number, options?: UseGetIdeaQueryOptions) {
+export function useGetIdeaQuery(
+  boardId: number,
+  ideaId: number,
+  options?: UseGetIdeaQueryOptions,
+) {
   return useQuery({
-    queryKey: [GET_IDEA_KEY],
-    queryFn: () => ideaService.getIdea(id),
+    queryKey: [GET_IDEA_KEY, boardId, ideaId],
+    queryFn: () => ideaService.getIdea(boardId, ideaId),
     retry: false,
     ...options,
   });

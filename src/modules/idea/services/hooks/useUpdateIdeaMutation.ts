@@ -3,15 +3,21 @@ import { ideaService } from "@/modules/idea/services/ideaService";
 import { Idea, UpdateIdeaRequest } from "@/modules/idea/types";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 
+type UpdateIdeaMutationRequest = {
+  boardId: number;
+  payload: UpdateIdeaRequest;
+};
+
 type UseUpdateIdeaMutationOptions = UseMutationOptions<
   Idea,
   ApiErrorResponse,
-  UpdateIdeaRequest
+  UpdateIdeaMutationRequest
 >;
 
 export function useUpdateIdeaMutation(options?: UseUpdateIdeaMutationOptions) {
   return useMutation({
-    mutationFn: ideaService.updateIdea,
+    mutationFn: ({ boardId, payload }) =>
+      ideaService.updateIdea(boardId, payload),
     ...options,
   });
 }
