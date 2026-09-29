@@ -9,8 +9,13 @@ import { Add } from "@mui/icons-material";
 import { Button } from "@mui/material";
 
 export function BoardView() {
-  const { isCreateIdeaDialogOpen, isLoading, name, toggleCreateIdeiaDialog } =
-    useBoardView();
+  const {
+    boardId,
+    isCreateIdeaDialogOpen,
+    isLoading,
+    name,
+    toggleCreateIdeiaDialog,
+  } = useBoardView();
 
   return (
     <>
@@ -33,12 +38,13 @@ export function BoardView() {
             }
           />
 
-          <BoardKanban />
+          <BoardKanban boardId={boardId} />
         </>
       )}
 
-      {isCreateIdeaDialogOpen && (
+      {isCreateIdeaDialogOpen && boardId && (
         <CreateIdeaDialog
+          boardId={boardId}
           open={isCreateIdeaDialogOpen}
           onClose={toggleCreateIdeiaDialog}
         />

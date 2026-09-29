@@ -1,10 +1,12 @@
+import { Idea } from "@/modules/idea/types";
 import { Box, Paper, Typography } from "@mui/material";
 
 interface BoardColumnProps {
+  ideas: Idea[];
   title: string;
 }
 
-export function BoardColumn({ title }: BoardColumnProps) {
+export function BoardColumn({ ideas, title }: BoardColumnProps) {
   return (
     <Paper
       sx={{
@@ -24,16 +26,19 @@ export function BoardColumn({ title }: BoardColumnProps) {
           gap: 1,
         }}
       >
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          bgcolor="black"
-          height={100}
-          width="100%"
-        >
-          Card
-        </Box>
+        {ideas?.map((idea) => (
+          <Box
+            key={idea.id}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            bgcolor="black"
+            height={100}
+            width="100%"
+          >
+            {idea.name}
+          </Box>
+        ))}
       </Box>
     </Paper>
   );
