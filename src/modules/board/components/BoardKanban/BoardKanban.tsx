@@ -1,9 +1,12 @@
 "use client";
 
 import { ContentCard } from "@/components/ContentCard";
+import { IconAction } from "@/components/icon/IconAction";
 import { MoreOptions } from "@/components/MoreOptions";
 import { BoardColumn } from "@/modules/board/components/BoardColumn";
 import { useBoardKanban } from "@/modules/board/components/BoardKanban/hooks/useBoardKanban";
+import ArchiveIcon from "@mui/icons-material/Archive";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import { Box } from "@mui/material";
 
 interface BoardKanbanProps {
@@ -11,7 +14,7 @@ interface BoardKanbanProps {
 }
 
 export function BoardKanban({ boardId }: BoardKanbanProps) {
-  const { ideas } = useBoardKanban({ boardId });
+  const { ideas, isLoading, refreshIdeas } = useBoardKanban({ boardId });
 
   const columns = [
     {
@@ -34,16 +37,27 @@ export function BoardKanban({ boardId }: BoardKanbanProps) {
 
   return (
     <ContentCard
-      toolbar={
-        <MoreOptions
-          options={[
-            {
-              label: "Sobre este quadro",
-              disabled: true,
-              onClick: () => console.log("clicou"),
-            },
-          ]}
-        />
+      toolbarRight={
+        <Box display="flex" alignItems="center">
+          <IconAction
+            icon={<RefreshIcon />}
+            tooltip="Atualizar"
+            disabled={isLoading}
+            onClick={refreshIdeas}
+          />
+
+          <IconAction icon={<ArchiveIcon />} tooltip="Arquivados" disabled />
+
+          <MoreOptions
+            options={[
+              {
+                label: "Sobre este quadro",
+                disabled: true,
+                onClick: () => console.log("clicou"),
+              },
+            ]}
+          />
+        </Box>
       }
     >
       <Box

@@ -1,24 +1,44 @@
 "use client";
 
 import { ContentCard } from "@/components/ContentCard";
+import { IconAction } from "@/components/icon/IconAction";
 import { Search } from "@/components/icon/Search";
 import { BoardCard } from "@/modules/board/components/BoardCard";
 import { useBoards } from "@/modules/board/components/Boards/hooks/useBoards";
 import { routes } from "@/routes";
-
-import { Grid } from "@mui/material";
+import ArchiveIcon from "@mui/icons-material/Archive";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import { Box, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 export function Boards() {
-  const { boards, search } = useBoards();
+  const { boards, isLoading, search, refreshBoards } = useBoards();
 
   const router = useRouter();
 
   return (
-    <ContentCard toolbar={<Search search={search} />}>
+    <ContentCard
+      toolbarLeft={
+        <Typography>{`Registros (${boards?.length ?? 0})`}</Typography>
+      }
+      toolbarRight={
+        <Box display="flex" alignItems="center">
+          <IconAction
+            icon={<RefreshIcon />}
+            tooltip="Atualizar"
+            disabled={isLoading}
+            onClick={refreshBoards}
+          />
+
+          <IconAction icon={<ArchiveIcon />} tooltip="Arquivados" disabled />
+
+          <Search search={search} />
+        </Box>
+      }
+    >
       <Grid container spacing={1}>
         {boards?.map((board) => (
-          <Grid item xs={12} sm={6} key={board.id}>
+          <Grid item xs={12} sm={4} key={board.id}>
             <BoardCard
               name={board.name}
               onEdit={() => router.push(routes.protected.boards.edit(board.id))}
