@@ -3,10 +3,15 @@ import { ReactNode } from "react";
 
 interface ContentCardProps {
   children: ReactNode;
-  toolbar?: ReactNode;
+  toolbarLeft?: ReactNode;
+  toolbarRight?: ReactNode;
 }
 
-export function ContentCard({ children, toolbar }: ContentCardProps) {
+export function ContentCard({
+  children,
+  toolbarLeft,
+  toolbarRight,
+}: ContentCardProps) {
   return (
     <Box>
       <Paper
@@ -17,14 +22,21 @@ export function ContentCard({ children, toolbar }: ContentCardProps) {
           borderBottomRightRadius: 0,
         }}
       >
-        {toolbar && (
+        {(toolbarLeft || toolbarRight) && (
           <Box
-            p={1}
+            px={2}
+            py={1}
             display="flex"
-            justifyContent="flex-end"
+            justifyContent="space-between"
             alignItems="center"
           >
-            {toolbar}
+            <Box display="flex" alignItems="center">
+              {toolbarLeft}
+            </Box>
+
+            <Box display="flex" alignItems="center">
+              {toolbarRight}
+            </Box>
           </Box>
         )}
       </Paper>
