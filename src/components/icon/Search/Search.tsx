@@ -1,6 +1,7 @@
+import { IconAction } from "@/components/icon/IconAction";
 import { SearchProps as Props } from "@/types";
 import { Close, Search as SearchIcon } from "@mui/icons-material";
-import { IconButton, InputAdornment, TextField, Tooltip } from "@mui/material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 
 type SearchProps = {
   search: Props;
@@ -13,11 +14,11 @@ export function Search({
 }: SearchProps) {
   if (!open) {
     return (
-      <Tooltip title="Pesquisar" arrow>
-        <IconButton onClick={handleOpen}>
-          <SearchIcon />
-        </IconButton>
-      </Tooltip>
+      <IconAction
+        icon={<SearchIcon />}
+        tooltip="Pesquisar"
+        onClick={handleOpen}
+      />
     );
   }
 
