@@ -61,7 +61,12 @@ export function BoardCard({ name, onOpen, onEdit }: BoardCardProps) {
           right: 12,
         }}
       >
-        <MoreOptions options={[{ label: "Editar", onClick: onEdit }]} />
+        <MoreOptions
+          options={[
+            { label: "Editar", onClick: onEdit },
+            { label: "Arquivar", disabled: true, onClick: () => {} },
+          ]}
+        />
       </Box>
     </Card>
   );

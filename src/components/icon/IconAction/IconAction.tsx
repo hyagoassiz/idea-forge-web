@@ -17,7 +17,15 @@ export function IconAction({
   return (
     <Tooltip title={tooltip} disableHoverListener={disabled}>
       <span>
-        <IconButton disabled={disabled} onClick={onClick}>
+        <IconButton
+          disabled={disabled}
+          onClick={onClick}
+          sx={{
+            border: "1px solid",
+            borderColor: "divider",
+            borderRadius: 2,
+          }}
+        >
           {icon}
         </IconButton>
       </span>
