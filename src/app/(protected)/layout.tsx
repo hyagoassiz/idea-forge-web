@@ -11,7 +11,6 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import GridViewIcon from "@mui/icons-material/GridView";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Box, Toolbar } from "@mui/material";
-import { redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function PublicLayout({
@@ -21,7 +20,7 @@ export default function PublicLayout({
 }>) {
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useState<boolean>(false);
 
-  const { isPending, isError } = useGetMeQuery();
+  const { isPending } = useGetMeQuery();
 
   const groups: DrawerGroup[] = [
     {
@@ -51,10 +50,6 @@ export default function PublicLayout({
 
   if (isPending) {
     return <ProtectedLayoutSkeleton />;
-  }
-
-  if (isError) {
-    redirect(routes.public.login);
   }
 
   return (

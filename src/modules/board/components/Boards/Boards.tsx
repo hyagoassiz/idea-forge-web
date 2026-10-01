@@ -22,7 +22,7 @@ export function Boards() {
         <Typography>{`Registros (${boards?.length ?? 0})`}</Typography>
       }
       toolbarRight={
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" gap={1}>
           <IconAction
             icon={<RefreshIcon />}
             tooltip="Atualizar"
@@ -32,7 +32,7 @@ export function Boards() {
 
           <IconAction icon={<ArchiveIcon />} tooltip="Arquivados" disabled />
 
-          <Search search={search} />
+          <Search width={200} search={search} />
         </Box>
       }
     >

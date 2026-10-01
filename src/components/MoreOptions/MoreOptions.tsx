@@ -35,6 +35,11 @@ export function MoreOptions({ disabled = false, options }: MoreOptionsProps) {
           aria-haspopup="true"
           onClick={handleClick}
           disabled={disabled}
+          sx={{
+            border: "1px solid",
+            borderColor: "divider",
+            borderRadius: 2,
+          }}
         >
           <MoreHoriz />
         </IconButton>
