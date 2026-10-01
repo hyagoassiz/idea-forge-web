@@ -34,7 +34,7 @@ export function BoardColumn({ title }: BoardColumnProps) {
           height={100}
           width="100%"
         >
-          Card
+          Ideia
         </Box>
       </Box>
     </Paper>

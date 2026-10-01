@@ -38,7 +38,7 @@ export function BoardKanban({ boardId }: BoardKanbanProps) {
   return (
     <ContentCard
       toolbarRight={
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" gap={1}>
           <IconAction
             icon={<RefreshIcon />}
             tooltip="Atualizar"
