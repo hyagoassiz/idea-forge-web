@@ -12,6 +12,7 @@ interface AlertProps {
   icon?: ReactNode;
   severity: MuiAlertProps["severity"];
   title?: string;
+  sx?: MuiAlertProps["sx"];
   onClose?: () => void;
 }
 
@@ -21,6 +22,7 @@ export function Alert({
   icon,
   severity,
   title,
+  sx,
   onClose,
 }: AlertProps) {
   return (
@@ -30,6 +32,7 @@ export function Alert({
         icon={icon}
         onClose={onClose}
         action={action}
+        sx={sx}
       >
         {title && <AlertTitle>{title}</AlertTitle>}
         {children}

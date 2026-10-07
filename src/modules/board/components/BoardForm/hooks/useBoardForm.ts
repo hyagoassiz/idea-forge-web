@@ -1,3 +1,4 @@
+import { useNotification } from "@/components/Notification/NotificationSnackbar/hooks/useNotificationSnackbar";
 import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import {
   BoardForm,
@@ -26,6 +27,8 @@ export function useBoardForm(): UseBoardFormReturn {
 
   const params = useParams<{ id: string }>();
 
+  const notification = useNotification();
+
   const boardId = params.id ? Number(params.id) : undefined;
 
   const boardForm = useForm<BoardForm>({
@@ -43,6 +46,7 @@ export function useBoardForm(): UseBoardFormReturn {
 
   const createBoardMutation = useCreateBoardMutation({
     onSuccess: () => {
+      notification.notify("Quadro criado com sucesso!", "success");
       goToBoards();
     },
     onError: (error) => {
@@ -52,6 +56,7 @@ export function useBoardForm(): UseBoardFormReturn {
 
   const updateBoardMutation = useUpdateBoardMutation({
     onSuccess: () => {
+      notification.notify("Quadro editado com sucesso!", "success");
       goToBoards();
     },
     onError: (error) => {

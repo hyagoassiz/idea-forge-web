@@ -1,8 +1,8 @@
 "use client";
 
-import { Alert } from "@/components/Alert";
 import { Dialog } from "@/components/Dialog";
 import { ControlledEmailField } from "@/components/form/ControlledEmailField";
+import { Alert } from "@/components/Notification/Alert";
 import { useForgotPasswordDialog } from "@/modules/auth/components/ForgotPasswordDialog/hooks/useForgotPasswordDialog";
 import { Box } from "@mui/material";
 

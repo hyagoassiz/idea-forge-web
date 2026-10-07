@@ -24,6 +24,7 @@ export function useResetPasswordValidateQuery(
     queryFn: () => authService.resetPasswordValidate(payload),
     enabled: !!payload.token,
     retry: false,
+    refetchOnWindowFocus: false,
     ...options,
   });
 }

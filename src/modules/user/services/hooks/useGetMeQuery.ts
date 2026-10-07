@@ -13,6 +13,7 @@ export function useGetMeQuery(options?: GetMeQueryOptions) {
     queryKey: [GET_ME_KEY],
     queryFn: () => userService.getMe(),
     retry: false,
+    refetchOnWindowFocus: false,
     ...options,
   });
 }

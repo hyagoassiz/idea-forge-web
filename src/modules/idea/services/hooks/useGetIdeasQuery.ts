@@ -17,6 +17,7 @@ export function useGetIdeasQuery(
     queryKey: [GET_IDEAS_KEY, boardId],
     queryFn: () => ideaService.getIdeas(boardId),
     retry: false,
+    refetchOnWindowFocus: false,
     ...options,
   });
 }

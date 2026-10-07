@@ -1,3 +1,4 @@
+import { useNotification } from "@/components/Notification/NotificationSnackbar/hooks/useNotificationSnackbar";
 import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import {
   RegisterUserForm,
@@ -18,6 +19,8 @@ interface UseRegisterUserFormReturn {
 export function useRegisterUserForm(): UseRegisterUserFormReturn {
   const router = useRouter();
 
+  const notification = useNotification();
+
   const registerUserForm = useForm<RegisterUserForm>({
     resolver: zodResolver(registerUserSchema),
     mode: "onSubmit",
@@ -35,6 +38,8 @@ export function useRegisterUserForm(): UseRegisterUserFormReturn {
       router.push(
         routes.public.verifyEmail.sent(response.email, response.token),
       );
+
+      notification.notify("Conta criada com sucesso!", "success");
     },
     onError: (error) => {
       applyFieldErrors(registerUserForm, error);

@@ -1,7 +1,7 @@
 "use client";
 
-import { Alert } from "@/components/Alert";
 import { AuthActions } from "@/components/AuthActions";
+import { Alert } from "@/components/Notification/Alert";
 import { useVerifyEmailSent } from "@/modules/auth/components/VerifyEmailSent/hooks/useVerifyEmailSent";
 import { routes } from "@/routes";
 
