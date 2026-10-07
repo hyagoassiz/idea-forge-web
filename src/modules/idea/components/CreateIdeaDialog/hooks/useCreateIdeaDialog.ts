@@ -1,3 +1,4 @@
+import { useNotification } from "@/components/Notification/NotificationSnackbar/hooks/useNotificationSnackbar";
 import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import { BoardForm } from "@/modules/board/components/BoardForm/schema/boardSchema";
 import { ideaSchema } from "@/modules/idea/components/CreateIdeaDialog/schema/ideaSchema";
@@ -26,6 +27,8 @@ export function useCreateIdeaDialog({
 }: UseCreateIdeaDialogProps): UseCreateIdeaDialogReturn {
   const queryClient = useQueryClient();
 
+  const notification = useNotification();
+
   const ideaForm = useForm<BoardForm>({
     resolver: zodResolver(ideaSchema),
     mode: "onSubmit",
@@ -38,6 +41,8 @@ export function useCreateIdeaDialog({
   const createIdeaMutation = useCreateIdeaMutation({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [GET_IDEAS_KEY] });
+
+      notification.notify("Idea criada com sucesso!", "success");
 
       onClose();
     },
