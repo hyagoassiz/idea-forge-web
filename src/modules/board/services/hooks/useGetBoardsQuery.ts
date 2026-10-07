@@ -14,6 +14,7 @@ export function useGetBoardsQuery(options?: UseGetBoardsQueryOptions) {
     queryKey: [GET_BOARDS_KEY],
     queryFn: () => boardService.getBoards(),
     retry: false,
+    refetchOnWindowFocus: false,
     ...options,
   });
 }

@@ -1,8 +1,8 @@
 "use client";
 
-import { Alert } from "@/components/Alert";
 import { AuthActions } from "@/components/AuthActions";
 import { ControlledPasswordField } from "@/components/form/ControlledPasswordField";
+import { Alert } from "@/components/Notification/Alert";
 import { useResetPasswordForm } from "@/modules/auth/components/ResetPasswordForm/hooks/useResetPasswordForm";
 import { routes } from "@/routes";
 

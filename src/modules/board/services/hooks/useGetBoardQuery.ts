@@ -17,6 +17,7 @@ export function useGetBoardQuery(
     queryKey: [GET_BOARD_KEY],
     queryFn: () => boardService.getBoard(id),
     retry: false,
+    refetchOnWindowFocus: false,
     ...options,
   });
 }

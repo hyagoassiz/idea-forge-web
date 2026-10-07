@@ -5,6 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode, useState } from "react";
 
+import { NotificationProvider } from "@/components/Notification/NotificationSnackbar/context/NotificationProvider";
 import { theme } from "@/theme/theme";
 
 interface ProvidersProps {
@@ -16,10 +17,12 @@ export function Providers({ children }: ProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
+      <NotificationProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {children}
+        </ThemeProvider>
+      </NotificationProvider>
     </QueryClientProvider>
   );
 }

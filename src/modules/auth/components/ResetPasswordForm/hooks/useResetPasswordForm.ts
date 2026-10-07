@@ -1,3 +1,4 @@
+import { useNotification } from "@/components/Notification/NotificationSnackbar/hooks/useNotificationSnackbar";
 import { ApiErrorResponse } from "@/lib/api/types";
 import { applyFieldErrors } from "@/lib/strings/applyFieldErrors";
 import {
@@ -25,6 +26,8 @@ interface UseResetPasswordFormReturn {
 export function useResetPasswordForm(): UseResetPasswordFormReturn {
   const router = useRouter();
 
+  const notification = useNotification();
+
   const searchParams = useSearchParams();
 
   const token = searchParams.get("token");
@@ -49,6 +52,8 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
   const resetPasswordMutation = useResetPasswordMutation({
     onSuccess: () => {
       router.push(routes.public.login);
+
+      notification.notify("Senha redefinida com sucesso!", "success");
     },
 
     onError: (error) => {
