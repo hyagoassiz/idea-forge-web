@@ -1,3 +1,4 @@
+import { BoardIdeaCard } from "@/modules/board/components/BoardIdeaCard";
 import { Idea } from "@/modules/idea/types";
 import { Box, Paper, Typography } from "@mui/material";
 
@@ -6,7 +7,7 @@ interface BoardColumnProps {
   title: string;
 }
 
-export function BoardColumn({ title }: BoardColumnProps) {
+export function BoardColumn({ title, ideas }: BoardColumnProps) {
   return (
     <Paper
       sx={{
@@ -26,16 +27,9 @@ export function BoardColumn({ title }: BoardColumnProps) {
           gap: 1,
         }}
       >
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          bgcolor="black"
-          height={100}
-          width="100%"
-        >
-          Ideia
-        </Box>
+        {ideas.map((idea) => (
+          <BoardIdeaCard key={idea.id} idea={idea} />
+        ))}
       </Box>
     </Paper>
   );
