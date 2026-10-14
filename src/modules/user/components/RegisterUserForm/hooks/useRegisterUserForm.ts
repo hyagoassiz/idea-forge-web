@@ -35,9 +35,7 @@ export function useRegisterUserForm(): UseRegisterUserFormReturn {
 
   const { mutate, isPending } = useCreateUserMutation({
     onSuccess: (response) => {
-      router.push(
-        routes.public.verifyEmail.sent(response.email, response.token),
-      );
+      router.push(routes.public.verifyEmail.sent(response.email));
 
       notification.notify("Conta criada com sucesso!", "success");
     },

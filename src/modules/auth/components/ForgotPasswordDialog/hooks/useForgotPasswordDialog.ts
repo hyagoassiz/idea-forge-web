@@ -5,7 +5,6 @@ import {
 } from "@/modules/auth/components/ForgotPasswordDialog/schema/forgotPasswordSchema";
 import { useForgotPasswordMutation } from "@/modules/auth/services/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 interface UseForgotPasswordDialogReturn {
@@ -17,8 +16,6 @@ interface UseForgotPasswordDialogReturn {
 }
 
 export function useForgotPasswordDialog(): UseForgotPasswordDialogReturn {
-  const router = useRouter();
-
   const forgotPasswordForm = useForm<ForgotPasswordForm>({
     resolver: zodResolver(forgotPasswordSchema),
     mode: "onSubmit",
@@ -28,17 +25,8 @@ export function useForgotPasswordDialog(): UseForgotPasswordDialogReturn {
     },
   });
 
-  const { mutate, error, data, isPending, isError } = useForgotPasswordMutation(
-    {
-      onSuccess: (response) => {
-        if (!response.token) return;
-
-        setTimeout(() => {
-          router.push(`/reset-password?token=${response.token}`);
-        }, 1500);
-      },
-    },
-  );
+  const { mutate, error, data, isPending, isError } =
+    useForgotPasswordMutation();
 
   const apiMessage =
     (error as ApiErrorResponse | null)?.message ?? data?.message ?? null;
