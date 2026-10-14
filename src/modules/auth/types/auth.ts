@@ -16,7 +16,6 @@ export type ForgotPasswordRequest = {
 
 export type ForgotPasswordResponse = {
   message: string;
-  token: string;
 };
 
 export type ValidateResetTokenRequest = {
@@ -44,5 +43,4 @@ export type ResendEmailVerificationRequest = {
 
 export type ResendEmailVerificationResponse = {
   message: string;
-  token: string;
 };

@@ -4,8 +4,6 @@ import { useEffect } from "react";
 
 interface UseVerifyEmailSent {
   email: string | null;
-  token: string | null;
-  router: ReturnType<typeof useRouter>;
 }
 
 export function useVerifyEmailSent(): UseVerifyEmailSent {
@@ -15,13 +13,11 @@ export function useVerifyEmailSent(): UseVerifyEmailSent {
 
   const email = searchParams.get("email");
 
-  const token = searchParams.get("token");
-
   useEffect(() => {
-    if (!email || !token) {
+    if (!email) {
       router.replace(routes.public.login);
     }
-  }, [email, token, router]);
+  }, [email, router]);
 
-  return { email, token, router };
+  return { email };
 }
