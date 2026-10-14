@@ -10,9 +10,7 @@ export type CreateUserRequest = Pick<User, "name" | "email" | "password">;
 export type CreateUserUserResponse = Pick<
   User,
   "name" | "email" | "emailVerified"
-> & {
-  token: string;
-};
+>;
 
 export type UserResponse = Pick<User, "email" | "emailVerified"> & {
   message: string;

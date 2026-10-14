@@ -6,7 +6,7 @@ import { useVerifyEmailSent } from "@/modules/auth/components/VerifyEmailSent/ho
 import { routes } from "@/routes";
 
 export function VerifyEmailSent() {
-  const { email, token, router } = useVerifyEmailSent();
+  const { email } = useVerifyEmailSent();
 
   return (
     <>
@@ -15,14 +15,7 @@ export function VerifyEmailSent() {
         Verifique sua caixa de entrada para validar seu endereço de e-mail.
       </Alert>
 
-      <AuthActions
-        linkHref={routes.public.login}
-        buttonLabel="Validar e-mail"
-        linkLabel="Fazer login"
-        onClick={() =>
-          router.push(routes.public.verifyEmail.verify(token as string))
-        }
-      />
+      <AuthActions linkHref={routes.public.login} linkLabel="Fazer login" />
     </>
   );
 }

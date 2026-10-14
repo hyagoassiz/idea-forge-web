@@ -63,10 +63,10 @@ export function useLoginUserForm(): UseLoginUserFormReturn {
   });
 
   const resendMutation = useResendVerificationEmailMutation({
-    onSuccess: ({ token }) => {
+    onSuccess: () => {
       const email = loginUserForm.getValues("email");
 
-      router.push(routes.public.verifyEmail.sent(email, token));
+      router.push(routes.public.verifyEmail.sent(email));
     },
 
     onError: (error) => {
