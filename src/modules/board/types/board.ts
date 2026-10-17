@@ -3,6 +3,10 @@ export interface Board {
   name: string;
   description: string | null;
 }
+export interface BoardFilter {
+  archived?: boolean;
+  search?: string;
+}
 
 export type CreateBoardRequest = Pick<Board, "name" | "description">;
 
