@@ -1,0 +1,18 @@
+import { ApiErrorResponse } from "@/lib/api/types";
+import { boardService } from "@/modules/board/services/boardService";
+import { useMutation, UseMutationOptions } from "@tanstack/react-query";
+
+type UseArchiveBoardMutationOptions = UseMutationOptions<
+  void,
+  ApiErrorResponse,
+  number
+>;
+
+export function useArchiveBoardMutation(
+  options?: UseArchiveBoardMutationOptions,
+) {
+  return useMutation({
+    mutationFn: boardService.archiveBoard,
+    ...options,
+  });
+}
