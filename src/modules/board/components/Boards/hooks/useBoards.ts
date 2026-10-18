@@ -29,7 +29,7 @@ export function useBoards(): UseBoardsReturn {
   const archiveBoardMutation = useArchiveBoardMutation({
     onSuccess: () => {
       notification.notify("Quadro arquivado com sucesso!", "success");
-      queryClient.invalidateQueries({ queryKey: [GET_BOARDS_KEY] });
+      refreshBoards();
     },
     onError: (error) => {
       notification.notify(

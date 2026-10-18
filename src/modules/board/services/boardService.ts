@@ -3,7 +3,7 @@ import {
   Board,
   CreateBoardRequest,
   UpdateBoardRequest,
-  BoardFilter,
+  BoardRequest,
 } from "@/modules/board/types";
 
 export const boardService = {
@@ -13,7 +13,7 @@ export const boardService = {
       body: JSON.stringify(payload),
     });
   },
-  archiveBoard: async (id: number): Promise<void> => {
+  archiveBoard: async (id: number): Promise<Board> => {
     return api(`/boards/${id}/archive`, {
       method: "PATCH",
     });
@@ -23,15 +23,15 @@ export const boardService = {
     return api(`/boards/${id}`);
   },
 
-  getBoards: async (filter: BoardFilter = {}): Promise<Board[]> => {
+  getBoards: async (payload: BoardRequest): Promise<Board[]> => {
     const params = new URLSearchParams();
 
-    if (filter.archived !== undefined) {
-      params.set("archived", String(filter.archived));
+    if (payload.archived !== undefined) {
+      params.set("archived", String(payload.archived));
     }
 
-    if (filter.search?.trim()) {
-      params.set("search", filter.search.trim());
+    if (payload.search?.trim()) {
+      params.set("search", payload.search.trim());
     }
 
     return api(`/boards?${params.toString()}`);

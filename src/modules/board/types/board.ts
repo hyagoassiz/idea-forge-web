@@ -2,8 +2,9 @@ export interface Board {
   id: number;
   name: string;
   description: string | null;
+  archived: boolean;
 }
-export interface BoardFilter {
+export interface BoardRequest {
   archived?: boolean;
   search?: string;
 }
