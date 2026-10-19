@@ -14,7 +14,9 @@ interface BoardKanbanProps {
 }
 
 export function BoardKanban({ boardId }: BoardKanbanProps) {
-  const { ideas, isLoading, refreshIdeas } = useBoardKanban({ boardId });
+  const { ideas, isLoading, refreshIdeas, mutate } = useBoardKanban({
+    boardId,
+  });
 
   const columns = [
     {
@@ -65,10 +67,11 @@ export function BoardKanban({ boardId }: BoardKanbanProps) {
           display: "grid",
           gridTemplateColumns: {
             xs: "1fr",
-            md: "repeat(4, minmax(240px, 1fr))",
+            md: "repeat(4, minmax(120px, 1fr))",
           },
           gap: 2,
           overflowX: "auto",
+          alignItems: "start",
         }}
       >
         {columns.map((column) => {
@@ -78,9 +81,11 @@ export function BoardKanban({ boardId }: BoardKanbanProps) {
 
           return (
             <BoardColumn
+              boardId={boardId as number}
               ideas={columnIdeas ?? []}
               key={column.id}
               title={column.title}
+              mutate={mutate}
             />
           );
         })}
