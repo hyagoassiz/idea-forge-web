@@ -1,17 +1,19 @@
+import { MoreOption } from "@/components/MoreOptions/types";
 import { MoreHoriz } from "@mui/icons-material";
 import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import { MouseEvent, useState } from "react";
 
 interface MoreOptionsProps {
   disabled?: boolean;
-  options: {
-    label: string;
-    disabled?: boolean;
-    onClick: () => void;
-  }[];
+  size?: "small" | "medium" | "large";
+  options: MoreOption[];
 }
 
-export function MoreOptions({ disabled = false, options }: MoreOptionsProps) {
+export function MoreOptions({
+  disabled = false,
+  size = "medium",
+  options,
+}: MoreOptionsProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   function handleClick(event: MouseEvent<HTMLElement>): void {
@@ -31,6 +33,7 @@ export function MoreOptions({ disabled = false, options }: MoreOptionsProps) {
     <>
       <Tooltip title="Opções" placement="top">
         <IconButton
+          size={size}
           aria-controls={anchorEl ? "options-menu" : undefined}
           aria-haspopup="true"
           onClick={handleClick}

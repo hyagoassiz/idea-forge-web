@@ -13,7 +13,7 @@ export function ContentCard({
   toolbarRight,
 }: ContentCardProps) {
   return (
-    <Box>
+    <Box mb={6}>
       <Paper
         sx={{
           width: "100%",

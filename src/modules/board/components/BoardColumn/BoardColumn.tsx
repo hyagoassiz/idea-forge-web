@@ -1,20 +1,27 @@
 import { BoardIdeaCard } from "@/modules/board/components/BoardIdeaCard";
-import { Idea } from "@/modules/idea/types";
+import { Idea, UpdateIdeaStatusRequest } from "@/modules/idea/types";
 import { Box, Paper, Typography } from "@mui/material";
 
 interface BoardColumnProps {
+  boardId: number;
   ideas: Idea[];
   title: string;
+  mutate(payload: UpdateIdeaStatusRequest): void;
 }
 
-export function BoardColumn({ title, ideas }: BoardColumnProps) {
+export function BoardColumn({
+  boardId,
+  title,
+  ideas,
+  mutate,
+}: BoardColumnProps) {
   return (
     <Paper
       sx={{
         display: "flex",
         flexDirection: "column",
         gap: 2,
-        minHeight: 400,
+        minHeight: 120,
         p: 2,
       }}
     >
@@ -28,7 +35,13 @@ export function BoardColumn({ title, ideas }: BoardColumnProps) {
         }}
       >
         {ideas.map((idea) => (
-          <BoardIdeaCard key={idea.id} idea={idea} />
+          <BoardIdeaCard
+            key={idea.id}
+            boardId={boardId}
+            idea={idea}
+            mutate={mutate}
+            onOpen={() => {}}
+          />
         ))}
       </Box>
     </Paper>
