@@ -14,17 +14,9 @@ interface BoardCardProps {
   name: string;
   onOpen: () => void;
   onEdit: () => void;
-  onArchive: () => void;
-  isArchiving: boolean;
 }
 
-export function BoardCard({
-  name,
-  onOpen,
-  onEdit,
-  onArchive,
-  isArchiving,
-}: BoardCardProps) {
+export function BoardCard({ name, onOpen, onEdit }: BoardCardProps) {
   return (
     <Card
       sx={{
@@ -72,7 +64,7 @@ export function BoardCard({
         <MoreOptions
           options={[
             { label: "Editar", onClick: onEdit },
-            { label: "Arquivar", disabled: isArchiving, onClick: onArchive },
+            { label: "Arquivar", disabled: true, onClick: () => {} },
           ]}
         />
       </Box>
