@@ -3,6 +3,7 @@ import {
   CreateIdeaRequest,
   Idea,
   UpdateIdeaRequest,
+  UpdateIdeaStatusRequest,
 } from "@/modules/idea/types";
 
 export const ideaService = {
@@ -32,6 +33,14 @@ export const ideaService = {
     return api(`/boards/${boardId}/ideas/${id}`, {
       method: "PUT",
       body: JSON.stringify(payload),
+    });
+  },
+
+  updateIdeaStatus: async (payload: UpdateIdeaStatusRequest): Promise<Idea> => {
+    const { boardId, ideaId, status } = payload;
+    return api(`/boards/${boardId}/ideas/${ideaId}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status }),
     });
   },
 };
