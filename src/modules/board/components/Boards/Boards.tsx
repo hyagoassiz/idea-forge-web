@@ -12,14 +12,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 export function Boards() {
-  const {
-    boards,
-    isLoading,
-    search,
-    refreshBoards,
-    archiveBoard,
-    isArchiving,
-  } = useBoards();
+  const { boards, isLoading, search, refreshBoards } = useBoards();
 
   const router = useRouter();
 
@@ -50,8 +43,6 @@ export function Boards() {
               name={board.name}
               onEdit={() => router.push(routes.protected.boards.edit(board.id))}
               onOpen={() => router.push(routes.protected.boards.view(board.id))}
-              onArchive={() => archiveBoard(board.id)}
-              isArchiving={isArchiving}
             />
           </Grid>
         ))}
