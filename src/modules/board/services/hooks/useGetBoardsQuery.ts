@@ -3,8 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ApiErrorResponse } from "@/lib/api/types";
 import { QueryOptions } from "@/lib/react-query/types";
 import { boardService } from "@/modules/board/services/boardService";
-import { Board } from "@/modules/board/types";
-import { BoardRequest } from "@/modules/board/types";
+import { Board, BoardRequest } from "@/modules/board/types";
 
 export const GET_BOARDS_KEY = "GET_BOARDS_KEY";
 

@@ -4,6 +4,7 @@ export interface Board {
   description: string | null;
   archived: boolean;
 }
+
 export interface BoardRequest {
   archived?: boolean;
   search?: string;
