@@ -1,7 +1,7 @@
 import { ApiErrorResponse } from "@/lib/api/types";
 import { boardService } from "@/modules/board/services/boardService";
-import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { Board } from "@/modules/board/types";
+import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 
 type UseArchiveBoardMutationOptions = UseMutationOptions<
   Board,

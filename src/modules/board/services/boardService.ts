@@ -1,9 +1,9 @@
 import { api } from "@/lib/api/api";
 import {
   Board,
+  BoardRequest,
   CreateBoardRequest,
   UpdateBoardRequest,
-  BoardRequest,
 } from "@/modules/board/types";
 
 export const boardService = {

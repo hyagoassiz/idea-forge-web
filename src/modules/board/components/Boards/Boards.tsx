@@ -14,11 +14,11 @@ import { useRouter } from "next/navigation";
 export function Boards() {
   const {
     boards,
+    isArchiving,
     isLoading,
     search,
-    refreshBoards,
     archiveBoard,
-    isArchiving,
+    refreshBoards,
   } = useBoards();
 
   const router = useRouter();

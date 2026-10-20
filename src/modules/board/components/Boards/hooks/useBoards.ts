@@ -1,3 +1,4 @@
+import { useNotification } from "@/components/Notification/NotificationSnackbar/hooks/useNotificationSnackbar";
 import { useSearch } from "@/hooks";
 import {
   GET_BOARDS_KEY,
@@ -8,27 +9,29 @@ import { Board } from "@/modules/board/types";
 import { SearchProps } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo } from "react";
-import { useNotification } from "@/components/Notification/NotificationSnackbar/hooks/useNotificationSnackbar";
 
 interface UseBoardsReturn {
   boards: Board[];
+  isArchiving: boolean;
   isLoading: boolean;
   search: SearchProps;
-  refreshBoards(): void;
   archiveBoard(id: number): void;
-  isArchiving: boolean;
+  refreshBoards(): void;
 }
 
 export function useBoards(): UseBoardsReturn {
   const queryClient = useQueryClient();
+
   const notification = useNotification();
 
   const { search, searchValue } = useSearch({});
+
   const { data, isFetching } = useGetBoardsQuery({ archived: false });
 
   const archiveBoardMutation = useArchiveBoardMutation({
     onSuccess: () => {
       notification.notify("Quadro arquivado com sucesso!", "success");
+
       refreshBoards();
     },
     onError: (error) => {
@@ -60,22 +63,22 @@ export function useBoards(): UseBoardsReturn {
 
   const boards: Board[] = useMemo(() => {
     return filterBoards(data ?? [], searchValue);
-  }, [data, filterBoards, searchValue]);
-
-  function refreshBoards(): void {
-    queryClient.invalidateQueries({ queryKey: [GET_BOARDS_KEY] });
-  }
+  }, [data, searchValue]);
 
   function archiveBoard(id: number): void {
     archiveBoardMutation.mutate(id);
   }
 
+  function refreshBoards(): void {
+    queryClient.invalidateQueries({ queryKey: [GET_BOARDS_KEY] });
+  }
+
   return {
     boards,
+    isArchiving: archiveBoardMutation.isPending,
     isLoading: isFetching,
     search,
-    refreshBoards,
     archiveBoard,
-    isArchiving: archiveBoardMutation.isPending,
+    refreshBoards,
   };
 }

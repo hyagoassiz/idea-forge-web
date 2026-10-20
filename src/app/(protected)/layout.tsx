@@ -42,6 +42,7 @@ export default function PublicLayout({
           label: "Logout",
           onClick: async () => {
             await authService.logout();
+
             window.location.href = routes.public.login;
           },
         },
