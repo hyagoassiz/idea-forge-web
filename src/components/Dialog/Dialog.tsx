@@ -9,7 +9,7 @@ import {
 
 interface DialogProps {
   open: boolean;
-  title: string;
+  title: string | React.ReactNode;
   children: React.ReactNode;
   actions?: ActionButton[];
   onClose(): void;

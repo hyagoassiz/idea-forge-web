@@ -7,13 +7,11 @@ import {
 } from "@/modules/idea/types";
 
 export const ideaService = {
-  createIdea: async (
-    boardId: number,
-    payload: CreateIdeaRequest,
-  ): Promise<Idea> => {
+  createIdea: async (payload: CreateIdeaRequest): Promise<Idea> => {
+    const { boardId, ...rest } = payload;
     return api(`/boards/${boardId}/ideas`, {
       method: "POST",
-      body: JSON.stringify(payload),
+      body: JSON.stringify(rest),
     });
   },
 
@@ -25,20 +23,17 @@ export const ideaService = {
     return api(`/boards/${boardId}/ideas`);
   },
 
-  updateIdea: async (
-    boardId: number,
-    payload: UpdateIdeaRequest,
-  ): Promise<Idea> => {
-    const { id } = payload;
-    return api(`/boards/${boardId}/ideas/${id}`, {
+  updateIdea: async (payload: UpdateIdeaRequest): Promise<Idea> => {
+    const { id, ...rest } = payload;
+    return api(`/ideas/${id}`, {
       method: "PUT",
-      body: JSON.stringify(payload),
+      body: JSON.stringify(rest),
     });
   },
 
   updateIdeaStatus: async (payload: UpdateIdeaStatusRequest): Promise<Idea> => {
-    const { boardId, ideaId, status } = payload;
-    return api(`/boards/${boardId}/ideas/${ideaId}/status`, {
+    const { id, status } = payload;
+    return api(`/ideas/${id}/status`, {
       method: "PATCH",
       body: JSON.stringify({ status }),
     });
