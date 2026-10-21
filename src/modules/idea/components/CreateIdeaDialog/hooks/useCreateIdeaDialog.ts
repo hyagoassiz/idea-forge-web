@@ -53,11 +53,9 @@ export function useCreateIdeaDialog({
 
   const handleSave = ideaForm.handleSubmit((data): void => {
     createIdeaMutation.mutate({
-      boardId: boardId,
-      payload: {
-        name: data.name,
-        description: data.description ?? "",
-      },
+      boardId,
+      name: data.name,
+      description: data.description ?? "",
     });
   });
 
