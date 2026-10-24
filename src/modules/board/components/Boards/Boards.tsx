@@ -3,12 +3,13 @@
 import { ContentCard } from "@/components/ContentCard";
 import { IconAction } from "@/components/icon/IconAction";
 import { Search } from "@/components/icon/Search";
+import { Alert } from "@/components/Notification/Alert";
 import { BoardCard } from "@/modules/board/components/BoardCard";
 import { useBoards } from "@/modules/board/components/Boards/hooks/useBoards";
 import { routes } from "@/routes";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 export function Boards() {
@@ -25,9 +26,6 @@ export function Boards() {
 
   return (
     <ContentCard
-      toolbarLeft={
-        <Typography>{`Registros (${boards?.length ?? 0})`}</Typography>
-      }
       toolbarRight={
         <Box display="flex" alignItems="center" gap={1}>
           <IconAction
@@ -39,10 +37,14 @@ export function Boards() {
 
           <IconAction icon={<ArchiveIcon />} tooltip="Arquivados" disabled />
 
-          <Search width={200} search={search} />
+          <Search width={300} search={search} />
         </Box>
       }
     >
+      {boards?.length === 0 && !isLoading && (
+        <Alert severity="info">Nenhum quadro encontrado.</Alert>
+      )}
+
       <Grid container spacing={1}>
         {boards?.map((board) => (
           <Grid item xs={12} sm={4} key={board.id}>
