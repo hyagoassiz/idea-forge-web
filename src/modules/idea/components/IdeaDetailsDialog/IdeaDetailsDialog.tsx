@@ -141,6 +141,7 @@ export function IdeaDetailsDialog({
                       input: { maxLength: 60 },
                     },
                   }}
+                  onBlur={() => setEditingField(null)}
                 />
 
                 <InlineEditActions
@@ -151,7 +152,7 @@ export function IdeaDetailsDialog({
               </Box>
             ) : (
               <Box
-                onClick={() => setEditingField("name")}
+                // onClick={() => setEditingField("name")}
                 sx={{
                   cursor: "text",
                   borderRadius: 1,
@@ -185,18 +186,19 @@ export function IdeaDetailsDialog({
                 fullWidth
                 multiline
                 minRows={3}
-                disabled={isLoading}
-                onFocus={() => {
-                  if (!editingField) {
-                    setEditingField("description");
-                  }
-                }}
+                disabled
+                // onFocus={() => {
+                //   if (!editingField) {
+                //     setEditingField("description");
+                //   }
+                // }}
                 InputProps={{
                   readOnly: editingField !== "description",
                   slotProps: {
                     input: { maxLength: 255 },
                   },
                 }}
+                onBlur={() => setEditingField(null)}
               />
 
               {editingField === "description" && (
