@@ -18,6 +18,7 @@ export function BoardForm() {
           control={boardForm.control}
           fullWidth
           InputProps={{ slotProps: { input: { maxLength: 60 } } }}
+          required
         />
 
         <ControlledTextField

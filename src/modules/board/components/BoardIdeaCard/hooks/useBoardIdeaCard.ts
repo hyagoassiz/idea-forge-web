@@ -33,27 +33,22 @@ export function useBoardIdeaCard({
   const options: Option[] = [
     {
       label: "Visualizar",
-      disabled: true,
       onClick: () => onOpen(idea),
     },
     {
       label: "Mover para Rascunho",
-      disabled: false,
       onClick: () => handleChangeStatus(IdeaStatus.DRAFT),
     },
     {
       label: "Mover para Validação",
-      disabled: false,
       onClick: () => handleChangeStatus(IdeaStatus.VALIDATION),
     },
     {
       label: "Mover para Desenvolvimento",
-      disabled: false,
       onClick: () => handleChangeStatus(IdeaStatus.DEVELOPMENT),
     },
     {
       label: "Mover para Lançadas",
-      disabled: false,
       onClick: () => handleChangeStatus(IdeaStatus.LAUNCHED),
     },
     {

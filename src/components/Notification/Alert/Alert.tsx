@@ -32,7 +32,11 @@ export function Alert({
         icon={icon}
         onClose={onClose}
         action={action}
-        sx={sx}
+        sx={{
+          ...sx,
+          width: "100%",
+          justifyContent: "center",
+        }}
       >
         {title && <AlertTitle>{title}</AlertTitle>}
         {children}

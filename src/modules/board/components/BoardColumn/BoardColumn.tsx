@@ -11,8 +11,11 @@ interface BoardColumnProps {
 }
 
 export function BoardColumn({ title, ideas, mutate }: BoardColumnProps) {
-  const { ideaDetailsDialogState, handleCloseIdeaDetailsDialog } =
-    useBoardColumn();
+  const {
+    ideaDetailsDialogState,
+    handleCloseIdeaDetailsDialog,
+    handleOpenIdeaDetailsDialog,
+  } = useBoardColumn();
 
   return (
     <>
@@ -39,7 +42,7 @@ export function BoardColumn({ title, ideas, mutate }: BoardColumnProps) {
               key={idea.id}
               idea={idea}
               mutate={mutate}
-              onOpen={() => {}}
+              onOpen={handleOpenIdeaDetailsDialog}
             />
           ))}
         </Box>
