@@ -1,5 +1,6 @@
 import { NavigateNext } from "@mui/icons-material";
-import { Box, Breadcrumbs, Link, Stack, Typography } from "@mui/material";
+import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 
 interface BreadcrumbItem {
   label: string;
@@ -28,8 +29,10 @@ export function PageHeader({
               <Link
                 key={item.href}
                 href={item.href}
-                underline="hover"
-                color="inherit"
+                style={{
+                  color: "inherit",
+                  textDecoration: "underline",
+                }}
               >
                 {item.label}
               </Link>

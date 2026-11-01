@@ -96,10 +96,10 @@ export function useBoardForm(): UseBoardFormReturn {
   }, [router]);
 
   useEffect(() => {
-    if (!board) return;
+    if (!board || !boardId) return;
 
     fillForm(board);
-  }, [board, fillForm]);
+  }, [board, boardId, fillForm]);
 
   useEffect(() => {
     if (!isError) return;

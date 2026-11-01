@@ -14,6 +14,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import { styled, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useRouter } from "next/navigation";
 
 type LeftDrawerProps = {
   open: boolean;
@@ -37,6 +38,8 @@ export function LeftDrawer({
   groups,
 }: LeftDrawerProps) {
   const theme = useTheme();
+
+  const router = useRouter();
 
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -88,8 +91,8 @@ export function LeftDrawer({
                 <ListItemButton
                   onClick={() => {
                     if (opt.onClick) opt.onClick();
-                    if (opt.href) window.location.href = opt.href;
-                    if (!isMdUp) onClose();
+                    if (opt.href) router.push(opt.href);
+                    onClose();
                   }}
                   disabled={opt.disabled}
                   role="menuitem"
