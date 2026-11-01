@@ -14,9 +14,10 @@ interface BoardKanbanProps {
 }
 
 export function BoardKanban({ boardId }: BoardKanbanProps) {
-  const { ideas, isLoading, refreshIdeas, mutate } = useBoardKanban({
-    boardId,
-  });
+  const { ideas, isLoading, isArchiving, archiveIdea, refreshIdeas, mutate } =
+    useBoardKanban({
+      boardId,
+    });
 
   const columns = [
     {
@@ -76,7 +77,7 @@ export function BoardKanban({ boardId }: BoardKanbanProps) {
       >
         {columns.map((column) => {
           const columnIdeas = ideas?.filter(
-            (idea) => idea.status === column.id,
+            (idea) => !idea.archived && idea.status === column.id,
           );
 
           return (
@@ -86,6 +87,8 @@ export function BoardKanban({ boardId }: BoardKanbanProps) {
               key={column.id}
               title={column.title}
               mutate={mutate}
+              archiveIdea={archiveIdea}
+              isArchiving={isArchiving}
             />
           );
         })}

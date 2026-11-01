@@ -7,12 +7,16 @@ interface BoardColumnProps {
   ideas: Idea[];
   title: string;
   mutate(payload: UpdateIdeaStatusRequest): void;
+  archiveIdea(ideaId: number): void;
+  isArchiving: boolean;
 }
 
 export function BoardColumn({
   boardId,
   title,
   ideas,
+  archiveIdea,
+  isArchiving,
   mutate,
 }: BoardColumnProps) {
   return (
@@ -41,6 +45,8 @@ export function BoardColumn({
             idea={idea}
             mutate={mutate}
             onOpen={() => {}}
+            archiveIdea={archiveIdea}
+            isArchiving={isArchiving}
           />
         ))}
       </Box>

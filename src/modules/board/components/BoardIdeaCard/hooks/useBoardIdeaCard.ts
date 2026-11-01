@@ -20,6 +20,8 @@ interface UseBoardKanbanProps {
   idea: Idea;
   onOpen(): void;
   mutate(payload: UpdateIdeaStatusRequest): void;
+  archiveIdea(ideaId: number): void;
+  isArchiving: boolean;
 }
 
 interface UseBoardIdeaCardReturn {
@@ -31,37 +33,39 @@ export function useBoardIdeaCard({
   idea,
   onOpen,
   mutate,
+  archiveIdea,
+  isArchiving,
 }: UseBoardKanbanProps): UseBoardIdeaCardReturn {
   const options: Option[] = [
     {
       label: "Visualizar",
-      disabled: true,
+      disabled: idea.archived,
       onClick: onOpen,
     },
     {
       label: "Mover para Rascunho",
-      disabled: false,
+      disabled: isArchiving || idea.archived,
       onClick: () => handleChangeStatus(IdeaStatus.DRAFT),
     },
     {
       label: "Mover para Validação",
-      disabled: false,
+      disabled: isArchiving || idea.archived,
       onClick: () => handleChangeStatus(IdeaStatus.VALIDATION),
     },
     {
       label: "Mover para Desenvolvimento",
-      disabled: false,
+      disabled: isArchiving || idea.archived,
       onClick: () => handleChangeStatus(IdeaStatus.DEVELOPMENT),
     },
     {
       label: "Mover para Lançadas",
-      disabled: false,
+      disabled: isArchiving || idea.archived,
       onClick: () => handleChangeStatus(IdeaStatus.LAUNCHED),
     },
     {
       label: "Arquivar",
-      disabled: true,
-      onClick: () => {},
+      disabled: isArchiving,
+      onClick: () => archiveIdea(idea.id),
     },
   ];
 

@@ -18,6 +18,8 @@ interface BoardIdeaCardProps {
   idea: Idea;
   onOpen(): void;
   mutate(payload: UpdateIdeaStatusRequest): void;
+  archiveIdea(ideaId: number): void;
+  isArchiving: boolean;
 }
 
 export function BoardIdeaCard({
@@ -25,8 +27,17 @@ export function BoardIdeaCard({
   idea,
   onOpen,
   mutate,
+  archiveIdea,
+  isArchiving,
 }: BoardIdeaCardProps) {
-  const { options } = useBoardIdeaCard({ boardId, idea, onOpen, mutate });
+  const { options } = useBoardIdeaCard({
+    boardId,
+    idea,
+    onOpen,
+    mutate,
+    archiveIdea,
+    isArchiving,
+  });
 
   const hasScore = idea.isEvaluated && idea.evaluationScore != null;
 
