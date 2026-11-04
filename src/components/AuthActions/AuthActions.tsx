@@ -1,5 +1,6 @@
 import { LoadingButton } from "@mui/lab";
-import { Divider, Link, Typography } from "@mui/material";
+import { Divider, Link as MuiLink, Typography } from "@mui/material";
+import Link from "next/link";
 
 interface AuthActionsProps {
   children?: React.ReactNode;
@@ -56,14 +57,9 @@ export function AuthActions({
         }}
       >
         {linkDescription}{" "}
-        <Link
-          href={linkHref}
-          sx={{
-            color: "inherit",
-          }}
-        >
+        <MuiLink component={Link} href={linkHref} sx={{ color: "inherit" }}>
           {linkLabel}
-        </Link>
+        </MuiLink>
       </Typography>
     </>
   );
