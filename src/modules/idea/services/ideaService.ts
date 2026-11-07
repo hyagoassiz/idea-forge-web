@@ -16,11 +16,7 @@ export const ideaService = {
       body: JSON.stringify(payload),
     });
   },
-  archiveIdea: async (
-    ideaId: number,
-  ): Promise<
-    Pick<Idea, "id" | "name" | "description" | "status" | "archived">
-  > => {
+  archiveIdea: async (ideaId: number): Promise<Idea> => {
     return api(`/ideas/${ideaId}/archive`, {
       method: "PATCH",
     });

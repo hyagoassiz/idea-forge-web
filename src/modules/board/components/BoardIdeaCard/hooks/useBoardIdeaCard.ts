@@ -39,27 +39,27 @@ export function useBoardIdeaCard({
   const options: Option[] = [
     {
       label: "Visualizar",
-      disabled: idea.archived,
+      disabled: isArchiving,
       onClick: onOpen,
     },
     {
       label: "Mover para Rascunho",
-      disabled: isArchiving || idea.archived,
+      disabled: isArchiving,
       onClick: () => handleChangeStatus(IdeaStatus.DRAFT),
     },
     {
       label: "Mover para Validação",
-      disabled: isArchiving || idea.archived,
+      disabled: isArchiving,
       onClick: () => handleChangeStatus(IdeaStatus.VALIDATION),
     },
     {
       label: "Mover para Desenvolvimento",
-      disabled: isArchiving || idea.archived,
+      disabled: isArchiving,
       onClick: () => handleChangeStatus(IdeaStatus.DEVELOPMENT),
     },
     {
       label: "Mover para Lançadas",
-      disabled: isArchiving || idea.archived,
+      disabled: isArchiving,
       onClick: () => handleChangeStatus(IdeaStatus.LAUNCHED),
     },
     {

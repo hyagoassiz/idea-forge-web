@@ -77,7 +77,7 @@ export function BoardKanban({ boardId }: BoardKanbanProps) {
       >
         {columns.map((column) => {
           const columnIdeas = ideas?.filter(
-            (idea) => !idea.archived && idea.status === column.id,
+            (idea) => idea.status === column.id,
           );
 
           return (
