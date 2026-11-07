@@ -1,12 +1,12 @@
 // lib/api/api.ts
+// lib/api/api.ts
 
 import { ApiErrorResponse } from "@/lib/api/types/apiErrorResponse";
 import { routes } from "@/routes";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
-let isRedirectingToLogin = false;
 
-function isExpiredAuthError(error: unknown): boolean {
+function isExpiredAuthError(error: unknown): error is ApiErrorResponse {
   return (
     typeof error === "object" &&
     error !== null &&
@@ -38,10 +38,8 @@ export async function api<T>(
       response.status === 401 &&
       isExpiredAuthError(data) &&
       typeof window !== "undefined" &&
-      window.location.pathname !== routes.public.login &&
-      !isRedirectingToLogin
+      window.location.pathname !== routes.public.login
     ) {
-      isRedirectingToLogin = true;
       window.location.replace(routes.public.login);
     }
 
