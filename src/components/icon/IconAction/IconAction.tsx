@@ -1,4 +1,4 @@
-import { IconButton, Tooltip } from "@mui/material";
+import { Badge, BadgeProps, IconButton, Tooltip } from "@mui/material";
 import { ReactNode } from "react";
 
 interface IconActionProps {
@@ -6,6 +6,8 @@ interface IconActionProps {
   icon: ReactNode;
   disabled?: boolean;
   size?: "large" | "medium" | "small";
+  badgeContent?: ReactNode;
+  badgeColor?: BadgeProps<"a">["color"];
   onClick?: () => void;
 }
 
@@ -14,6 +16,8 @@ export function IconAction({
   icon,
   disabled = false,
   size,
+  badgeContent,
+  badgeColor = "secondary",
   onClick,
 }: IconActionProps) {
   return (
@@ -29,7 +33,14 @@ export function IconAction({
             borderRadius: 2,
           }}
         >
-          {icon}
+          <Badge
+            badgeContent={badgeContent}
+            color={badgeColor}
+            max={99}
+            invisible={badgeContent === undefined || badgeContent === null}
+          >
+            {icon}
+          </Badge>
         </IconButton>
       </span>
     </Tooltip>

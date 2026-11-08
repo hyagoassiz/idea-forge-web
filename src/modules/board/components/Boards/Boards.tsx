@@ -5,6 +5,7 @@ import { IconAction } from "@/components/icon/IconAction";
 import { Search } from "@/components/icon/Search";
 import { Alert } from "@/components/Notification/Alert";
 import { PageHeader } from "@/components/PageHeader";
+import { ArchivedBoardsDialog } from "@/modules/board/components/ArchivedBoardsDialog";
 import { BoardCard } from "@/modules/board/components/BoardCard";
 import { useBoards } from "@/modules/board/components/Boards/hooks/useBoards";
 import { routes } from "@/routes";
@@ -18,10 +19,12 @@ export function Boards() {
   const {
     boards,
     isArchiving,
+    isArchivedBoardsDialogOpen,
     isLoading,
     search,
     archiveBoard,
     refreshBoards,
+    toggleArchivedBoardsDialog,
   } = useBoards();
 
   const router = useRouter();
@@ -52,7 +55,11 @@ export function Boards() {
               onClick={refreshBoards}
             />
 
-            <IconAction icon={<ArchiveIcon />} tooltip="Arquivados" disabled />
+            <IconAction
+              icon={<ArchiveIcon />}
+              tooltip="Arquivados"
+              onClick={toggleArchivedBoardsDialog}
+            />
 
             <Search width={300} search={search} />
           </Box>
@@ -80,6 +87,13 @@ export function Boards() {
           ))}
         </Grid>
       </ContentCard>
+
+      {isArchivedBoardsDialogOpen && (
+        <ArchivedBoardsDialog
+          open={isArchivedBoardsDialogOpen}
+          onClose={toggleArchivedBoardsDialog}
+        />
+      )}
     </>
   );
 }

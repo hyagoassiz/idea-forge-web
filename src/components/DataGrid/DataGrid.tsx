@@ -201,7 +201,7 @@ export function DataGrid<T>({
                           }),
                         }}
                       >
-                        {row[column.key]?.toString()}
+                        {row[column.key] as React.ReactNode}
                       </TableCell>
                     ))}
                   </TableRow>
