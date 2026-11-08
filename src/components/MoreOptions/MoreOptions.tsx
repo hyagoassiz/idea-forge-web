@@ -31,7 +31,7 @@ export function MoreOptions({
 
   return (
     <>
-      <Tooltip title="Opções" placement="top">
+      <Tooltip title="Opções">
         <IconButton
           size={size}
           aria-controls={anchorEl ? "options-menu" : undefined}

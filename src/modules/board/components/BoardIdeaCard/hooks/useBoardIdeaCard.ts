@@ -16,9 +16,8 @@ type Option = Omit<MoreOption, "label"> & {
 };
 
 interface UseBoardKanbanProps {
-  boardId: number;
   idea: Idea;
-  onOpen(): void;
+  onOpen(idea: Idea): void;
   mutate(payload: UpdateIdeaStatusRequest): void;
 }
 
@@ -27,7 +26,6 @@ interface UseBoardIdeaCardReturn {
 }
 
 export function useBoardIdeaCard({
-  boardId,
   idea,
   onOpen,
   mutate,
@@ -35,27 +33,22 @@ export function useBoardIdeaCard({
   const options: Option[] = [
     {
       label: "Visualizar",
-      disabled: true,
-      onClick: onOpen,
+      onClick: () => onOpen(idea),
     },
     {
       label: "Mover para Rascunho",
-      disabled: false,
       onClick: () => handleChangeStatus(IdeaStatus.DRAFT),
     },
     {
       label: "Mover para Validação",
-      disabled: false,
       onClick: () => handleChangeStatus(IdeaStatus.VALIDATION),
     },
     {
       label: "Mover para Desenvolvimento",
-      disabled: false,
       onClick: () => handleChangeStatus(IdeaStatus.DEVELOPMENT),
     },
     {
       label: "Mover para Lançadas",
-      disabled: false,
       onClick: () => handleChangeStatus(IdeaStatus.LAUNCHED),
     },
     {
@@ -80,8 +73,7 @@ export function useBoardIdeaCard({
 
   function handleChangeStatus(status: IdeaStatus): void {
     mutate({
-      boardId,
-      ideaId: idea.id,
+      id: idea.id,
       status,
     });
   }

@@ -8,15 +8,17 @@ import {
 import { Board } from "@/modules/board/types";
 import { SearchProps } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 interface UseBoardsReturn {
   boards: Board[];
   isArchiving: boolean;
+  isArchivedBoardsDialogOpen: boolean;
   isLoading: boolean;
   search: SearchProps;
   archiveBoard(id: number): void;
   refreshBoards(): void;
+  toggleArchivedBoardsDialog(): void;
 }
 
 export function useBoards(): UseBoardsReturn {
@@ -25,6 +27,9 @@ export function useBoards(): UseBoardsReturn {
   const notification = useNotification();
 
   const { search, searchValue } = useSearch({});
+
+  const [isArchivedBoardsDialogOpen, setIsArchivedBoardsDialogOpen] =
+    useState<boolean>(false);
 
   const { data, isFetching } = useGetBoardsQuery({ archived: false });
 
@@ -73,12 +78,18 @@ export function useBoards(): UseBoardsReturn {
     queryClient.invalidateQueries({ queryKey: [GET_BOARDS_KEY] });
   }
 
+  function toggleArchivedBoardsDialog(): void {
+    setIsArchivedBoardsDialogOpen((prevState) => !prevState);
+  }
+
   return {
     boards,
     isArchiving: archiveBoardMutation.isPending,
+    isArchivedBoardsDialogOpen,
     isLoading: isFetching,
     search,
     archiveBoard,
     refreshBoards,
+    toggleArchivedBoardsDialog,
   };
 }

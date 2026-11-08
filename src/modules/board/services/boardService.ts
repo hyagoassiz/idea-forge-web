@@ -13,6 +13,7 @@ export const boardService = {
       body: JSON.stringify(payload),
     });
   },
+
   archiveBoard: async (id: number): Promise<Board> => {
     return api(`/boards/${id}/archive`, {
       method: "PATCH",
@@ -35,6 +36,12 @@ export const boardService = {
     }
 
     return api(`/boards?${params.toString()}`);
+  },
+
+  unarchiveBoard: async (id: number): Promise<Board> => {
+    return api(`/boards/${id}/unarchive`, {
+      method: "PATCH",
+    });
   },
 
   updateBoard: async (payload: UpdateBoardRequest): Promise<Board> => {
