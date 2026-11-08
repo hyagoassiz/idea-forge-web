@@ -43,59 +43,57 @@ export function BoardKanban({ boardId, description }: BoardKanbanProps) {
   ] as const;
 
   return (
-    <>
-      <ContentCard
-        toolbarRight={
-          <Box display="flex" alignItems="center" gap={1}>
-            <IconAction
-              icon={<RefreshIcon />}
-              tooltip="Atualizar"
-              disabled={isLoading}
-              onClick={refreshIdeas}
-            />
+    <ContentCard
+      toolbarRight={
+        <Box display="flex" alignItems="center" gap={1}>
+          <IconAction
+            icon={<RefreshIcon />}
+            tooltip="Atualizar"
+            disabled={isLoading}
+            onClick={refreshIdeas}
+          />
 
-            <IconAction icon={<ArchiveIcon />} tooltip="Arquivados" disabled />
+          <IconAction icon={<ArchiveIcon />} tooltip="Arquivados" disabled />
 
-            <MoreOptions
-              options={[
-                {
-                  label: "Descrição do quadro",
-                  onClick: () => setIsDescriptionDialogOpen(true),
-                },
-              ]}
-            />
-          </Box>
-        }
-      >
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "1fr",
-              md: "repeat(4, minmax(120px, 1fr))",
-            },
-            gap: 2,
-            overflowX: "auto",
-            alignItems: "start",
-          }}
-        >
-          {columns.map((column) => {
-            const columnIdeas = ideas?.filter(
-              (idea) => idea.status === column.id,
-            );
-
-            return (
-              <BoardColumn
-                boardId={boardId as number}
-                ideas={columnIdeas ?? []}
-                key={column.id}
-                title={column.title}
-                mutate={mutate}
-              />
-            );
-          })}
+          <MoreOptions
+            options={[
+              {
+                label: "Descrição do quadro",
+                onClick: () => setIsDescriptionDialogOpen(true),
+              },
+            ]}
+          />
         </Box>
-      </ContentCard>
+      }
+    >
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "1fr",
+            md: "repeat(4, minmax(120px, 1fr))",
+          },
+          gap: 2,
+          overflowX: "auto",
+          alignItems: "start",
+        }}
+      >
+        {columns.map((column) => {
+          const columnIdeas = ideas?.filter(
+            (idea) => idea.status === column.id,
+          );
+
+          return (
+            <BoardColumn
+              boardId={boardId as number}
+              ideas={columnIdeas ?? []}
+              key={column.id}
+              title={column.title}
+              mutate={mutate}
+            />
+          );
+        })}
+      </Box>
 
       <DescriptionDialog
         description={description}
@@ -103,6 +101,6 @@ export function BoardKanban({ boardId, description }: BoardKanbanProps) {
         open={isDescriptionDialogOpen}
         onClose={() => setIsDescriptionDialogOpen(false)}
       />
-    </>
+    </ContentCard>
   );
 }
