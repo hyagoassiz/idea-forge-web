@@ -14,11 +14,10 @@ export enum IdeaStatus {
   LAUNCHED = "LAUNCHED",
 }
 
-export type CreateIdeaRequest = Pick<Idea, "name" | "description">;
+export type CreateIdeaRequest = Pick<Idea, "name" | "description"> & {
+  boardId: number;
+};
 
 export type UpdateIdeaRequest = Pick<Idea, "id" | "name" | "description">;
 
-export type UpdateIdeaStatusRequest = Pick<Idea, "status"> & {
-  boardId: number;
-  ideaId: number;
-};
+export type UpdateIdeaStatusRequest = Pick<Idea, "status" | "id">;

@@ -85,7 +85,6 @@ export function BoardKanban({ boardId, description }: BoardKanbanProps) {
 
           return (
             <BoardColumn
-              boardId={boardId as number}
               ideas={columnIdeas ?? []}
               key={column.id}
               title={column.title}

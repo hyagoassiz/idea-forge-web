@@ -14,19 +14,13 @@ import {
 } from "@mui/material";
 
 interface BoardIdeaCardProps {
-  boardId: number;
   idea: Idea;
-  onOpen(): void;
+  onOpen(idea: Idea): void;
   mutate(payload: UpdateIdeaStatusRequest): void;
 }
 
-export function BoardIdeaCard({
-  boardId,
-  idea,
-  onOpen,
-  mutate,
-}: BoardIdeaCardProps) {
-  const { options } = useBoardIdeaCard({ boardId, idea, onOpen, mutate });
+export function BoardIdeaCard({ idea, onOpen, mutate }: BoardIdeaCardProps) {
+  const { options } = useBoardIdeaCard({ idea, onOpen, mutate });
 
   const hasScore = idea.isEvaluated && idea.evaluationScore != null;
 
@@ -47,7 +41,7 @@ export function BoardIdeaCard({
       }}
     >
       <CardActionArea
-        onClick={onOpen}
+        onClick={() => onOpen(idea)}
         sx={{
           display: "block",
           textAlign: "left",

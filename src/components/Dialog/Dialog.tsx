@@ -9,10 +9,13 @@ import {
 
 interface DialogProps {
   open: boolean;
-  title: string;
+  title: string | React.ReactNode;
   children: React.ReactNode;
   actions?: ActionButton[];
   onClose(): void;
+  width?: number | string;
+  height?: number | string;
+  maxHeight?: number | string;
 }
 
 export function Dialog({
@@ -21,9 +24,23 @@ export function Dialog({
   children,
   actions,
   onClose,
+  width = 400,
+  height,
+  maxHeight = "80vh",
 }: DialogProps) {
   return (
-    <MuiDialog open={open} onClose={onClose}>
+    <MuiDialog
+      open={open}
+      onClose={onClose}
+      PaperProps={{
+        sx: {
+          width,
+          maxWidth: "calc(100% - 64px)",
+          height,
+          maxHeight,
+        },
+      }}
+    >
       <DialogTitle>{title}</DialogTitle>
 
       <DialogContent
@@ -31,7 +48,7 @@ export function Dialog({
           display: "flex",
           flexDirection: "column",
           gap: 2,
-          minWidth: 400,
+          overflowY: "auto",
           "&.MuiDialogContent-root": {
             paddingTop: 1,
           },
@@ -41,9 +58,7 @@ export function Dialog({
       </DialogContent>
 
       {actions && (
-        <DialogActions
-          sx={{ gap: 1, marginLeft: 2, marginRight: 2, marginBottom: 2 }}
-        >
+        <DialogActions sx={{ gap: 1, mx: 2, mb: 2 }}>
           {actions.map((button) => (
             <LoadingButton
               key={button.id}
