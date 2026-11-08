@@ -1,6 +1,7 @@
 "use client";
 
 import { ContentCard } from "@/components/ContentCard";
+import { DescriptionDialog } from "@/components/DescriptionDialog";
 import { IconAction } from "@/components/icon/IconAction";
 import { MoreOptions } from "@/components/MoreOptions";
 import { BoardColumn } from "@/modules/board/components/BoardColumn";
@@ -8,8 +9,6 @@ import { useBoardKanban } from "@/modules/board/components/BoardKanban/hooks/use
 import ArchiveIcon from "@mui/icons-material/Archive";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { Box } from "@mui/material";
-import { Dialog } from "@/components/Dialog";
-import { Typography } from "@mui/material";
 import { useState } from "react";
 
 interface BoardKanbanProps {
@@ -57,16 +56,14 @@ export function BoardKanban({ boardId, description }: BoardKanbanProps) {
 
             <IconAction icon={<ArchiveIcon />} tooltip="Arquivados" disabled />
 
-            {description?.trim() && (
-              <MoreOptions
-                options={[
-                  {
-                    label: "Descrição do quadro",
-                    onClick: () => setIsDescriptionDialogOpen(true),
-                  },
-                ]}
-              />
-            )}
+            <MoreOptions
+              options={[
+                {
+                  label: "Descrição do quadro",
+                  onClick: () => setIsDescriptionDialogOpen(true),
+                },
+              ]}
+            />
           </Box>
         }
       >
@@ -100,23 +97,12 @@ export function BoardKanban({ boardId, description }: BoardKanbanProps) {
         </Box>
       </ContentCard>
 
-      {description?.trim() && (
-        <Dialog
-          title="Sobre este quadro"
-          open={isDescriptionDialogOpen}
-          onClose={() => setIsDescriptionDialogOpen(false)}
-          actions={[
-            {
-              id: "fechar",
-              label: "Fechar",
-              variant: "outlined",
-              onClick: () => setIsDescriptionDialogOpen(false),
-            },
-          ]}
-        >
-          <Typography sx={{ whiteSpace: "pre-wrap" }}>{description}</Typography>
-        </Dialog>
-      )}
+      <DescriptionDialog
+        description={description}
+        title="Sobre este quadro"
+        open={isDescriptionDialogOpen}
+        onClose={() => setIsDescriptionDialogOpen(false)}
+      />
     </>
   );
 }
