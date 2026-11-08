@@ -14,6 +14,8 @@ interface DialogProps {
   actions?: ActionButton[];
   onClose(): void;
   width?: number | string;
+  height?: number | string;
+  maxHeight?: number | string;
 }
 
 export function Dialog({
@@ -23,6 +25,8 @@ export function Dialog({
   actions,
   onClose,
   width = 400,
+  height,
+  maxHeight = "80vh",
 }: DialogProps) {
   return (
     <MuiDialog
@@ -32,6 +36,8 @@ export function Dialog({
         sx: {
           width,
           maxWidth: "calc(100% - 64px)",
+          height,
+          maxHeight,
         },
       }}
     >
@@ -42,6 +48,7 @@ export function Dialog({
           display: "flex",
           flexDirection: "column",
           gap: 2,
+          overflowY: "auto",
           "&.MuiDialogContent-root": {
             paddingTop: 1,
           },
