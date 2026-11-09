@@ -14,16 +14,14 @@ import {
 } from "@mui/material";
 
 interface BoardIdeaCardProps {
-  boardId: number;
   idea: Idea;
-  onOpen(): void;
+  onOpen(idea: Idea): void;
   mutate(payload: UpdateIdeaStatusRequest): void;
   archiveIdea(ideaId: number): void;
   isArchiving: boolean;
 }
 
 export function BoardIdeaCard({
-  boardId,
   idea,
   onOpen,
   mutate,
@@ -31,7 +29,6 @@ export function BoardIdeaCard({
   isArchiving,
 }: BoardIdeaCardProps) {
   const { options } = useBoardIdeaCard({
-    boardId,
     idea,
     onOpen,
     mutate,
@@ -58,7 +55,7 @@ export function BoardIdeaCard({
       }}
     >
       <CardActionArea
-        onClick={onOpen}
+        onClick={() => onOpen(idea)}
         sx={{
           display: "block",
           textAlign: "left",

@@ -47,7 +47,9 @@ export function CreateIdeaDialog({
           name="name"
           control={ideaForm.control}
           fullWidth
+          multiline
           InputProps={{ slotProps: { input: { maxLength: 60 } } }}
+          required
         />
 
         <ControlledTextField
@@ -55,8 +57,7 @@ export function CreateIdeaDialog({
           name="description"
           control={ideaForm.control}
           fullWidth
-          minRows={2}
-          maxRows={10}
+          minRows={3}
           multiline
           InputProps={{ slotProps: { input: { maxLength: 255 } } }}
         />

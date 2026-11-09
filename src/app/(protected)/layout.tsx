@@ -12,6 +12,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import GridViewIcon from "@mui/icons-material/GridView";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Box, Toolbar } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function PublicLayout({
@@ -20,6 +21,8 @@ export default function PublicLayout({
   children: React.ReactNode;
 }>) {
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const { isPending } = useGetMeQuery();
 
@@ -43,7 +46,7 @@ export default function PublicLayout({
           onClick: async () => {
             await authService.logout();
 
-            window.location.href = routes.public.login;
+            router.push(routes.public.login);
           },
         },
       ],

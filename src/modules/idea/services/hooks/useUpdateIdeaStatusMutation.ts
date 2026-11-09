@@ -3,12 +3,10 @@ import { ideaService } from "@/modules/idea/services/ideaService";
 import { Idea, UpdateIdeaStatusRequest } from "@/modules/idea/types";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 
-type UpdateIdeaStatusMutationRequest = UpdateIdeaStatusRequest;
-
 type UseUpdateIdeaStatusMutationOptions = UseMutationOptions<
   Idea,
   ApiErrorResponse,
-  UpdateIdeaStatusMutationRequest
+  UpdateIdeaStatusRequest
 >;
 
 export function useUpdateIdeaStatusMutation(
