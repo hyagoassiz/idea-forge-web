@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 
 interface UseBoardViewReturn {
   boardId?: number;
+  description?: string | null;
   isCreateIdeaDialogOpen: boolean;
   isLoading: boolean;
   name?: string;
@@ -41,6 +42,7 @@ export function useBoardView(): UseBoardViewReturn {
 
   return {
     boardId,
+    description: data?.description,
     isCreateIdeaDialogOpen,
     isLoading: isFetching,
     name: data?.name,

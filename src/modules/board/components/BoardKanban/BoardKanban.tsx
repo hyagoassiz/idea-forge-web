@@ -5,19 +5,24 @@ import { IconAction } from "@/components/icon/IconAction";
 import { MoreOptions } from "@/components/MoreOptions";
 import { BoardColumn } from "@/modules/board/components/BoardColumn";
 import { useBoardKanban } from "@/modules/board/components/BoardKanban/hooks/useBoardKanban";
+import { DescriptionBoardDialog } from "@/modules/board/components/DescriptionBoardDialog";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { Box } from "@mui/material";
+import { useState } from "react";
 
 interface BoardKanbanProps {
   boardId?: number;
+  description?: string | null;
 }
 
-export function BoardKanban({ boardId }: BoardKanbanProps) {
+export function BoardKanban({ boardId, description }: BoardKanbanProps) {
   const { ideas, isLoading, isArchiving, archiveIdea, refreshIdeas, mutate } =
     useBoardKanban({
       boardId,
     });
+
+  const [isDescriptionDialogOpen, setIsDescriptionDialogOpen] = useState(false);
 
   const columns = [
     {
@@ -54,9 +59,8 @@ export function BoardKanban({ boardId }: BoardKanbanProps) {
           <MoreOptions
             options={[
               {
-                label: "Sobre este quadro",
-                disabled: true,
-                onClick: () => console.log("clicou"),
+                label: "Descrição do quadro",
+                onClick: () => setIsDescriptionDialogOpen(true),
               },
             ]}
           />
@@ -92,6 +96,14 @@ export function BoardKanban({ boardId }: BoardKanbanProps) {
           );
         })}
       </Box>
+
+      {isDescriptionDialogOpen && (
+        <DescriptionBoardDialog
+          description={description}
+          open={isDescriptionDialogOpen}
+          onClose={() => setIsDescriptionDialogOpen(false)}
+        />
+      )}
     </ContentCard>
   );
 }

@@ -11,6 +11,7 @@ import { Button } from "@mui/material";
 export function BoardView() {
   const {
     boardId,
+    description,
     isCreateIdeaDialogOpen,
     isLoading,
     name,
@@ -38,7 +39,7 @@ export function BoardView() {
             }
           />
 
-          <BoardKanban boardId={boardId} />
+          <BoardKanban boardId={boardId} description={description} />
         </>
       )}
 
