@@ -5,6 +5,7 @@ export interface Idea {
   status: IdeaStatus;
   isEvaluated: boolean;
   evaluationScore: number | null;
+  archived: boolean;
 }
 
 export enum IdeaStatus {

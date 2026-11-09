@@ -14,6 +14,11 @@ export const ideaService = {
       body: JSON.stringify(rest),
     });
   },
+  archiveIdea: async (ideaId: number): Promise<Idea> => {
+    return api(`/ideas/${ideaId}/archive`, {
+      method: "PATCH",
+    });
+  },
 
   getIdea: async (boardId: number, ideaId: number): Promise<Idea> => {
     return api(`/boards/${boardId}/ideas/${ideaId}`);

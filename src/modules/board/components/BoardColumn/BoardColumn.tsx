@@ -6,11 +6,19 @@ import { Box, Paper, Typography } from "@mui/material";
 
 interface BoardColumnProps {
   ideas: Idea[];
+  isArchiving: boolean;
   title: string;
+  archiveIdea(ideaId: number): void;
   mutate(payload: UpdateIdeaStatusRequest): void;
 }
 
-export function BoardColumn({ title, ideas, mutate }: BoardColumnProps) {
+export function BoardColumn({
+  ideas,
+  isArchiving,
+  title,
+  mutate,
+  archiveIdea,
+}: BoardColumnProps) {
   const {
     ideaDetailsDialogState,
     handleCloseIdeaDetailsDialog,
@@ -43,6 +51,8 @@ export function BoardColumn({ title, ideas, mutate }: BoardColumnProps) {
               idea={idea}
               mutate={mutate}
               onOpen={handleOpenIdeaDetailsDialog}
+              archiveIdea={archiveIdea}
+              isArchiving={isArchiving}
             />
           ))}
         </Box>

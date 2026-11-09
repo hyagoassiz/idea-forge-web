@@ -1,6 +1,7 @@
 import { useNotification } from "@/components/Notification/NotificationSnackbar/hooks/useNotificationSnackbar";
 import {
   GET_IDEAS_KEY,
+  useArchiveIdeaMutation,
   useGetIdeasQuery,
   useUpdateIdeaStatusMutation,
 } from "@/modules/idea/services/hooks";
@@ -14,6 +15,8 @@ interface UseBoardKanbanProps {
 interface UseBoardKanbanReturn {
   ideas?: Idea[];
   isLoading: boolean;
+  isArchiving: boolean;
+  archiveIdea(ideaId: number): void;
   refreshIdeas(): void;
   mutate(payload: UpdateIdeaStatusRequest): void;
 }
@@ -32,6 +35,18 @@ export function useBoardKanban({
       refreshIdeas();
     },
   });
+  const archiveIdeaMutation = useArchiveIdeaMutation({
+    onSuccess: () => {
+      notification.notify("Ideia arquivada com sucesso!", "success");
+      refreshIdeas();
+    },
+    onError: (error) => {
+      notification.notify(
+        error.message || "Não foi possível arquivar a ideia.",
+        "error",
+      );
+    },
+  });
 
   const { data: ideas, isFetching } = useGetIdeasQuery(boardId as number, {
     enabled: true,
@@ -40,6 +55,16 @@ export function useBoardKanban({
   function refreshIdeas(): void {
     queryClient.invalidateQueries({ queryKey: [GET_IDEAS_KEY] });
   }
+  function archiveIdea(ideaId: number): void {
+    archiveIdeaMutation.mutate(ideaId);
+  }
 
-  return { ideas, isLoading: isFetching, mutate, refreshIdeas };
+  return {
+    ideas,
+    isLoading: isFetching,
+    isArchiving: archiveIdeaMutation.isPending,
+    archiveIdea,
+    mutate,
+    refreshIdeas,
+  };
 }

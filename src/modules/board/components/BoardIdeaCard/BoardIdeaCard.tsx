@@ -17,10 +17,24 @@ interface BoardIdeaCardProps {
   idea: Idea;
   onOpen(idea: Idea): void;
   mutate(payload: UpdateIdeaStatusRequest): void;
+  archiveIdea(ideaId: number): void;
+  isArchiving: boolean;
 }
 
-export function BoardIdeaCard({ idea, onOpen, mutate }: BoardIdeaCardProps) {
-  const { options } = useBoardIdeaCard({ idea, onOpen, mutate });
+export function BoardIdeaCard({
+  idea,
+  onOpen,
+  mutate,
+  archiveIdea,
+  isArchiving,
+}: BoardIdeaCardProps) {
+  const { options } = useBoardIdeaCard({
+    idea,
+    onOpen,
+    mutate,
+    archiveIdea,
+    isArchiving,
+  });
 
   const hasScore = idea.isEvaluated && idea.evaluationScore != null;
 
