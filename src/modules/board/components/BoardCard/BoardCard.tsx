@@ -1,6 +1,7 @@
 "use client";
 
 import { MoreOptions } from "@/components/MoreOptions";
+import { Board } from "@/modules/board/types";
 
 import {
   Box,
@@ -11,19 +12,19 @@ import {
 } from "@mui/material";
 
 interface BoardCardProps {
-  name: string;
+  board: Board;
+  isArchiving: boolean;
   onOpen: () => void;
   onEdit: () => void;
   onArchive: () => void;
-  isArchiving: boolean;
 }
 
 export function BoardCard({
-  name,
+  board,
+  isArchiving,
   onOpen,
   onEdit,
   onArchive,
-  isArchiving,
 }: BoardCardProps) {
   return (
     <Card
@@ -57,7 +58,7 @@ export function BoardCard({
               lineHeight: 1.3,
             }}
           >
-            {name}
+            {board.name}
           </Typography>
         </CardContent>
       </CardActionArea>

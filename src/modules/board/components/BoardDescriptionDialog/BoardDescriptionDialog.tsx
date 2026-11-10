@@ -1,17 +1,18 @@
 import { Dialog } from "@/components/Dialog";
 import { Alert } from "@/components/Notification/Alert";
+import { Board } from "@/modules/board/types";
 
-interface DescriptionBoardDialogProps {
-  description?: string | null;
+interface BoardDescriptionDialogProps {
+  board: Board;
   open: boolean;
   onClose(): void;
 }
 
-export function DescriptionBoardDialog({
-  description,
+export function BoardDescriptionDialog({
+  board,
   open,
   onClose,
-}: DescriptionBoardDialogProps) {
+}: BoardDescriptionDialogProps) {
   return (
     <Dialog
       title="Sobre este quadro"
@@ -26,8 +27,8 @@ export function DescriptionBoardDialog({
         },
       ]}
     >
-      {description ? (
-        description
+      {board.description ? (
+        board.description
       ) : (
         <Alert severity="info">Nenhuma descrição encontrada.</Alert>
       )}

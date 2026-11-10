@@ -7,7 +7,7 @@ import { Alert } from "@/components/Notification/Alert";
 import { PageHeader } from "@/components/PageHeader";
 import { ArchivedBoardsDialog } from "@/modules/board/components/ArchivedBoardsDialog";
 import { BoardCard } from "@/modules/board/components/BoardCard";
-import { useBoards } from "@/modules/board/components/Boards/hooks/useBoards";
+import { useBoards } from "@/modules/board/components/BoardsView/hooks/useBoards";
 import { routes } from "@/routes";
 import { Add } from "@mui/icons-material";
 import ArchiveIcon from "@mui/icons-material/Archive";
@@ -15,7 +15,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import { Box, Button, Grid } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-export function Boards() {
+export function BoardsView() {
   const {
     boards,
     isArchiving,
@@ -73,7 +73,7 @@ export function Boards() {
           {boards?.map((board) => (
             <Grid item xs={12} sm={4} key={board.id}>
               <BoardCard
-                name={board.name}
+                board={board}
                 onEdit={() =>
                   router.push(routes.protected.boards.edit(board.id))
                 }
