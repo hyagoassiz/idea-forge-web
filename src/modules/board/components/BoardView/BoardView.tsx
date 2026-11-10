@@ -1,6 +1,7 @@
 "use client";
 
 import { PageHeader } from "@/components/PageHeader";
+import { BoardDescriptionDialog } from "@/modules/board/components/BoardDescriptionDialog";
 import { BoardKanban } from "@/modules/board/components/BoardKanban";
 import { useBoardView } from "@/modules/board/components/BoardView/hooks/useBoardView";
 import { CreateIdeaDialog } from "@/modules/idea/components/CreateIdeaDialog";
@@ -10,23 +11,23 @@ import { Button } from "@mui/material";
 
 export function BoardView() {
   const {
-    boardId,
-    description,
+    board,
     isCreateIdeaDialogOpen,
+    isDescriptionDialogOpen,
     isLoading,
-    name,
     toggleCreateIdeiaDialog,
+    toggleDescriptionDialog,
   } = useBoardView();
 
   return (
     <>
-      {!isLoading && name && (
+      {!isLoading && board && (
         <>
           <PageHeader
-            title={name}
+            title={board.name}
             breadcrumbs={[
               { label: "Quadros", href: routes.protected.boards.list },
-              { label: name },
+              { label: board.name },
             ]}
             actions={
               <Button
@@ -39,15 +40,26 @@ export function BoardView() {
             }
           />
 
-          <BoardKanban boardId={boardId} description={description} />
+          <BoardKanban
+            boardId={board.id}
+            toggleDescriptionDialog={toggleDescriptionDialog}
+          />
         </>
       )}
 
-      {isCreateIdeaDialogOpen && boardId && (
+      {isCreateIdeaDialogOpen && board && (
         <CreateIdeaDialog
-          boardId={boardId}
+          boardId={board.id}
           open={isCreateIdeaDialogOpen}
           onClose={toggleCreateIdeiaDialog}
+        />
+      )}
+
+      {isDescriptionDialogOpen && board && (
+        <BoardDescriptionDialog
+          board={board}
+          open={isDescriptionDialogOpen}
+          onClose={toggleDescriptionDialog}
         />
       )}
     </>

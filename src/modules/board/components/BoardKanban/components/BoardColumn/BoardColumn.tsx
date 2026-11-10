@@ -1,5 +1,5 @@
-import { useBoardColumn } from "@/modules/board/components/BoardColumn/hooks/useBoardColumn";
-import { BoardIdeaCard } from "@/modules/board/components/BoardIdeaCard";
+import { useBoardColumn } from "@/modules/board/components/BoardKanban/components/BoardColumn/hooks/useBoardColumn";
+import { BoardIdeaCard } from "@/modules/board/components/BoardKanban/components/BoardIdeaCard";
 import { IdeaDetailsDialog } from "@/modules/idea/components/IdeaDetailsDialog";
 import { Idea, UpdateIdeaStatusRequest } from "@/modules/idea/types";
 import { Box, Paper, Typography } from "@mui/material";

@@ -1,15 +1,16 @@
 import { useGetBoardQuery } from "@/modules/board/services/hooks";
+import { Board } from "@/modules/board/types";
 import { routes } from "@/routes";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 interface UseBoardViewReturn {
-  boardId?: number;
-  description?: string | null;
+  board: Board | undefined;
   isCreateIdeaDialogOpen: boolean;
+  isDescriptionDialogOpen: boolean;
   isLoading: boolean;
-  name?: string;
   toggleCreateIdeiaDialog(): void;
+  toggleDescriptionDialog(): void;
 }
 
 export function useBoardView(): UseBoardViewReturn {
@@ -22,7 +23,14 @@ export function useBoardView(): UseBoardViewReturn {
   const [isCreateIdeaDialogOpen, setIsCreateIdeaDialogOpen] =
     useState<boolean>(false);
 
-  const { isError, isFetching, data } = useGetBoardQuery(boardId as number, {
+  const [isDescriptionDialogOpen, setIsDescriptionDialogOpen] =
+    useState<boolean>(false);
+
+  const {
+    isError,
+    isFetching,
+    data: board,
+  } = useGetBoardQuery(boardId as number, {
     enabled: Boolean(boardId),
   });
 
@@ -34,6 +42,10 @@ export function useBoardView(): UseBoardViewReturn {
     setIsCreateIdeaDialogOpen((prevState) => !prevState);
   }
 
+  function toggleDescriptionDialog(): void {
+    setIsDescriptionDialogOpen((prevState) => !prevState);
+  }
+
   useEffect(() => {
     if (!isError) return;
 
@@ -41,11 +53,11 @@ export function useBoardView(): UseBoardViewReturn {
   }, [isError, goToBoards]);
 
   return {
-    boardId,
-    description: data?.description,
+    board,
     isCreateIdeaDialogOpen,
+    isDescriptionDialogOpen,
     isLoading: isFetching,
-    name: data?.name,
     toggleCreateIdeiaDialog,
+    toggleDescriptionDialog,
   };
 }
