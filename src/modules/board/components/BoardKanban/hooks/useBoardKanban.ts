@@ -9,11 +9,11 @@ import { Idea, UpdateIdeaStatusRequest } from "@/modules/idea/types";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface UseBoardKanbanProps {
-  boardId?: number;
+  boardId: number;
 }
 
 interface UseBoardKanbanReturn {
-  ideas?: Idea[];
+  ideas: Idea[] | undefined;
   isLoading: boolean;
   isArchiving: boolean;
   archiveIdea(ideaId: number): void;
@@ -35,6 +35,7 @@ export function useBoardKanban({
       refreshIdeas();
     },
   });
+
   const archiveIdeaMutation = useArchiveIdeaMutation({
     onSuccess: () => {
       notification.notify("Ideia arquivada com sucesso!", "success");
@@ -52,11 +53,12 @@ export function useBoardKanban({
     enabled: true,
   });
 
-  function refreshIdeas(): void {
-    queryClient.invalidateQueries({ queryKey: [GET_IDEAS_KEY] });
-  }
   function archiveIdea(ideaId: number): void {
     archiveIdeaMutation.mutate(ideaId);
+  }
+
+  function refreshIdeas(): void {
+    queryClient.invalidateQueries({ queryKey: [GET_IDEAS_KEY] });
   }
 
   return {
@@ -64,7 +66,7 @@ export function useBoardKanban({
     isLoading: isFetching,
     isArchiving: archiveIdeaMutation.isPending,
     archiveIdea,
-    mutate,
     refreshIdeas,
+    mutate,
   };
 }

@@ -1,5 +1,5 @@
 import { MoreOptions } from "@/components/MoreOptions";
-import { useBoardIdeaCard } from "@/modules/board/components/BoardIdeaCard/hooks/useBoardIdeaCard";
+import { useBoardIdeaCard } from "@/modules/board/components/BoardKanban/components/BoardIdeaCard/hooks/useBoardIdeaCard";
 import { Idea, UpdateIdeaStatusRequest } from "@/modules/idea/types";
 import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurnedInOutlined";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";

@@ -1,10 +1,10 @@
 import { APP_NAME } from "@/constants/app";
-import { Boards } from "@/modules/board/components/Boards";
+import { BoardsView } from "@/modules/board/components/BoardsView";
 
 export const metadata = {
   title: `Quadros | ${APP_NAME}`,
 };
 
 export default function BoardsPage() {
-  return <Boards />;
+  return <BoardsView />;
 }
