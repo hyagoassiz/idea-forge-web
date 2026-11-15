@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { ContentCard } from "@/components/ContentCard";
 import { IconAction } from "@/components/icon/IconAction";
 import { MoreOptions } from "@/components/MoreOptions";
+import { ArchivedIdeasDialog } from "@/modules/board/components/ArchivedIdeasDialog/ArchivedIdeasDialog";
 import { BoardColumn } from "@/modules/board/components/BoardKanban/components/BoardColumn";
 import { useBoardKanban } from "@/modules/board/components/BoardKanban/hooks/useBoardKanban";
 import ArchiveIcon from "@mui/icons-material/Archive";
@@ -18,83 +20,88 @@ export function BoardKanban({
   boardId,
   toggleDescriptionDialog,
 }: BoardKanbanProps) {
+  const [isArchivedIdeasDialogOpen, setIsArchivedIdeasDialogOpen] =
+    useState(false);
+
   const { ideas, isLoading, isArchiving, archiveIdea, refreshIdeas, mutate } =
     useBoardKanban({
       boardId,
     });
 
   const columns = [
-    {
-      id: "DRAFT",
-      title: "Rascunho",
-    },
-    {
-      id: "VALIDATION",
-      title: "Validação",
-    },
-    {
-      id: "DEVELOPMENT",
-      title: "Desenvolvimento",
-    },
-    {
-      id: "LAUNCHED",
-      title: "Lançadas",
-    },
+    { id: "DRAFT", title: "Rascunho" },
+    { id: "VALIDATION", title: "Validação" },
+    { id: "DEVELOPMENT", title: "Desenvolvimento" },
+    { id: "LAUNCHED", title: "Lançadas" },
   ] as const;
 
   return (
-    <ContentCard
-      toolbarRight={
-        <Box display="flex" alignItems="center" gap={1}>
-          <IconAction
-            icon={<RefreshIcon />}
-            tooltip="Atualizar"
-            disabled={isLoading}
-            onClick={refreshIdeas}
-          />
-
-          <IconAction icon={<ArchiveIcon />} tooltip="Arquivados" disabled />
-
-          <MoreOptions
-            options={[
-              {
-                label: "Descrição do quadro",
-                onClick: () => toggleDescriptionDialog(),
-              },
-            ]}
-          />
-        </Box>
-      }
-    >
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: {
-            xs: "1fr",
-            md: "repeat(4, minmax(120px, 1fr))",
-          },
-          gap: 2,
-          overflowX: "auto",
-          alignItems: "start",
-        }}
-      >
-        {columns.map((column) => {
-          const columnIdeas = ideas?.filter(
-            (idea) => !idea.archived && idea.status === column.id,
-          );
-
-          return (
-            <BoardColumn
-              ideas={columnIdeas ?? []}
-              key={column.id}
-              title={column.title}
-              mutate={mutate}
-              archiveIdea={archiveIdea}
-              isArchiving={isArchiving}
+    <>
+      <ContentCard
+        toolbarRight={
+          <Box display="flex" alignItems="center" gap={1}>
+            <IconAction
+              icon={<RefreshIcon />}
+              tooltip="Atualizar"
+              disabled={isLoading}
+              onClick={refreshIdeas}
             />
-          );
-        })}
-      </Box>
-    </ContentCard>
+
+            <IconAction
+              icon={<ArchiveIcon />}
+              tooltip="Arquivados"
+              onClick={() => setIsArchivedIdeasDialogOpen(true)}
+            />
+
+            <MoreOptions
+              options={[
+                {
+                  label: "Descrição do quadro",
+                  onClick: () => toggleDescriptionDialog(),
+                },
+              ]}
+            />
+          </Box>
+        }
+      >
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              md: "repeat(4, minmax(120px, 1fr))",
+            },
+            gap: 2,
+            overflowX: "auto",
+            alignItems: "start",
+          }}
+        >
+          {columns.map((column) => {
+            const columnIdeas = ideas?.filter(
+              (idea) => !idea.archived && idea.status === column.id,
+            );
+
+            return (
+              <BoardColumn
+                ideas={columnIdeas ?? []}
+                key={column.id}
+                title={column.title}
+                mutate={mutate}
+                archiveIdea={archiveIdea}
+                isArchiving={isArchiving}
+              />
+            );
+          })}
+        </Box>
+      </ContentCard>
+
+      {isArchivedIdeasDialogOpen && (
+        <ArchivedIdeasDialog
+          boardId={boardId}
+          open={isArchivedIdeasDialogOpen}
+          onClose={() => setIsArchivedIdeasDialogOpen(false)}
+        />
+      )}
+    </>
   );
 }

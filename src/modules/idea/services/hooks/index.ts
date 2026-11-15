@@ -4,3 +4,4 @@ export * from "./useGetIdeasQuery";
 export * from "./useUpdateIdeaMutation";
 export * from "./useUpdateIdeaStatusMutation";
 export * from "./useArchiveIdeaMutation";
+export * from "./useUnarchiveIdeaMutation";

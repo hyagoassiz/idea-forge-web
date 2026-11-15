@@ -25,13 +25,11 @@ export function useBoardKanban({
   boardId,
 }: UseBoardKanbanProps): UseBoardKanbanReturn {
   const queryClient = useQueryClient();
-
   const notification = useNotification();
 
   const { mutate } = useUpdateIdeaStatusMutation({
     onSuccess: () => {
       notification.notify("Ideia movida com sucesso!", "success");
-
       refreshIdeas();
     },
   });
@@ -49,9 +47,11 @@ export function useBoardKanban({
     },
   });
 
-  const { data: ideas, isFetching } = useGetIdeasQuery(boardId as number, {
-    enabled: true,
-  });
+  const { data: ideas, isFetching } = useGetIdeasQuery(
+    boardId,
+    { archived: false },
+    { enabled: true },
+  );
 
   function archiveIdea(ideaId: number): void {
     archiveIdeaMutation.mutate(ideaId);
