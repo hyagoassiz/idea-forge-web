@@ -2,6 +2,7 @@ import { api } from "@/lib/api/api";
 import {
   CreateIdeaRequest,
   Idea,
+  IdeaFilter,
   UpdateIdeaRequest,
   UpdateIdeaStatusRequest,
 } from "@/modules/idea/types";
@@ -14,8 +15,15 @@ export const ideaService = {
       body: JSON.stringify(rest),
     });
   },
+
   archiveIdea: async (ideaId: number): Promise<Idea> => {
     return api(`/ideas/${ideaId}/archive`, {
+      method: "PATCH",
+    });
+  },
+
+  unarchiveIdea: async (ideaId: number): Promise<Idea> => {
+    return api(`/ideas/${ideaId}/unarchive`, {
       method: "PATCH",
     });
   },
@@ -24,8 +32,21 @@ export const ideaService = {
     return api(`/boards/${boardId}/ideas/${ideaId}`);
   },
 
-  getIdeas: async (boardId: number): Promise<Idea[]> => {
-    return api(`/boards/${boardId}/ideas`);
+  getIdeas: async (boardId: number, filter?: IdeaFilter): Promise<Idea[]> => {
+    const params = new URLSearchParams();
+
+    if (filter?.archived !== undefined) {
+      params.set("archived", String(filter.archived));
+    }
+
+    if (filter?.search?.trim()) {
+      params.set("search", filter.search.trim());
+    }
+
+    const query = params.toString();
+    const path = `/boards/${boardId}/ideas${query ? `?${query}` : ""}`;
+
+    return api(path);
   },
 
   updateIdea: async (payload: UpdateIdeaRequest): Promise<Idea> => {

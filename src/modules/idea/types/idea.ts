@@ -7,6 +7,10 @@ export interface Idea {
   evaluationScore: number | null;
   archived: boolean;
 }
+export interface IdeaFilter {
+  archived?: boolean;
+  search?: string;
+}
 
 export enum IdeaStatus {
   DRAFT = "DRAFT",
